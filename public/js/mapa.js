@@ -29,8 +29,9 @@ function initMap() {
 
   let url_init = new URL(document.baseURI);
   //console.log("latitud",url_init.get("lat"));
-  
-  map.setCenter(new google.maps.LatLng(url_init.searchParams.get("lat"), url_init.searchParams.get("lng")));
+  if (url_init.searchParams.get("lat") && url_init.searchParams.get("lng")) {
+    map.setCenter(new google.maps.LatLng(url_init.searchParams.get("lat"), url_init.searchParams.get("lng")));
+  }
   let infowindow = new google.maps.InfoWindow({ maxWidth: 400 }); //objecte infowindow per afegir als markers
   const input = document.getElementById("search-box");
   const options = {
@@ -131,7 +132,7 @@ function initMap() {
 
 
       } else {
-        console.log("new_item:",places[i]);
+        console.log("new_item:", places[i]);
         console.log("e:", places[i].id, bound);
         if (markers.hasOwnProperty(places[i].id)) {
           // si existeix el marker el fa invisible
@@ -214,7 +215,7 @@ function getHtml(place) {
       </div>
       <div>
         <p> PREU:
-          <div class="text-xl text-[#52ab98] font-bold font-sans shadow-s w-16">
+          <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
           ${place.preu}€
           </div>
         </p>
@@ -236,7 +237,7 @@ function getHtml(place) {
       </div>
       <div>
         <p> PREU:
-          <div class="text-xl text-[#52ab98] font-bold font-sans shadow-s w-16">
+          <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
           ${place.preu}€
           </div>
         </p>
