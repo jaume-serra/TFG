@@ -10,7 +10,6 @@ Coses a revisar:
 -Actualitzo el llistat de lesquerra des del mapa :(
 */
 function initMap() {
-
   let lastInfowindow;
   let markers = [];
 
@@ -28,9 +27,9 @@ function initMap() {
 
 
 
-
   let url_init = new URL(document.baseURI);
   //console.log("latitud",url_init.get("lat"));
+  
   map.setCenter(new google.maps.LatLng(url_init.searchParams.get("lat"), url_init.searchParams.get("lng")));
   let infowindow = new google.maps.InfoWindow({ maxWidth: 400 }); //objecte infowindow per afegir als markers
   const input = document.getElementById("search-box");

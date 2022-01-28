@@ -24,8 +24,8 @@ app.use('*/css', express.static(path.join(__dirname, 'static/css')));
 
 
 
-app.get('/llistat',(req,res) =>{
-    res.render('mapa',{});
+app.all('/llistat',(req,res) =>{ //Todo: not working
+    res.render('mapa.ejs',{});
 });
 
 app.get('/', (req, res) => {
@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
         name: "Jaume"
     });
 });
+
 
 app.use('/api',api);  // Use api.js to handle js
 

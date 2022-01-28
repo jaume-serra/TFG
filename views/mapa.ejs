@@ -5,10 +5,10 @@
 <html>
   <head>
     <title>Kipper</title>
-    <script src=/static/js/styled_map.js></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script><!-- TODO:S'ha dinstalar, no importar -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src=/static/js/styled_map.js></script>
+    <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="text/javascript" src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script><!-- TODO:S'ha dinstalar, no importar -->
+    <script type="text/javascript" src="https://cdn.tailwindcss.com"></script>
   
     <link  type="text/css" href="/static/css/style.css" />
     <link  type="text/css" href="/static/css/actualitzar_mapa.css">
@@ -151,8 +151,9 @@
               </div>
           </div>
         </div>
+        <!-- Mapa -->
         <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0"  id='div_mapa'>
-            <div id="map" class="fluid-container focus:outline-none"></div>
+            <div id="map" style="width:500px; height:300px"class="fluid-container focus:outline-none"></div>
             <div class="flex items-center justify-center">
               <button class= "flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none" href = 'div_taula' id="button_list" onclick = "changeButtonList()" >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -165,14 +166,14 @@
     </div>
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
+    <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
       async
     >
     </script>
    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <!-- Link per agrupar markers -->
-    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script><!-- TODO:S'ha dinstalar, no importar -->
+    <script type="text/javascript" src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script><!-- TODO:S'ha dinstalar, no importar -->
 
     </body>
 </html>
