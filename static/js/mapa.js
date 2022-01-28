@@ -102,6 +102,7 @@ function initMap() {
     var bound = map.getBounds();
     var places = get_places();   //cridar api per agafar llocs
     console.log("api:");
+
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
     markers = [];
@@ -131,6 +132,7 @@ function initMap() {
 
 
       } else {
+        console.log("new_item:",places[i]);
         console.log("e:", places[i].id, bound);
         if (markers.hasOwnProperty(places[i].id)) {
           // si existeix el marker el fa invisible
@@ -270,7 +272,7 @@ function get_places() {
 
 
 function changeButtonMap() {
-
+  //Todo: canviar per toggle
   document.getElementById('div_taula').classList.add('invisible');
   document.getElementById('div_taula').style.display = 'none';
   document.getElementById('div_mapa').classList.remove('invisible', 'h-0');
@@ -279,6 +281,7 @@ function changeButtonMap() {
 
 }
 function changeButtonList() {
+  //Todo: canviar per toggle
   document.getElementById('div_taula').classList.remove('invisible');
   document.getElementById('div_taula').style.display = 'inline';
   document.getElementById('div_mapa').classList.add('invisible', 'h-0');
