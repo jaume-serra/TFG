@@ -3,87 +3,110 @@
 
 
 <html>
-  <head>
-    <title>Kipper</title>
-    <script type="text/javascript" src=/static/js/styled_map.js></script>
-    <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script type="text/javascript" src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script><!-- TODO:S'ha dinstalar, no importar -->
-    <script type="text/javascript" src="https://cdn.tailwindcss.com"></script>
-  
-    <link  type="text/css" href="/static/css/style.css" />
-    <link  type="text/css" href="/static/css/actualitzar_mapa.css">
-    <script type="text/javascript" src="/static/js/actualitzar_mapa.js"></script>
-    <script type="text/javascript" src="/static/js/mapa.js"></script>
-    <meta charset="UTF-8">
-  </head>
-  <body>
-    
-<!-- Menu navegacio -->
-<nav class="bg-white-100 border-b-2 border-gray-200  p-0 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
+
+<head>
+  <title>Kipper</title>
+  <script type="text/javascript" src=/public/js/styled_map.js></script>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script type="text/javascript"
+    src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+  <!-- TODO:S'ha dinstalar, no importar -->
+  <script type="text/javascript" src="https://cdn.tailwindcss.com"></script>
+
+  <link rel='stylesheet' type="text/css" href="/public/css/style.css" />
+  <link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
+  <script type="text/javascript" src="/public/js/actualitzar_mapa.js"></script>
+  <script type="text/javascript" src="/public/js/mapa.js"></script>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+  <!-- Menu navegacio -->
+  <nav class="bg-white-100 border-b-2 border-gray-200  p-0 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16 p-1">
-      <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
+        <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
           <!-- Mobile menu button-->
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <!--
+          <button type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <!--
               Icon when menu is closed.
 
               Heroicon name: outline/menu
 
               Menu open: "hidden", Menu closed: "block"
           -->
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <!--
+            </svg>
+            <!--
               Icon when menu is open.
 
               Heroicon name: outline/x
 
               Menu open: "block", Menu closed: "hidden"
           -->
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+            </svg>
           </button>
-      </div>
-      <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-start m-5">
+        </div>
+        <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-start m-5">
           <div class="flex-shrink-0 flex items-center m-3">
-              <img class="block lg:hidden h-8 w-auto items-center" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="KIPPER" href="#">
-              <img class="hidden lg:block h-8 w-auto items-center" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="KIPPER" href="#">
+            <img class="block lg:hidden h-8 w-auto items-center"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="KIPPER" href="#">
+            <img class="hidden lg:block h-8 w-auto items-center"
+              src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="KIPPER" href="#">
           </div>
           <div class="hidden md:block md:ml-6 items-center m-5">
-              <div class="flex space-x-4 items-center m-5">
-                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <a href="#" class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide  no-underline m-1 p-1" aria-current="page">Storage</a>
+            <div class="flex space-x-4 items-center m-5">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="#"
+                class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide  no-underline m-1 p-1"
+                aria-current="page">Storage</a>
 
-                  <a href="#" class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Parking</a>
+              <a href="#"
+                class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Parking</a>
 
-                  <a href="#" class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Business</a>
+              <a href="#"
+                class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Business</a>
 
-                  <a href="#" class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Blog</a>
-                  <button href="#" class="bg-gray-200 border-2 text-gray-500 hover:bg-gray-500 hover:text-white hover:shadow-lg  rounded-md text-l text-align-center whitespace-nowrap font-extrabold tracking-wide no-underline  py-1 px-6 min-w-100">List space </button>
+              <a href="#"
+                class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Blog</a>
+              <button href="#"
+                class="bg-gray-200 border-2 text-gray-500 hover:bg-gray-500 hover:text-white hover:shadow-lg  rounded-md text-l text-align-center whitespace-nowrap font-extrabold tracking-wide no-underline  py-1 px-6 min-w-100">List
+                space </button>
 
-              </div>         
+            </div>
           </div>
-      </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2  sm:ml-6 sm:pr-0 ">
-          <button type="button" class="lg:visible invisible bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-          <span class="sr-only md:visible invisible">View notifications</span>
-          <!-- Heroicon name: outline/bell -->
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2  sm:ml-6 sm:pr-0 ">
+          <button type="button"
+            class="lg:visible invisible bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <span class="sr-only md:visible invisible">View notifications</span>
+            <!-- Heroicon name: outline/bell -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
           </button>
 
           <!-- Profile dropdown -->
-      
-          <div> 
-              <button type="button" class="m-4 border-4 rounded-full py-1 px-1 w-12 lg:w-32 flex items-stretch" id="user-menu-button" >
-              <img class="h-8 w-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU" alt="">
+
+          <div>
+            <button type="button" class="m-4 border-4 rounded-full py-1 px-1 w-12 lg:w-32 flex items-stretch"
+              id="user-menu-button">
+              <img class="h-8 w-8 rounded-full"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
+                alt="">
               <p class="font-black text-gray-900 m-1 invisible lg:visible">Account</p>
-          </button>
+            </button>
           </div>
 
           <!--
@@ -103,77 +126,99 @@
           <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
           </div>
           -->
+        </div>
       </div>
-      </div>
-  </div>
+    </div>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
+    <!-- Mobile menu, show/hide based on menu state. -->
   </nav>
 
-<nav class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-50 overflow-hidden">
+  <nav class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-50 overflow-hidden">
     <div class="flex flex-wrap items-center mt-2 ml-2 mb-2 px-2">
       <div>
-        <button class="text-[#52ab98] rounded-md  text-l px-4 pb-1 font-black  border-b-2 border-[#52ab98] rounded-b-none focus:outline-none" id="storage_button" onclick="changeStorage()">Storage</button>
+        <button
+          class="text-[#52ab98] rounded-md  text-l px-4 pb-1 font-black  border-b-2 border-[#52ab98] rounded-b-none focus:outline-none"
+          id="storage_button" onclick="changeStorage()">Storage</button>
       </div>
       <div>
-        <button class="text-white rounded-md  text-l px-4 pb-1 border-b-2 border-white rounded-b-none focus:outline-none" id="parking_button" onclick="changeParking()">Parking</button>
+        <button
+          class="text-white rounded-md  text-l px-4 pb-1 border-b-2 border-white rounded-b-none focus:outline-none"
+          id="parking_button" onclick="changeParking()">Parking</button>
       </div>
       <!-- Inici cercador -->
       <div class="flex flex-shrink-0 rounded-full  bg-white mt-4 lg:mt-2  w-11/12 mx-1 lg:w-2/5 lg:mx-8">
         <button>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 hover:bg-grey-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 hover:bg-grey-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </button>
-        <input type="text" placeholder="Search.." class="w-full rounded mr-4 ml-2" id = "search-box">
+        <input type="text" placeholder="Search.." class="w-full rounded mr-4 ml-2" id="search-box">
       </div>
       <!-- Final cercador -->
 
-      <a href="#" class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mr-4">Time in</a>
-      <a href="#" class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mx-4">Time out</a>
+      <a href="#"
+        class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mr-4">Time
+        in</a>
+      <a href="#"
+        class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mx-4">Time
+        out</a>
     </div>
-</nav>
-<!-- Llistat esquerra-->
-    <div class="grid md:grid-cols-2  h-screen max-h-screen resize-none">
-        <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible" id='div_taula'>
-            <div id="taula_disponible" class="bg-gray-100 overflow-hidden">
-            </div>
-            <div class ="relative z-50">
-              <div class="flex items-center justify-center" >  
-                <button class= "flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none" href = 'div_mapa' id="button_map" onclick = "changeButtonMap()">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black" >Mostrar Mapa</span>
-                </button>
-              </div>
-          </div>
+  </nav>
+  <!-- Llistat esquerra-->
+  <div class="grid md:grid-cols-2  h-screen max-h-screen resize-none">
+    <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible bg-[#c8d8e4]" id='div_taula'>
+      <div id="taula_disponible" class="overflow-hidden">
+      </div>
+      <div class="relative z-50">
+        <div class="flex items-center justify-center">
+          <button
+            class="flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+            href='div_mapa' id="button_map" onclick="changeButtonMap()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Mapa</span>
+          </button>
         </div>
-        <!-- Mapa -->
-        <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0"  id='div_mapa'>
-            <div id="map" style="width:500px; height:300px"class="fluid-container focus:outline-none"></div>
-            <div class="flex items-center justify-center">
-              <button class= "flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none" href = 'div_taula' id="button_list" onclick = "changeButtonList()" >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Llista</span>
-              </button>
-          </div>
-          </div>
+      </div>
     </div>
+    <!-- Mapa -->
+    <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0" id='div_mapa'>
+      <div id="map" style="width:100%; height:100%" class="fluid-container focus:outline-none"></div>
+      <div class="flex items-center justify-center">
+        <button
+          class="flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+          href='div_taula' id="button_list" onclick="changeButtonList()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+          <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Llista</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
-      async
-    >
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
+    async>
     </script>
-   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-    <!-- Link per agrupar markers -->
-    <script type="text/javascript" src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script><!-- TODO:S'ha dinstalar, no importar -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+  <!-- Link per agrupar markers -->
+  <script type="text/javascript"
+    src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <!-- TODO:S'ha dinstalar, no importar -->
 
-    </body>
+</body>
+
 </html>

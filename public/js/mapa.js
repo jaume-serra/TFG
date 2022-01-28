@@ -214,7 +214,7 @@ function getHtml(place) {
       </div>
       <div>
         <p> PREU:
-          <div class="text-xl text-purple-600 font-bold font-sans shadow-s w-16">
+          <div class="text-xl text-[#52ab98] font-bold font-sans shadow-s w-16">
           ${place.preu}€
           </div>
         </p>
@@ -236,7 +236,7 @@ function getHtml(place) {
       </div>
       <div>
         <p> PREU:
-          <div class="text-xl text-purple-600 font-bold font-sans shadow-s w-16">
+          <div class="text-xl text-[#52ab98] font-bold font-sans shadow-s w-16">
           ${place.preu}€
           </div>
         </p>
