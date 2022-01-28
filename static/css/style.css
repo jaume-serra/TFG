@@ -1,0 +1,145 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 100%;
+      }
+      
+      /* Optional: Makes the sample page fill the window. */
+      html,
+     
+      
+      #mydiv{
+        width: 100%;
+        height: 100%;
+        }
+        .gm-ui-hover-effect {
+          background-color: aliceblue !important;
+          background: url(https://cdn-icons.flaticon.com/png/512/1008/premium/1008968.png?token=exp=1636543205~hmac=f359123a9e58eb6cfb9c5fc14b64a474) !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          background-size: cover !important;
+          text-indent: 100% !important;
+          border: 4px !important;
+          width: 30px !important;
+          height: 30px !important;
+          margin-right: 12px !important;
+          margin-top: 8px !important;
+      }
+      .gm-ui-hover-effect:focus{
+        outline: none;
+      }
+
+    @media not screen and (max-width: 800px) {
+      #div_mapa{
+        display:'flex';
+      }
+      #div_taula{
+        display: inline !important;
+      }
+    }
+    #map_button_css{
+      z-index: 1000 !important;
+    }
+
+    .tab {
+      overflow: hidden;
+      }
+      .tab-content {
+      max-height: 0;
+      transition: all 0.5s;
+      }
+
+
+      input:checked + .tab-label .test {
+          background-color: #000;
+      }
+      input:checked + .tab-label .test svg {
+          transform: rotate(180deg);
+          stroke: #fff;
+      }
+      input:checked + .tab-label::after {
+      transform: rotate(90deg);
+      }
+      input:checked ~ .tab-content {
+      max-height: 100vh;
+      }
+
+/* Inici boto deplegable navbar mobil*/
+
+
+details, /* 1 */
+menu {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Scripting
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+canvas {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+template {
+  display: none;
+}
+
+/* Hidden
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+/*_-----------------------------------------------------_ */
+
+
+/*
+ * BEGIN EDITING FROM THIS POINT ONWARDS
+ * =====================================
+ */
+.offsite-is-open .offsite-container {
+  transform: translateX(40rem);
+  transition: all 0.5s;
+}
+
+.offsite-is-open .site-container {
+  transform: translateX(40rem);
+  transition: all 0.5s;
+
+}
+/**
+ * Containers
+ */
+.offsite-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right:0;
+  opacity: 1 !important;
+  transition: all 0.3s ease;}

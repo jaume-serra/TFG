@@ -1,0 +1,21 @@
+.separator{
+    display: flex;
+    align-items: center;
+  }
+  
+  .separator p{
+    padding: 0 0.5rem; /* creates the space */
+  }
+  
+  .separator .line{
+    flex: 1;
+    height: 0.05em;
+    background-color: #000;
+  }
+
+
+
+  .google-button{
+    width: 50px;
+    border-radius: 9999px !important;
+  }
