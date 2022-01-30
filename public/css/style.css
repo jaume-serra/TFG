@@ -8,6 +8,8 @@
      html,body{
       font-family: 'Arimo', sans-serif;   
       }
+
+      
       #mydiv{
         width: 100%;
         height: 100%;
@@ -143,3 +145,27 @@ template {
   right:0;
   opacity: 1 !important;
   transition: all 0.3s ease;}
+
+
+/* Wave */
+.custom-shape-divider-bottom-1643409354 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1643409354 svg {
+  position: relative;
+  display: block;
+  width: calc(167% + 1.3px);
+  height: 100px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1643409354 .shape-fill {
+  fill: #F2F2F2;
+}
