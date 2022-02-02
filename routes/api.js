@@ -4,6 +4,12 @@ const { route } = require('express/lib/application');
 let router = express.Router();
 
 
+router.all('/customers', (req,res) =>{
+    var customer = [{"id":"1","h":"2"}];
+    res.send(customer);
+
+
+})
 
 
 router.get('/get_places', (req, res) => {
