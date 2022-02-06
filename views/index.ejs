@@ -6,7 +6,7 @@
 
 <head>
     <title>Releaser</title>
-    
+
     <link rel='stylesheet' type="text/css" href="/public/css/style.css" />
     <script src="../"></script>
     <script type="text/javascript" src="/public/js/index.js"></script>
@@ -28,8 +28,7 @@
                         <div class="flex">
                             <!-- Website Logo -->
                             <a href="#" class="flex py-4 px-2 my-3">
-                                <img class="block h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
+                                <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
 
                                 <span class="ml-4 mr-10 font-semibold text-[#2b6777] text-lg">Releaser</span>
                             </a>
@@ -37,29 +36,21 @@
                         <!-- Primary Navbar items -->
                         <div class="hidden md:flex  space-x-4 my-4">
                             <!-- <a href="" class="py-4 px-2 text-green-200 border-b-4 border-green-200 font-semibold ">Storage</a> -->
-                            <a href=""
-                                class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
+                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
                             <hr>
-                            <a href=""
-                                class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
-                            <a href=""
-                                class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Blog</a>
-                            <a href=""
-                                class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">List
+                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
+                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Blog</a>
+                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">List
                                 space</a>
                         </div>
                     </div>
                     <!-- Secondary Navbar items -->
-                    <div
-                        class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
-                        <button type="button"
-                            class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1 w-12 lg:w-40 flex items-stretch focus:outline-none"
-                            id="user-menu-button" onclick="showDropDown()">
+                    <div class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
+                        <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1 w-12 lg:w-40 flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
                             <img class="h-8 w-8 rounded-full"
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
                                 alt="">
                             <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
-                                <%= name %>
                                     <!--
                                 {% if not session['name'] %}
                                 Account
@@ -78,31 +69,22 @@
                             </p>
 
                         </button>
-                        <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl"
-                            id="user-menu-dropdown">
+                        <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
                             <!--Dropdown menu-->
                             {% if session %}
-                            <a href="/logout"
-                                class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Log
-                                out</a>
-
-                            {% else %}
-                            <a href="login"
-                                class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Sign
-                                in</a>
-                            {% endif %}
-                            <a href="#"
-                                class="px-2 py-1 mx-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">Register</a>
-                            <a href="#"
-                                class="px-2 py-1 mx-2 mb-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">List
+                            <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Log
+                                out</a> {% else %}
+                            <a href="login" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Sign
+                                in</a> {% endif %}
+                            <a href="#" class="px-2 py-1 mx-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">Register</a>
+                            <a href="#" class="px-2 py-1 mx-2 mb-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">List
                                 space</a>
                         </div>
                     </div>
 
                     <!-- Mobile menu button -->
                     <div class="md:hidden flex items-center">
-                        <button class="sidebar-button focus:outline-none mobile-menu-button"
-                            onclick="changeVisibility()">
+                        <button class="sidebar-button focus:outline-none mobile-menu-button" onclick="changeVisibility()">
                             <svg class=" w-6 h-6 text-gray-500 hover:text-green-200 " x-show="!showMenu" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -117,12 +99,9 @@
     <div class="offsite-container w-4/6 hidden md:hidden  z-50  bg-gray-500 " id="off_site-object">
         <nav class="nav bg-gray-100 h-full overflow-y-auto shadow-2xl">
             <div class="relative">
-                <img class="absolute left-0 m-5 h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
+                <img class="absolute left-0 m-5 h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
 
-                <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black"
-                    width="16" height="16" onclick="changeVisibility()" viewBox="0 0 48 48"
-                    xmlns="http://www.w3.org/2000/svg">
+                <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black" width="16" height="16" onclick="changeVisibility()" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                     <g transform="matrix(2,0,0,2,0,0)">
                         <path d="M4.5 19.5L19.5 4.5" fill="none" stroke="#000000" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="1.5"></path>
@@ -159,11 +138,9 @@
         <div class="grid md:grid-cols-2 grid-cols-1 bg-gradient-to-r from-[#2b6777] to-[#52ab98]  overflow-x-hidden z-10">
             <!--imatge class = "bg-local bg-no-repeat bg-right-top bg-auto "src: style="background-image: url(https://media.istockphoto.com/photos/residential-street-lined-with-new-houses-and-cloudy-autumnal-sky-picture-id966419482);"-->
             <div class="col-span-1 items-center  mt-10 pl-12 sm:pl-20">
-                <h1 class="font-black text-4xl tracking-tight text-white  lg:text-left text-center w-5/6 ">Find
-                    storage and parking near you </h1>
+                <h1 class="font-black text-4xl tracking-tight text-white  lg:text-left text-center w-5/6 ">Find storage and parking near you </h1>
                 <div class="flex flex-shrink-0 rounded-full bg-[#f2f2f2] mt-8 h-10 w-5/6 mr-20 max-w-screen-md">
-                    <input type="text" placeholder="Enter location" class="w-full rounded mr-4 ml-4"
-                        id="search-box-index">
+                    <input type="text" placeholder="Enter location" class="w-full rounded mr-4 ml-4" id="search-box-index">
 
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 mr-4  hover:bg-grey-500" fill="none"
@@ -176,21 +153,16 @@
                     </button>
                 </div>
                 <div class="grid grid-cols-2 gap-2 w-5/6 mr-20 max-w-screen-md">
-                    <button
-                        class="mt-8  rounded-full py-2 bg-[#c8d8e4] text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300"
-                        id="storage_button">
+                    <button class="mt-8  rounded-full py-2 bg-[#c8d8e4] text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300" id="storage_button">
                         Storage
                     </button>
-                    <button
-                        class="mt-8 rounded-full py-2 bg-[#c8d8e4] text-center text-[#2b6777] border-2 hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300"
-                        id="parking_button">
+                    <button class="mt-8 rounded-full py-2 bg-[#c8d8e4] text-center text-[#2b6777] border-2 hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300" id="parking_button">
                         Parking
                     </button>
                 </div>
                 <div>
                     <p class="hidden lg:block text-white font-black mt-10">Got some unused space?</p>
-                    <button
-                        class="rounded-full font-black focus:outline-none mt-4 lg:mt-2 py-2 bg-[#c8d8e4]  text-[#2b6777] hover:bg-[#e9fffa] w-5/6 max-w-screen-md text-lg transition duration-300">List
+                    <button class="rounded-full font-black focus:outline-none mt-4 lg:mt-2 py-2 bg-[#c8d8e4]  text-[#2b6777] hover:bg-[#e9fffa] w-5/6 max-w-screen-md text-lg transition duration-300">List
                         your space</button>
                 </div>
                 <div class="mt-10 mb-10">
@@ -314,8 +286,7 @@
             </div>
 
             <div class="col-span-1  p-10 hidden md:block">
-                <img src="https://media.istockphoto.com/photos/residential-street-lined-with-new-houses-and-cloudy-autumnal-sky-picture-id966419482"
-                    alt="" class="w-100">
+                <img src="https://media.istockphoto.com/photos/residential-street-lined-with-new-houses-and-cloudy-autumnal-sky-picture-id966419482" alt="" class="w-100">
             </div>
         </div>
 
@@ -327,8 +298,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-10 lg:mx-20 mt-5 ">
 
                 <div class="flex bg-[#2b6777]  rounded-lg border-2 shadow-lg items-center text-left p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 ml-2 " fill="none" viewBox="0 0 24 24"
-                        stroke="#c8d8e4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 ml-2 " fill="none" viewBox="0 0 24 24" stroke="#c8d8e4">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
@@ -404,20 +374,13 @@
                     <div class="tabs">
                         <div class="border-b tab rounded-lg">
                             <div class="border-l-2 border-transparent relative">
-                                <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2"
-                                    type="checkbox" id="chck1">
-                                <header
-                                    class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none"
-                                    for="chck1">
+                                <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2" type="checkbox" id="chck1">
+                                <header class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none" for="chck1">
                                     <span class="text-grey-darkest  text-xl font-semibold">
                                         Pregunta:1 Massa vitae tortor condimentum lacinia quis vel eros donec
                                     </span>
-                                    <div
-                                        class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
-                                        <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24"
-                                            stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" viewbox="0 0 24 24" width="24"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                    <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
+                                        <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                             <polyline points="6 9 12 15 18 9">
                                             </polyline>
                                         </svg>
@@ -427,15 +390,9 @@
                                     <div class=" pb-5 text-grey-darkest">
                                         <ul class="pl-4  pr-4 md:pr-10 mx-4">
                                             <li class="pb-2 text-justify overflow-y-auto">
-                                                ¿Buscas un trastero donde guardar tu bicicleta que sea barato y esté a
-                                                pie de calle? ¿O un parking para tu moto que no te cueste un riñón?
-                                                ¡Speizy te ayuda!
-                                                Utiliza el buscador de Speizy para buscar y filtrar cerca de tu zona
-                                                (puedes acceder desde la página principal). Si encuentras el que te
-                                                conviene, podrás hablar con el anfitrión mediante el sistema de chat de
-                                                Speizy, o reservarlo directamente desde el día que te convenga. Desde el
-                                                momento en el que reserves, el anfitrión tendrá un plazo de 48 horas
-                                                para decidir si la acepta o la rechaza.
+                                                ¿Buscas un trastero donde guardar tu bicicleta que sea barato y esté a pie de calle? ¿O un parking para tu moto que no te cueste un riñón? ¡Speizy te ayuda! Utiliza el buscador de Speizy para buscar y filtrar cerca de tu zona (puedes acceder desde la
+                                                página principal). Si encuentras el que te conviene, podrás hablar con el anfitrión mediante el sistema de chat de Speizy, o reservarlo directamente desde el día que te convenga. Desde el momento en el que
+                                                reserves, el anfitrión tendrá un plazo de 48 horas para decidir si la acepta o la rechaza.
                                             </li>
                                         </ul>
                                     </div>
@@ -444,21 +401,14 @@
                         </div>
                         <div class="border-b tab rounded-lg">
                             <div class="border-l-2 border-transparent relative">
-                                <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2"
-                                    type="checkbox" id="chck1">
+                                <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2" type="checkbox" id="chck1">
 
-                                <header
-                                    class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none"
-                                    for="chck1">
+                                <header class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none" for="chck1">
                                     <span class="text-grey-darkest  text-xl font-semibold">
                                         Pregunta:1 Massa vitae tortor condimentum lacinia quis vel eros donec
                                     </span>
-                                    <div
-                                        class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
-                                        <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24"
-                                            stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" viewbox="0 0 24 24" width="24"
-                                            xmlns="http://www.w3.org/2000/svg">
+                                    <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
+                                        <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                             <polyline points="6 9 12 15 18 9">
                                             </polyline>
                                         </svg>
@@ -469,15 +419,9 @@
                                     <div class=" pb-5 text-grey-darkest">
                                         <ul class="pl-4  pr-4 md:pr-10 mx-4">
                                             <li class="pb-2 text-justify ">
-                                                ¿Buscas un trastero donde guardar tu bicicleta que sea barato y esté a
-                                                pie de calle? ¿O un parking para tu moto que no te cueste un riñón?
-                                                ¡Speizy te ayuda!
-                                                Utiliza el buscador de Speizy para buscar y filtrar cerca de tu zona
-                                                (puedes acceder desde la página principal). Si encuentras el que te
-                                                conviene, podrás hablar con el anfitrión mediante el sistema de chat de
-                                                Speizy, o reservarlo directamente desde el día que te convenga. Desde el
-                                                momento en el que reserves, el anfitrión tendrá un plazo de 48 horas
-                                                para decidir si la acepta o la rechaza.
+                                                ¿Buscas un trastero donde guardar tu bicicleta que sea barato y esté a pie de calle? ¿O un parking para tu moto que no te cueste un riñón? ¡Speizy te ayuda! Utiliza el buscador de Speizy para buscar y filtrar cerca de tu zona (puedes acceder desde la
+                                                página principal). Si encuentras el que te conviene, podrás hablar con el anfitrión mediante el sistema de chat de Speizy, o reservarlo directamente desde el día que te convenga. Desde el momento en el que
+                                                reserves, el anfitrión tendrá un plazo de 48 horas para decidir si la acepta o la rechaza.
                                             </li>
                                         </ul>
                                     </div>
@@ -499,16 +443,12 @@
                     <div class="col-span-1">
                         <div class="flex md:grid md:grid-cols-1 overflow-x-auto" id="buttons">
                             <hr>
-                            <button
-                                class="btn bg-[#2b6777] text-white font-black px-2 py-2 mb-2 mx-2 my-2 md:mx-0 md:py-4 rounded-2xl active focus:outline-none"
-                                id="garage" onclick="changeTypeSpace('garage')">Garages</button>
+                            <button class="btn bg-[#2b6777] text-white font-black px-2 py-2 mb-2 mx-2 my-2 md:mx-0 md:py-4 rounded-2xl active focus:outline-none" id="garage" onclick="changeTypeSpace('garage')">Garages</button>
                             <hr>
-                            <button class="btn py-2 px-2 my-2 mx-2 md:mx-0 md:py-4 rounded-xl focus:outline-none"
-                                id="parking" onclick="changeTypeSpace('parking')">Parking Spaces</button>
+                            <button class="btn py-2 px-2 my-2 mx-2 md:mx-0 md:py-4 rounded-xl focus:outline-none" id="parking" onclick="changeTypeSpace('parking')">Parking Spaces</button>
                             <hr>
 
-                            <button class="btn py-2 px-2 mt-2 mx-2 mb-2 md:mx-0 md:py-4 rounded-xl focus:outline-none"
-                                id="hola1" onclick="changeTypeSpace('hola1')">Hola1</button>
+                            <button class="btn py-2 px-2 mt-2 mx-2 mb-2 md:mx-0 md:py-4 rounded-xl focus:outline-none" id="hola1" onclick="changeTypeSpace('hola1')">Hola1</button>
                             <hr>
 
                         </div>
@@ -518,9 +458,7 @@
                         <div class="m-5 p-5">
                             <h1 class="font-black text-white text-xl">Garages</h1>
                             <div class="text-[#c8d8e4]">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt
-                                    suscipit
-                                    sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
                                 <div class="ml-10 mt-5">
                                     <h1>caracteristica 1</h1>
                                     <h1>caracteristica 1</h1>
@@ -529,14 +467,9 @@
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 mt-5">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg"
-                                    alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg"
-                                    alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg" alt="" srcset="">
 
                             </div>
 
@@ -546,9 +479,7 @@
                         <div class="m-5 p-5">
                             <h1 class="font-black text-white text-xl">Parking Spaces</h1>
                             <div class="text-[#c8d8e4]">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt
-                                    suscipit
-                                    sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
                                 <div class="ml-10 mt-5">
                                     <h1>caracteristica 1</h1>
                                     <h1>caracteristica 1</h1>
@@ -557,14 +488,9 @@
                             </div>
 
                             <div class="grid  grid-cols-1 md:grid-cols-3 mt-5">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg"
-                                    alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg"
-                                    alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg" alt="" srcset="">
 
                             </div>
 
@@ -574,9 +500,7 @@
                         <div class="m-5 p-5">
                             <h1 class="font-black text-white text-xl">Parking Spaces</h1>
                             <div class="text-[#c8e8d4]">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt
-                                    suscipit
-                                    sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat quibusdam?</p>
                                 <div class="ml-10 mt-5">
                                     <h1> 1</h1>
                                     <h1>caracteristica 1</h1>
@@ -585,14 +509,9 @@
                             </div>
 
                             <div class="grid  grid-cols-1 md:grid-cols-3 mt-5">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg"
-                                    alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
-                                <img class="px-2 my-2 rounded-xl"
-                                    src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg"
-                                    alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt="" srcset="">
+                                <img class="px-2 my-2 rounded-xl" src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg" alt="" srcset="">
                             </div>
                         </div>
                     </div>
@@ -641,14 +560,10 @@
                             Contacta'ns en alguna d'aquestes plataformes.
                         </h5>
                         <div class="grid grid-cols-4 mt-6 lg:mb-0 mb-6 w-48">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                                src="/public/img/facebook.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                                src="/public/img/instagram.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                                src="/public/img/whatsapp.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                                src="/public/img/twitter.png">
+                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/facebook.png">
+                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/instagram.png">
+                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/whatsapp.png">
+                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/twitter.png">
 
 
                         </div>
@@ -660,20 +575,16 @@
                                     útils</span>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">About Us</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">About Us</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Blog</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Blog</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Mapa</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Mapa</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Topics</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Topics</a>
                                     </li>
                                 </ul>
                             </div>
@@ -682,20 +593,16 @@
                                     recursos</span>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="#">hola</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="#">hola</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Terms &amp; Conditions</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Terms &amp; Conditions</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Privacy Policy</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm"
-                                            href="">Contact Us</a>
+                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>
@@ -715,9 +622,7 @@
         </footer>
     </div>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=&callback=initAutocomplete&libraries=places&v=weekly"
-        async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initAutocomplete&libraries=places&v=weekly" async></script>
 </body>
 
 </html>
