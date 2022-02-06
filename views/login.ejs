@@ -10,6 +10,9 @@
     <link type="text/css" href="/public/css/style.css" />
     <link type="text/css" href="/public/css/login.css" />
 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
 
     <!--<script src="/public/js/index.js"></script>-->
     <script src="/public/js/menu.js"></script>
@@ -17,9 +20,7 @@
     <meta charset="UTF-8">
     <script src="/public/js/login.js"></script>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
 
     <!--Inici login-->
 
@@ -173,16 +174,16 @@
                     <!--Line seperator -->
 
 
-                    <div class="place-items-center py-5">
+                    <div class="grid place-items-center h-10 py-5">
                         <p class="text-blue-600 text-sm">or</p>
                     </div>
 
 
                     <!--Google or facebook buttons-->
-                    <div class="grid grid-cols-1 gap-x-4 place-items-center p-3">
+                    <div class="grid grid-cols-1 gap-x-4 place-items-center pt-5 pb-3">
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </div>
-
+                    <a href="#" onclick="signOut();">Sign Out</a>
                 </div>
             </div>
         </div>
