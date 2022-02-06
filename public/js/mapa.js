@@ -9,6 +9,7 @@ let map;
 Coses a revisar:
 -Actualitzo el llistat de lesquerra des del mapa :(
 */
+
 function initMap() {
   let lastInfowindow;
   let markers = [];
@@ -262,7 +263,7 @@ function get_places() {
       msg = JSON.parse(request.responseText)["msg"];
     }
   }
-  request.open("GET", url, false); //todo mirar fer async
+  request.open("GET", url, false); //TODO: mirar fer async
   request.send();
   if (msg != []) {
     return msg;
@@ -272,7 +273,7 @@ function get_places() {
 
 
 function changeButtonMap() {
-  //Todo: canviar per toggle
+  //TODO: canviar per toggle
   document.getElementById('div_taula').classList.add('invisible');
   document.getElementById('div_taula').style.display = 'none';
   document.getElementById('div_mapa').classList.remove('invisible', 'h-0');
@@ -281,7 +282,7 @@ function changeButtonMap() {
 
 }
 function changeButtonList() {
-  //Todo: canviar per toggle
+  //TODO: canviar per toggle
   document.getElementById('div_taula').classList.remove('invisible');
   document.getElementById('div_taula').style.display = 'inline';
   document.getElementById('div_mapa').classList.add('invisible', 'h-0');
@@ -327,7 +328,7 @@ function changeParking() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-white', 'border-white');
   parking_button.classList.add('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
-  //falta crida funcio per filtrar
+  //TODO:falta crida funcio per filtrar
   //check_bounds(map.getBounds(),"changeParking");
   map.setZoom(map.getZoom());
 
@@ -358,7 +359,7 @@ function changeStorage() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
   parking_button.classList.add('text-white', 'border-white');
-  //check_bounds(map.getBounds(),"changeStorage");
+  //TODO: check_bounds(map.getBounds(),"changeStorage");
   //falta crida funcio per filtrar
   map.setZoom(map.getZoom());
 }

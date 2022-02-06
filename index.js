@@ -1,20 +1,11 @@
 var express = require("express");
 var path = require("path");
 const app = express();
-/* const ReactDOM = require('react-dom');
-const React = require('react'); */
-
+const cors = require("cors");
 const api = require("./routes/api");
 
 const morgan = require("morgan"); //Per printar resultat pantalla
 
-/* Inici react */
-// JAJA riure trist
-/* Final react */
-
-/* if (true) {
-  pass;
-} */
 //Middleware
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -35,28 +26,35 @@ app.use(express.static(path.join(__dirname, "public")));
     res.send(html);
 })
  */
+const whitelist = ["http://localhost:5000"];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  optionsSuccesStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 app.all("/mapa", (req, res) => {
-  //Todo: not working
   res.render("mapa.ejs", {});
 });
 
 app.get("/", (req, res) => {
   res.render("index", {
-    name: "Jaume",
+    name: "Jaume", //FIXME: passar usuari real
   });
 });
 
-app.use("/api", api); // Use api.js to handle js
+app.use("/api", api);
 
-/* app.get('/llistat',function(req,res){
-    res.render('mapa',{});
+app.get("/login", function (req, res) {
+  res.render("login", {});
 });
-*/
-
-/* app.get('/login', function (req, res) {
-    res.render('login', {});
-});
- */
 
 // api.app()
 
