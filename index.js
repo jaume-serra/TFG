@@ -4,11 +4,15 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const api = require("./routes/api");
+const dotenv = require("dotenv");
+
+
+dotenv.config({ path: '/config/config.env' });
 
 //Google Auth2 
 const { OAuth2Client } = require('google-auth-library');
-const CLIENT_ID = "376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com"
-const client = new OAuth2Client(CLIENT_ID);
+
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 
 const morgan = require("morgan"); //Per printar resultat pantalla
@@ -69,7 +73,7 @@ app.post("/login", (req, res) => {
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
+            audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         });
@@ -101,8 +105,10 @@ app.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
-app.listen(5000, () => {
-    console.log("Server running port 5000");
+const PORT = process.env.PORT
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server running port ${PORT}`);
 });
 
 
@@ -115,7 +121,7 @@ function checkAuthenticated(req, res, next) {
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: CLIENT_ID,
+            audience: process.env.CLIENT_ID,
         })
         const payload = ticket.getPayload()
         user.name = payload.name;
