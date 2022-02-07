@@ -5,6 +5,9 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 const dotenv = require("dotenv");
 dotenv.config({ path: './config/config.env' });
 
+
+const User = require('../models/users')
+
 //@Desc pagina principal
 //@route  /
 
@@ -13,6 +16,32 @@ dotenv.config({ path: './config/config.env' });
 
 const connectDB = require('../config/db');
 connectDB()
+
+const checkAuthenticated = (req, res, next) => {
+
+    let token = req.cookies['session-token']
+    let user = {};
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.CLIENT_ID,
+        })
+        const payload = ticket.getPayload()
+        user.name = payload.name;
+        user.email = payload.email;
+        user.picture = payload.picture;
+
+    }
+    verify()
+        .then(() => {
+            req.user = user;
+
+            next()
+        })
+        .catch(err => {
+            res.redirect('/login')
+        })
+}
 
 
 router.get("/", (req, res) => {
@@ -28,8 +57,10 @@ router.all("/mapa", (req, res) => {
 
 
 router.get("/login", function(req, res) {
-    res.render("login", {});
+    res.render("login");
 });
+
+
 
 router.post("/login", (req, res) => {
     let token = req.body.token;
@@ -41,24 +72,38 @@ router.post("/login", (req, res) => {
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         });
         const payload = ticket.getPayload();
-        const userid = payload['sub']; //TODO:Save user bbdd
-        console.log(payload)
+        let newUser = {
+            googleId: payload["sub"],
+            displayName: payload["name"],
+            email: payload["email"],
+            firstName: payload["given_name"],
+            lastName: payload["family_name"],
+            image: payload["picture"]
+        }
+        try{
+            let user = await User.findOne({email: payload["email"]})
+            if(user == null){
+                user = await User.create(newUser)
+            }
+        } catch(err){
 
+        }
+
+        
     }
     verify()
         .then(() => {
             res.cookie('session-token', token);
             res.send('success');
-        }).
-    catch(console.error);
+        })
+        .catch(console.error);
 
 
 
 });
 
 router.get('/profile', checkAuthenticated, (req, res) => {
-    let user = req.user;
-    res.render('profile', { user });
+    res.render('profile', { name: req.user.firstName, user: req.user });
 })
 
 
@@ -70,29 +115,6 @@ router.get('/logout', (req, res) => {
 
 
 
-function checkAuthenticated(req, res, next) {
-
-    let token = req.cookies['session-token']
-    let user = {};
-    async function verify() {
-        const ticket = await client.verifyIdToken({
-            idToken: token,
-            audience: process.env.CLIENT_ID,
-        })
-        const payload = ticket.getPayload()
-        user.name = payload.name;
-        user.email = payload.email;
-        user.picture = payload.picture;
-    }
-    verify()
-        .then(() => {
-            req.user = user;
-            next()
-        })
-        .catch(err => {
-            res.redirect('/login')
-        })
-}
 
 
 module.exports = router
