@@ -7,7 +7,7 @@ const api = require("./routes/api");
 const dotenv = require("dotenv");
 
 
-dotenv.config({ path: '/config/config.env' });
+dotenv.config({ path: './config/config.env' });
 
 //Google Auth2 
 const { OAuth2Client } = require('google-auth-library');
