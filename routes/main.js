@@ -17,6 +17,8 @@ const User = require('../models/users')
 const connectDB = require('../config/db');
 connectDB()
 
+
+
 const checkAuthenticated = (req, res, next) => {
 
     let token = req.cookies['session-token']
@@ -56,13 +58,16 @@ router.all("/mapa", (req, res) => {
 
 
 
-router.get("/login", function(req, res) {
+// TODO: Mirar quin tipus d'usuari és i si esta loggejat per accedir al login
+router.get("/login", function(req, res) { 
     res.render("login");
 });
 
 
 
 router.post("/login", (req, res) => {
+
+    //Canviar aixo a MVC
     let token = req.body.token;
     async function verify() {
         const ticket = await client.verifyIdToken({
@@ -71,6 +76,7 @@ router.post("/login", (req, res) => {
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         });
+
         const payload = ticket.getPayload();
         let newUser = {
             googleId: payload["sub"],
@@ -86,11 +92,12 @@ router.post("/login", (req, res) => {
                 user = await User.create(newUser)
             }
         } catch(err){
-
+            console.error()
         }
 
         
     }
+
     verify()
         .then(() => {
             res.cookie('session-token', token);
