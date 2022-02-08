@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  { verifyToken }  = require('../controller/main.js')
+const  { newLogin, verifyToken }  = require('../controller/main.js')
 
 const dotenv = require("dotenv");
 dotenv.config({ path: './config/config.env' });
@@ -17,10 +17,16 @@ dotenv.config({ path: './config/config.env' });
 const checkAuthenticated = (req, res, next) => {
 
     let token = req.cookies['session-token']
-    let user = {};
     
-    
-    
+    verifyToken(token)
+    .then((user) => {
+        req.user = user
+        next()
+    })
+    .catch(err => {
+        res.redirect('/login')
+    }) 
+   /*  
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -32,6 +38,7 @@ const checkAuthenticated = (req, res, next) => {
         user.picture = payload.picture;
 
     } 
+
     verify()
         .then(() => {
             req.user = user;
@@ -40,7 +47,7 @@ const checkAuthenticated = (req, res, next) => {
         })
         .catch(err => {
             res.redirect('/login')
-        })
+        }) */
 }
 
 
@@ -68,7 +75,7 @@ router.post("/login", (req, res) => {
     //Canviar aixo a MVC
     let token = req.body.token;
     
-    verifyToken(token).then(() => {
+    newLogin(token).then(() => {
         console.log("success")
         res.cookie('session-token', token);
         res.send('success');
@@ -82,7 +89,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get('/profile', checkAuthenticated, (req, res) => {
-    res.render('profile', /* { name: req.user.firstName, user: req.user } */);
+    res.render('profile',  { name: req.user.firstName, user: req.user } );
 })
 
 

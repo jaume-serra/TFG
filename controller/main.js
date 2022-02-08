@@ -25,20 +25,28 @@ async function verifyToken(token) {
         lastName: payload["family_name"],
         image: payload["picture"]
     }
-    try{
-        
-        let user = await User.findOne({email: payload["email"]})
-        if(user == null){
-            user = await User.create(newUser)
-        }
-    } catch(err){
-        console.error()
-    }
-
-    
+    if(!newUser) return new Error("Error al comprovar token")
+    return newUser
 }
 
  
 
+async function newLogin(token){
+    verifyToken(token)
+    .then(async (newUser) => {
+        try{
 
-module.exports = {verifyToken}
+            let user = await User.findOne({email: newUser.email})
+            if(user == null){
+                user = await User.create(newUser)
+            }
+        }catch(err){
+            console.error()
+        }
+    })
+
+
+}
+
+
+module.exports = { newLogin, verifyToken }
