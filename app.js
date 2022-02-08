@@ -11,13 +11,8 @@ const morgan = require("morgan"); //Per printar resultat pantalla
 const { connect } = require("http2");
 
 
-
-//Google Auth2 
-
 //Config file 
 dotenv.config({ path: './config/config.env' });
-
-
 
 
 //Middleware
@@ -35,13 +30,6 @@ app.use("*/js", express.static(path.join(__dirname, "public/js")));
 app.use("*/css", express.static(path.join(__dirname, "public/css")));
 app.use(express.static(path.join(__dirname, "public")));
 
-/* app.get('/react', (req, res) => {
-    var html = ReactDOM.renderToString(
-        React.createElement(component)
-    )
-    res.send(html);
-})
- */
 
 
 const whitelist = ["http://localhost:5000"];
