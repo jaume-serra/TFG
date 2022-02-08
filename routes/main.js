@@ -7,13 +7,25 @@ dotenv.config({ path: './config/config.env' });
 
 
 
-//@Desc pagina principal
-//@route  /
+/* Comprova si l'usuari no està loggejat */
+const checkNotAuthenticated = (req, res, next) => {
+    let token = req.cookies['session-token']
+    if(!token){ 
+        next()
+    }
+    verifyToken(token)
+    .then((user) => {
+        res.redirect("/profile")
+    })
+    .catch( err => {
+        next()
+    })
 
-//Connect ddbb
+
+}
 
 
-
+/* Comprova si l'usuari està loggejat  */
 const checkAuthenticated = (req, res, next) => {
 
     let token = req.cookies['session-token']
@@ -26,28 +38,6 @@ const checkAuthenticated = (req, res, next) => {
     .catch(err => {
         res.redirect('/login')
     }) 
-   /*  
-    async function verify() {
-        const ticket = await client.verifyIdToken({
-            idToken: token,
-            audience: process.env.CLIENT_ID,
-        })
-        const payload = ticket.getPayload()
-        user.name = payload.name;
-        user.email = payload.email;
-        user.picture = payload.picture;
-
-    } 
-
-    verify()
-        .then(() => {
-            req.user = user;
-
-            next()
-        })
-        .catch(err => {
-            res.redirect('/login')
-        }) */
 }
 
 
@@ -63,16 +53,15 @@ router.all("/mapa", (req, res) => {
 
 
 
-// TODO: Mirar quin tipus d'usuari és i si esta loggejat per accedir al login
-router.get("/login", function(req, res) { 
+router.get("/login", checkNotAuthenticated, function(req, res) { 
     res.render("login");
 });
 
 
 
-router.post("/login", (req, res) => {
+router.post("/login", checkNotAuthenticated, (req, res) => {
 
-    //Canviar aixo a MVC
+    
     let token = req.body.token;
     
     newLogin(token).then(() => {
@@ -98,8 +87,6 @@ router.get('/logout', (req, res) => {
     res.clearCookie('session-token')
     res.redirect('/')
 })
-
-
 
 
 

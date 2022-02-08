@@ -10,6 +10,7 @@ connectDB()
 
 
 
+/* Verifica el token que rep i retorna l'usuari */
 async function verifyToken(token) {
     const ticket = await client.verifyIdToken({
         idToken: token,
@@ -30,7 +31,7 @@ async function verifyToken(token) {
 }
 
  
-
+/* crida la funcio verifyToken i comprova si l'usuari existeix i sinó, en crea un */
 async function newLogin(token){
     verifyToken(token)
     .then(async (newUser) => {
