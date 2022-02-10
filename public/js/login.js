@@ -6,8 +6,7 @@ function onSignIn(googleUser) {
     xhr.open('POST', '/login')
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onload = function() {
-        console.log("sign in as: " + xhr.responseText);
-        if (xhr.responseText === 'success') {
+        if (xhr.response === 'success') {
             signOut();
             location.assign('/profile')
         }

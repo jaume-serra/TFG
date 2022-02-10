@@ -1,4 +1,3 @@
-
 const { OAuth2Client } = require('google-auth-library');
 const { Error } = require('mongoose');
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -26,28 +25,32 @@ async function verifyToken(token) {
         lastName: payload["family_name"],
         image: payload["picture"]
     }
-    if(!newUser) return new Error("Error al comprovar token")
+    if (!newUser) return new Error("Error al comprovar token")
     return newUser
 }
 
- 
-/* crida la funcio verifyToken i comprova si l'usuari existeix i sinó, en crea un */
-async function newLogin(token){
-    verifyToken(token)
-    .then(async (newUser) => {
-        try{
 
-            let user = await User.findOne({email: newUser.email})
-            if(user == null){
-                user = await User.create(newUser)
+/* crida la funcio verifyToken i comprova si l'usuari existeix i sinó, en crea un */
+async function newLogin(token) {
+    verifyToken(token)
+        .then(async(newUser) => {
+            try {
+
+                let user = await User.findOne({ email: newUser.email })
+                if (user == null) {
+                    user = await User.create(newUser)
+                }
+            } catch (err) {
+                console.error()
             }
-        }catch(err){
-            console.error()
-        }
-    })
+        })
 
 
 }
 
 
-module.exports = { newLogin, verifyToken }
+const getUser = async({ email }) => {
+    return await User.findOne({ email })
+}
+
+module.exports = { newLogin, verifyToken, getUser }
