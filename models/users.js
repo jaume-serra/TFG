@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
     googleId: {
         type: String,
-        required: true
+        default: null
     },
     email: {   //FIXME: Posar type email?
         type: String,
@@ -19,7 +19,6 @@ const UserSchema = new mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: true
     },
     image: {
         type: String,
@@ -27,6 +26,9 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now()
+    },
+    deletedAT:{
+        type: Date
     }
 })
 
