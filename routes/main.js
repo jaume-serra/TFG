@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { loginGoogleUser, verifyToken, getUser,loginUser } = require("../controller/main.js");
+const { verifyToken } = require("../controller/main.js");
 const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
+
+let userControler = require('../controller/main');  
 
 const bcrypt = require('bcrypt'); /* Nose si fa falta */
 const dotenv = require("dotenv");
@@ -103,43 +105,7 @@ router.get("/login", checkNotAuthenticated, function(req, res) {
 
 
 
-router.post("/login", async(req, res) => {
-    try{
-        const {email, password, token} = req.body
-        if(token){
-            /* TODO: Mirar com pot quedar millor aixo */
-            loginGoogleUser(token)
-            .then(() => {
-                res.cookie("session-token", token);
-                res.status(200).send("success");
-                return
-            })
-            .catch(() => {
-                return new Error("Error to get Google Access");
-            }); 
-        }
-
-        const user = await loginUser(email, password)
-        
-        if(!user){
-            throw new Error("Invalid Parameters Login")
-        }
-        else{
-            // res.status(200).json(user);
-            res.status(200).render("profile",{user})
-        }
-        // const response = await checkUser()
-        // console.log('response :>> ', response);
-    
-    }catch(err){
-        console.log('err :>> ', err);
-        res.status(400).send(err)
-    }
-    
-
-
-
-});
+router.post("/login", userControler.newLogin)
 
 router.get("/profile", checkAuthenticated, (req, res) => {
     res.render("profile", { name: req.user.firstName, user: req.user });

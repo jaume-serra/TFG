@@ -63,6 +63,7 @@ const loginUser = async(email,password) => {
 }
 
  const loginGoogleUser = async (token) => {
+
     verifyToken(token)
         .then(async(newUser) => {
             try {
@@ -79,4 +80,38 @@ const loginUser = async(email,password) => {
 
 }
 
-module.exports = { loginGoogleUser, verifyToken, getUser, loginUser }
+const newLogin = async (req,res) => {
+    try{
+        const {email, password, token} = req.body
+        if(token){
+            /* TODO: Mirar com pot quedar millor aixo */
+            loginGoogleUser(token)
+            .then(() => {
+                res.cookie("session-token", token);
+                res.status(200).send("success");
+            })
+            .catch(() => {
+                throw new Error("Error to get Google Access");
+            }); 
+        }
+
+        const user = await loginUser(email, password)
+        
+        if(!user){
+            res.status(400).send("Invalid user or password")
+
+        }
+        else{
+            // res.status(200).json(user);
+            res.status(200).render("profile",{user})
+        }
+
+
+    }catch(err){
+        console.log('err :>> ', err);
+        res.status(400).send(err)
+
+    }
+}
+
+module.exports = { newLogin,verifyToken } /* TODO: Mirar que cal exportar */
