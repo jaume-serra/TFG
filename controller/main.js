@@ -1,7 +1,8 @@
 const { OAuth2Client } = require('google-auth-library');
 const { Error } = require('mongoose');
 const client = new OAuth2Client(process.env.CLIENT_ID);
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 //DDBB
 const User = require('../models/users')
 const connectDB = require('../config/db');
@@ -10,7 +11,7 @@ connectDB()
 
 
 /* Verifica el token que rep i retorna l'usuari */
-async function verifyToken(token) {
+const verifyToken = async(token) => {
     const ticket = await client.verifyIdToken({
         idToken: token,
         audience: process.env.CLIENT_ID,
@@ -31,7 +32,37 @@ async function verifyToken(token) {
 
 
 /* crida la funcio verifyToken i comprova si l'usuari existeix i sinó, en crea un */
-async function newLogin(token) {
+
+
+
+const getUser = async ({ email }) =>{
+    return await User.findOne({ email })
+}
+
+
+const loginUser = async(email,password) => {
+    if(!(email && password)) return false
+    const user = await User.findOne({email})
+    if (user && (await bcrypt.compare(password, user.password))){
+        const token = jwt.sign(
+            { user_id: user._id, email },
+            process.env.TOKEN_KEY,
+            {
+              expiresIn: "2h",
+            }
+          );
+    
+          // save user token
+        user.token = token;
+        return user
+
+    }
+    else{
+        return false
+    }
+}
+
+ const loginGoogleUser = async (token) => {
     verifyToken(token)
         .then(async(newUser) => {
             try {
@@ -48,9 +79,4 @@ async function newLogin(token) {
 
 }
 
-
-const getUser = async({ email }) => {
-    return await User.findOne({ email })
-}
-
-module.exports = { newLogin, verifyToken, getUser }
+module.exports = { loginGoogleUser, verifyToken, getUser, loginUser }

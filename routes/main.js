@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { newLogin, verifyToken, getUser } = require("../controller/main.js");
+const { loginGoogleUser, verifyToken, getUser,loginUser } = require("../controller/main.js");
+const bodyParser = require('body-parser')
+const jsonParser = bodyParser.json()
 
-
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); /* Nose si fa falta */
 const dotenv = require("dotenv");
 const { hasBrowserCrypto } = require("google-auth-library/build/src/crypto/crypto");
 const { UserRefreshClient } = require("google-auth-library");
@@ -46,10 +47,6 @@ router.all("/mapa", (req, res) => {
     res.render("mapa.ejs", {});
 });
 
-router.get("/login", checkNotAuthenticated, function(req, res) {
-    res.render("login");
-});
-
 
 
 router.get("/register", checkNotAuthenticated, (req,res) =>{
@@ -59,7 +56,7 @@ router.get("/register", checkNotAuthenticated, (req,res) =>{
 
 
 router.post("/register", async (req,res) => {
-
+    /* TODO: passar això al controller */
     try{
         const { name, firstName, lastName, email , password } = req.body  /* TODO: Comprovar aqui la password o al front?  */
         if(!(name && firstName && lastName && email && password)) res.status(400).send("All input are required")
@@ -99,52 +96,47 @@ router.post("/register", async (req,res) => {
 
 })
 
-router.post("/login", async(req, res) => { 
-    console.log('req.body :>> ', req.body);
-    try {
-        const { email, password, token } = req.body;
-        if ((!(email && password)) && (!token)) {
-            res.status(400).send("Invalid Input");
-        }
 
-        if (token) {
-            newLogin(token)
-                .then(() => {
-                    res.cookie("session-token", token);
-                    res.status(200).send("success");
-                })
-                .catch(() => {
-                    return new Error("Error to get Google Access");
-                });
-        }
+router.get("/login", checkNotAuthenticated, function(req, res) {
+    res.render("login");
+});
 
-       
-        const user = await getUser({ email })
 
-        if(user.googleId){
-            throw new Error("Invalid parameters")
-        }
-        console.log('user :>> ', user);
-        
-        if (user && (await bcrypt.compare(password , user.password))) {
-            //User OK --> Crear usuari
-            const newToken = jwt.sign({ user_id: user._id, email },
-            process.env.TOKEN_KEY, 
-            {
-                expiresIn: "1h",
+
+router.post("/login", async(req, res) => {
+    try{
+        const {email, password, token} = req.body
+        if(token){
+            /* TODO: Mirar com pot quedar millor aixo */
+            loginGoogleUser(token)
+            .then(() => {
+                res.cookie("session-token", token);
+                res.status(200).send("success");
+                return
             })
-
-            user.token = newToken;
-            res.status(200).json(user).render("profile");
+            .catch(() => {
+                return new Error("Error to get Google Access");
+            }); 
         }
-        
-        res.status(400).send("Invalid Credentials or User")
-    
-    } catch (err) {
-        console.log('err :>> ', err);
-        res.redirect("/")
 
+        const user = await loginUser(email, password)
+        
+        if(!user){
+            throw new Error("Invalid Parameters Login")
+        }
+        else{
+            // res.status(200).json(user);
+            res.status(200).render("profile",{user})
+        }
+        // const response = await checkUser()
+        // console.log('response :>> ', response);
+    
+    }catch(err){
+        console.log('err :>> ', err);
+        res.status(400).send(err)
     }
+    
+
 
 
 });

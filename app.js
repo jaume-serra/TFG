@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 
-const whitelist = ["http://localhost:5000"];
+const whitelist = ["http://localhost:5000", "http://127.0.0.1:5000"];
 const corsOptions = {
     origin: (origin, callback) => {
         if (!origin || whitelist.indexOf(origin) !== -1) {
