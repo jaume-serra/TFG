@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     googleId: {
-        type: String,
-        default: null
+        type: String
     },
     email: {   //FIXME: Posar type email?
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     displayName: {
         type: String,

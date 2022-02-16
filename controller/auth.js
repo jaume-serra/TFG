@@ -151,7 +151,6 @@ const postLogin = async (req,res) => {
         const {email, password, token} = req.body
         /* Login with Google */
         if(token){
-            /* TODO: Mirar com pot quedar millor aixo */
             /* Pot rebre token i tenir sessio? En teoria no*/
 
             loginGoogle({"googleToken":token})
@@ -195,17 +194,28 @@ const getRegister = (req,res) => {
 const postRegister = async (req,res) => {
 
     try{
-        const { name, firstName, lastName, email , password } = req.body  
-        if(!(name && firstName && lastName && email && password)) res.status(400).send("All input are required")
-        
+        const { name, firstName, email , password, passwordRepeat } = req.body  
+        if(!(name && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
+        console.log('req.body :>> ', req.body);
+    
         const oldUser = await User.findOne({ email })
-        if(oldUser) res.status(409).send("Invalid user")
+        if(oldUser) res.status(409).send("This user already have an account")
+        
+        /* Per si tenim 3 cognoms */
+        let firstNameReal = firstName
+        let secondNameReal
+        let cognoms = firstName.split(" ")
+        if(cognoms.length > 1){
+            firstNameReal = cognoms[0]            
+            cognoms.shift()
+            secondNameReal = cognoms.join(" ")
+        }
 
         encryptedPassword = await bcrypt.hash(password,10)
         const user = await User.create({
-            displayName,
-            firstName,
-            lastName,
+            displayName: name,
+            firstName:firstNameReal,
+            lastName:secondNameReal,
             email: email.toLowerCase(),
             password:encryptedPassword,
         })
@@ -221,11 +231,12 @@ const postRegister = async (req,res) => {
         // save user token
         user.token = token;
         res.cookie("session-token-default",user.token)
-        res.status(201).render("profile")
+        res.status(201).render("profile",{user})
    
    
-    }catch{
+    }catch(err){
         /* TODO: acabar aixo */
+        console.log('err :>> ', err);
     }
 
 }
