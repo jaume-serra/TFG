@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 });
 
 router.all("/mapa", (req, res) => {
-    res.render("mapa.ejs", {});
+    res.render("mapa.ejs");
 });
 
 

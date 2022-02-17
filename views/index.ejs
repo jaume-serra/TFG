@@ -1,138 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<%- include('../views/partials/head') %>
 
-<html>
-
-<head>
-    <title>Releaser</title>
-
-    <link rel='stylesheet' type="text/css" href="/public/css/style.css" />
-    <script src="../"></script>
-    <script type="text/javascript" src="/public/js/index.js"></script>
-
-
-    <script type="text/javascript" src="/public/js/menu.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <meta charset="UTF-8">
-</head>
+<script type="text/javascript" src="/public/js/index.js"></script>
 
 <body>
-    <div id="change-bg" class="change-bg">
-        <!-- Menu navegacio -->
-        <nav class="bg-[#c8d8e4]  h-20 max-h-20 border-b-1 ">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="flex justify-between">
-                    <div class="flex space-x-7">
-                        <div class="flex">
-                            <!-- Website Logo -->
-                            <a href="#" class="flex py-4 px-2 my-3">
-                                <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
 
-                                <span class="ml-4 mr-10 font-semibold text-[#2b6777] text-lg">Releaser</span>
-                            </a>
-                        </div>
-                        <!-- Primary Navbar items -->
-                        <div class="hidden md:flex  space-x-4 my-4">
-                            <!-- <a href="" class="py-4 px-2 text-green-200 border-b-4 border-green-200 font-semibold ">Storage</a> -->
-                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
-                            <hr>
-                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
-                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Blog</a>
-                            <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">List
-                                space</a>
-                        </div>
-                    </div>
-                    <!-- Secondary Navbar items -->
-                    <div class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
-                        <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1 w-12 lg:w-40 flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
-                            <img class="h-8 w-8 rounded-full"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
-                                alt="">
-                            <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
-                                    <!--
-                                {% if not session['name'] %}
-                                Account
-                                {% else %}
-                                {{ session['name'] }}
-                                {% endif %}
-                                -->
-                                    <svg class="w-3 h-3 ml-2 font-black" viewBox="0 0 48 48"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g transform="matrix(2,0,0,2,0,0)">
-                                            <path d="M23.25,7.311,12.53,18.03a.749.749,0,0,1-1.06,0L.75,7.311"
-                                                fill="none" stroke="#000000" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.5"></path>
-                                        </g>
-                                    </svg>
-                            </p>
-
-                        </button>
-                        <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
-                            <!--Dropdown menu-->
-                            {% if session %}
-                            <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Log
-                                out</a> {% else %}
-                            <a href="login" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">Sign
-                                in</a> {% endif %}
-                            <a href="#" class="px-2 py-1 mx-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">Register</a>
-                            <a href="#" class="px-2 py-1 mx-2 mb-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">List
-                                space</a>
-                        </div>
-                    </div>
-
-                    <!-- Mobile menu button -->
-                    <div class="md:hidden flex items-center">
-                        <button class="sidebar-button focus:outline-none mobile-menu-button" onclick="changeVisibility()">
-                            <svg class=" w-6 h-6 text-gray-500 hover:text-green-200 " x-show="!showMenu" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-    </div>
-
-    <div class="offsite-container w-4/6 hidden md:hidden  z-50  bg-gray-500 " id="off_site-object">
-        <nav class="nav bg-gray-100 h-full overflow-y-auto shadow-2xl">
-            <div class="relative">
-                <img class="absolute left-0 m-5 h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
-
-                <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black" width="16" height="16" onclick="changeVisibility()" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                    <g transform="matrix(2,0,0,2,0,0)">
-                        <path d="M4.5 19.5L19.5 4.5" fill="none" stroke="#000000" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="1.5"></path>
-                        <path d="M4.5 4.5L19.5 19.5" fill="none" stroke="#000000" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="1.5"></path>
-                    </g>
-                </svg>
-            </div>
-            <ul class="mx-5 mt-16 py-6 mb-4">
-                <!--<li class="flex items-center">
-                        <svg class="rounded-full border-2 border-gray-200"width="16" height="16" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(2,0,0,2,0,0)"><path d="M6.750 6.000 A5.250 5.250 0 1 0 17.250 6.000 A5.250 5.250 0 1 0 6.750 6.000 Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path d="M2.25,23.25a9.75,9.75,0,0,1,19.5,0" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></g></svg>
-                        <a class="px-4" href="#">Usuari</a>
-                    </li>-->
-                <!--TODO: Afegir menu mobil quan estas log in -->
-                <button class="bg-red-400 text-white w-full py-2 mb-6 rounded-xl hover:bg-red-600">List your
-                    space</button>
-                <li class="mb- p-2  hover:bg-gray-200 rounded-xl"><a href="#">Storage</a></li>
-                <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">Parking</a></li>
-                <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">List your space</a></li>
-                <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">Blog</a></li>
-                <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">About</a></li>
-                <a href="login"><button
-                        class="bg-green-400 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Sign in
-                    </button></a>
-
-
-            </ul>
-        </nav>
-    </div>
+    <%- include('../views/partials/navbar') %>
+    
     <div class="change-bg">
-        </nav>
 
         <!--Inici cercador -->
         <div class="grid md:grid-cols-2 grid-cols-1 bg-gradient-to-r from-[#2b6777] to-[#52ab98]  overflow-x-hidden z-10">
@@ -550,78 +425,9 @@
         </section>
 
 
-        <!-- Inici footer -->
-        <footer class="relative  bg-gradient-to-r from-[#2b6777] to-[#50b4a5] pt-8 pb-6">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-wrap text-left lg:text-left">
-                    <div class="w-full lg:w-6/12 px-4">
-                        <h4 class="text-3xl fonat-semibold text-white">Let's keep in touch!</h4>
-                        <h5 class="text-lg mt-0 mb-2 text-[#c8d8e4]">
-                            Contacta'ns en alguna d'aquestes plataformes.
-                        </h5>
-                        <div class="grid grid-cols-4 mt-6 lg:mb-0 mb-6 w-48">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/facebook.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/instagram.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/whatsapp.png">
-                            <img class="bg-[#f2f2f2] text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/twitter.png">
-
-
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-6/12 px-4">
-                        <div class="flex flex-wrap items-top mb-6">
-                            <div class="w-full lg:w-4/12 px-4 ml-auto">
-                                <span class="block uppercase text-white text-sm font-semibold mb-2">Links
-                                    útils</span>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">About Us</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Mapa</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Topics</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="w-full lg:w-4/12 px-4">
-                                <span class="block uppercase text-white text-sm font-semibold mb-2">Altres
-                                    recursos</span>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="#">hola</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Terms &amp; Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-[#c8d8e4] hover:text-white font-semibold block pb-2 text-sm" href="">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-6 border-green-300">
-                <div class="flex flex-wrap items-center md:justify-between justify-center">
-                    <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-                        <div class="text-sm text-white font-semibold py-1">
-                            Copyright © <span id="get-current-year">2021</span>
-                            <a class="text-white">All rights reserved</a>.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <%- include('../views/partials/footer') %>
+     
     </div>
-
     <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
     async>

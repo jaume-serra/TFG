@@ -1,0 +1,82 @@
+<div id="change-bg" class="change-bg">
+    <!-- Menu navegacio -->
+    <nav class="bg-[#c8d8e4]  h-20 max-h-20 border-b-1">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex">
+                        <!-- Website Logo -->
+                        <a href="#" class="flex py-4 px-2 my-3">
+                            <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
+
+                            <span class="ml-4 mr-10 font-semibold text-[#2b6777] text-lg">Releaser</span>
+                        </a>
+                    </div>
+                    <!-- Primary Navbar items -->
+                    <div class="hidden md:flex  space-x-4 my-4">
+                        <!-- <a href="" class="py-4 px-2 text-green-200 border-b-4 border-green-200 font-semibold ">Storage</a> -->
+                        <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
+                        <hr>
+                        <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Parking</a>
+                        <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">Blog</a>
+                        <a href="" class="py-4 px-2 text-[#2b6777] font-semibold hover:text-green-200 transition duration-300">List
+                            space</a>
+                    </div>
+                </div>
+                <!-- Secondary Navbar items -->
+                <div class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
+                    <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1 w-12 lg:w-40 flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
+                        <img class="h-8 w-8 rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
+                            alt="">
+                        <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
+                                <!--
+                            {% if not session['name'] %}
+                            Account
+                            {% else %}
+                            {{ session['name'] }}
+                            {% endif %}
+                            -->
+                                <svg class="w-3 h-3 ml-2 font-black" viewBox="0 0 48 48"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g transform="matrix(2,0,0,2,0,0)">
+                                        <path d="M23.25,7.311,12.53,18.03a.749.749,0,0,1-1.06,0L.75,7.311"
+                                            fill="none" stroke="#000000" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="1.5"></path>
+                                    </g>
+                                </svg>
+                        </p>
+
+                    </button>
+                    <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
+                        <!--Dropdown menu-->
+                        <% if  (locals.user) {%>
+                        <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
+                            Log out</a> 
+                        <% }else{ %>
+                        <a href="login" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
+                            Sign in</a>
+                        <% } %>
+                        <a href="#" class="px-2 py-1 mx-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">Register</a>
+                        <a href="#" class="px-2 py-1 mx-2 mb-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">List
+                            space</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center ">
+                    <button class="sidebar-button focus:outline-none mobile-menu-button" onclick="changeVisibility()">
+                        <svg class=" w-6 h-6 text-gray-500 hover:text-green-200 " x-show="!showMenu" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<%- include('./mobileNavbar') %>
+
+</nav>

@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
 
 
-<html>
-
-<head>
-  <title>Kipper</title>
-  <script type="text/javascript" src=/public/js/styled_map.js></script>
-  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script type="text/javascript"
-    src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-  <!-- TODO:S'ha dinstalar, no importar -->
-  <script type="text/javascript" src="https://cdn.tailwindcss.com"></script>
-
-  <link rel='stylesheet' type="text/css" href="/public/css/style.css" />
-  <link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
-  <script type="text/javascript" src="/public/js/actualitzar_mapa.js"></script>
-  <script type="text/javascript" src="/public/js/mapa.js"></script>
-  <meta charset="UTF-8">
-</head>
+<%- include('../views/partials/head') %>
+<link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
+<script type="text/javascript" src=/public/js/styled_map.js></script>
+<script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script type="text/javascript" src="/public/js/mapa.js"></script>
+<script type="text/javascript" src="/public/js/actualitzar_mapa.js"></script>
+<script type="text/javascript"
+src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 
 <body>
-
   <!-- Menu navegacio -->
   <nav class="bg-white-100 border-b-2 border-gray-200  p-0 overflow-hidden">
     <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">

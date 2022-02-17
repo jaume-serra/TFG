@@ -1,30 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../views/partials/head') %>
+<script type="text/javascript" src="/public/js/login.js"></script>
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
+<link type="text/css" href="/public/css/login.css" />
 
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Kipeer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link type="text/css" href="/public/css/style.css" />
-    <link type="text/css" href="/public/css/login.css" />
-
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
-
-    <!--<script src="/public/js/index.js"></script>-->
-    <script type="text/javascript" src="/public/js/menu.js"></script>
-
-    <script type="text/javascript" src="/public/js/login.js"></script>
-
-
-
-    <!--Inici login-->
-
-</head>
 
 <body>
     <div id="change-bg" class="change-bg">
@@ -189,75 +169,8 @@
             </div>
         </div>
 
-
-        <!-- Inici footer -->
-        <footer class="relative bg-blue-200 pt-8 pb-6 ">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-wrap text-left lg:text-left">
-                    <div class="w-full lg:w-6/12 px-4">
-                        <h4 class="text-3xl fonat-semibold text-blue-700">Let's keep in touch!</h4>
-                        <h5 class="text-lg mt-0 mb-2 text-blue-600">
-                            Contacta'ns en alguna d'aquestes plataformes.
-                        </h5>
-                        <div class="grid grid-cols-4 mt-6 lg:mb-0 mb-6 w-48">
-                            <img class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/facebook.png">
-                            <img class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/instagram.png">
-                            <img class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/whatsapp.png">
-                            <img class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4" src="/public/img/twitter.png">
-
-
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-6/12 px-4">
-                        <div class="flex flex-wrap items-top mb-6">
-                            <div class="w-full lg:w-4/12 px-4 ml-auto">
-                                <span class="block uppercase text-blue-500 text-sm font-semibold mb-2">Links útils</span>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">About Us</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Mapa</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Topics</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="w-full lg:w-4/12 px-4">
-                                <span class="block uppercase text-blue-500 text-sm font-semibold mb-2">Altres recursos</span>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="#">hola</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Terms &amp; Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a class="text-blue-600 hover:text-blue-800 font-semibold block pb-2 text-sm" href="">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-6 border-blue-300">
-                <div class="flex flex-wrap items-center md:justify-between justify-center">
-                    <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-                        <div class="text-sm text-blue-500 font-semibold py-1">
-                            Copyright © <span id="get-current-year">2021</span>
-                            <a class="text-blue-500">All rights reserved</a>.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    <%- include("../views/partials/footer") %>
+   
     </div>
 
 
