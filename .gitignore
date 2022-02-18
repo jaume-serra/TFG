@@ -1,3 +1,4 @@
 *.py
 /config
 *.env
+todo.txt
