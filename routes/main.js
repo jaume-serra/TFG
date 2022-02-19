@@ -13,7 +13,7 @@ dotenv.config({ path: "./config/config.env" });
 
 
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index",{ user:req.user }); /* FIXME: arreglar user */
 });
 
 router.all("/mapa", (req, res) => {

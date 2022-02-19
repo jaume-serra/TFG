@@ -50,7 +50,9 @@
                     </button>
                     <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
                         <!--Dropdown menu-->
-                        <% if  (locals.user) {%>
+                        <% if  (user) {%>
+                        <a href="/profile" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
+                        <%= user.email %></a>
                         <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
                             Log out</a> 
                         <% }else{ %>

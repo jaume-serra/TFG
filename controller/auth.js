@@ -48,7 +48,7 @@ const checkNotAuthenticated = (req, res, next) => {
 
     verifyToken(token)
         .then((user) => {
-            /* FIXME: Passar user?  */
+            req.user = user;
             res.redirect("/profile");
         })
         .catch((err) => {
