@@ -25,12 +25,26 @@
                 </div>
                 <!-- Secondary Navbar items -->
                 <div class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
-                    <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1 w-12 lg:w-40 flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
-                        <img class="h-8 w-8 rounded-full"
+                    <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1   flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
+                        <% if (user) {%>
+                            <img class="h-8 w-8 rounded-full"
+                            src= "<%= user.image %>"
+                            alt="">
+                        <% }else{%>
+                            <img class="h-8 w-8 rounded-full"
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
                             alt="">
+                        <% }%>
+                        
+                        
+                        
                         <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
-                                <!--
+                            <% if(user) {%>
+                                <%= user.displyName %>
+                            <% }else{ %>
+                                Account
+                            <%}%> 
+                            <!--
                             {% if not session['name'] %}
                             Account
                             {% else %}
@@ -52,7 +66,7 @@
                         <!--Dropdown menu-->
                         <% if  (user) {%>
                         <a href="/profile" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
-                        <%= user.email %></a>
+                        <%= user.firstName %></a>
                         <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
                             Log out</a> 
                         <% }else{ %>

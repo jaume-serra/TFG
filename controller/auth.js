@@ -10,11 +10,6 @@ const connectDB = require('../config/db');
 connectDB()
 
 
-
-
-
-
-
 /* Comprova si l'usuari està loggejat  */
 const checkAuthenticated = (req, res, next) => {
     let token = {
@@ -29,7 +24,6 @@ const checkAuthenticated = (req, res, next) => {
             return
         })
         .catch((err) => {
-            console.log('err veryfit auth :>> ', err);
             res.redirect("/login");
         });
 };
@@ -41,7 +35,6 @@ const checkNotAuthenticated = (req, res, next) => {
         "googleToken": req.cookies["session-token"]
     };
     if (!(token["defaultToken"] || token["googleToken"])) {
-        console.log('(token not auth holas) :>> ', token);
         next();
         return
     }
@@ -57,6 +50,22 @@ const checkNotAuthenticated = (req, res, next) => {
 };
 
 
+const getUserToRequest = (req, res, next) => {
+    let token = {
+        "defaultToken":req.cookies["session-token-default"],
+        "googleToken": req.cookies["session-token"]
+    };
+    if (!(token["defaultToken"] || token["googleToken"])) {
+        next();
+        return
+    }
+
+    verifyToken(token).then((user) => {
+        req.user = user;
+        next()
+    })
+}
+
 /* Verifica el token que rep i retorna l'usuari */
 const verifyToken = async(token) => {
     /* Rep:
@@ -64,8 +73,6 @@ const verifyToken = async(token) => {
         "googleToken" : req.cookies["session-token"]
     */
     let newUser;
-    console.log('token verify token funct :>> ', token);
-
     if(token["googleToken"]){
         const ticket = await client.verifyIdToken({
             idToken: token["googleToken"],
@@ -84,7 +91,6 @@ const verifyToken = async(token) => {
     }
     else if(token["defaultToken"]){
         jwt.verify(token["defaultToken"],process.env.TOKEN_KEY, (err,authData) => {
-            console.log('authData :>> ', authData);
             if(err) return new Error("Error al comprovar token")
             else newUser = authData
         })
@@ -196,7 +202,6 @@ const postRegister = async (req,res) => {
     try{
         const { name, firstName, email , password, passwordRepeat } = req.body  
         if(!(name && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
-        console.log('req.body :>> ', req.body);
     
         const oldUser = await User.findOne({ email })
         if(oldUser) res.status(409).send("This user already have an account")
@@ -241,4 +246,4 @@ const postRegister = async (req,res) => {
 
 }
 
-module.exports = { getLogin,postLogin,getRegister, postRegister, checkAuthenticated,checkNotAuthenticated }
+module.exports = { getLogin,postLogin,getRegister, postRegister, checkAuthenticated,checkNotAuthenticated , getUserToRequest }

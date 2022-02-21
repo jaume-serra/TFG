@@ -12,11 +12,12 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-router.get("/", (req, res) => {
+router.get("/",authControler.getUserToRequest, (req, res) => {
+    console.log('req.user :>> ', req.user);
     res.render("index",{ user:req.user }); /* FIXME: arreglar user */
 });
 
-router.all("/mapa", (req, res) => {
+router.all("/mapa", authControler.getUserToRequest, (req, res) => {
     res.render("mapa.ejs");
 });
 
