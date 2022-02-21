@@ -115,8 +115,12 @@ const loginUser = async(email,password) => {
     if (user && (await bcrypt.compare(password, user.password))){
         
         const token = jwt.sign(
-            { user_id: user._id, 
-                email },
+            { 
+                user_id: user._id, 
+                email,
+                firstName: user.firstName,
+                image: user.image
+            },
             process.env.TOKEN_KEY,
             {
               expiresIn: "2h",
@@ -165,6 +169,7 @@ const postLogin = async (req,res) => {
                     res.cookie("session-token", token);
                 }
                 res.status(200).send("success");
+                return
                  
              })
             .catch(() => {
@@ -181,7 +186,7 @@ const postLogin = async (req,res) => {
         }
         else{
             res.cookie("session-token-default",user.token)
-            res.status(200).render("profile",{user})
+            res.status(200).redirect("/profile")
         }
 
 
@@ -192,7 +197,7 @@ const postLogin = async (req,res) => {
 }
 
 const getRegister = (req,res) => {
-    res.render("register")
+    res.render("register",{user:req.user})
 }
 
 
@@ -200,34 +205,31 @@ const getRegister = (req,res) => {
 const postRegister = async (req,res) => {
 
     try{
-        const { name, firstName, email , password, passwordRepeat } = req.body  
-        if(!(name && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
+        const { firstName, secondName, email , password, passwordRepeat } = req.body  
+        if(!(secondName && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
     
         const oldUser = await User.findOne({ email })
-        if(oldUser) res.status(409).send("This user already have an account")
-        
-        /* Per si tenim 3 cognoms */
-        let firstNameReal = firstName
-        let secondNameReal
-        let cognoms = firstName.split(" ")
-        if(cognoms.length > 1){
-            firstNameReal = cognoms[0]            
-            cognoms.shift()
-            secondNameReal = cognoms.join(" ")
+        if(oldUser) {
+            res.status(409)
+            return
         }
-
         encryptedPassword = await bcrypt.hash(password,10)
+        const displayName = `${firstName} ${secondName}`
         const user = await User.create({
-            displayName: name,
-            firstName:firstNameReal,
-            lastName:secondNameReal,
+            displayName,
+            firstName,
+            lastName: secondName,
             email: email.toLowerCase(),
             password:encryptedPassword,
         })
 
         // Create token
         const token = jwt.sign(
-        { user_id: user._id, email },
+        { user_id: user._id, 
+            email,
+            firstName: user.firstName,
+            image: user.image,
+        },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",

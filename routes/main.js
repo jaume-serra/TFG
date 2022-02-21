@@ -32,13 +32,14 @@ router.post("/login", authControler.postLogin)
 
 
 router.get("/profile", authControler.checkAuthenticated, (req, res) => {
-    res.render("profile", { name: req.user.firstName, user: req.user });
+    console.log('req.user :>> ', req.user);
+    res.render("profile", { user: req.user });
 });
 
 
 router.get("/logout", (req, res) => {
     if(req.cookies["session-token"]) res.clearCookie("session-token")
-    else if (req.cookies["session-token-default"]) res.clearCookie("session-token-default")
+    if (req.cookies["session-token-default"]) res.clearCookie("session-token-default")
     res.redirect("/");
 });
 

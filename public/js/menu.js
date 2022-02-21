@@ -13,12 +13,14 @@ function changeVisibility(){
     background[1].classList.toggle("opacity-25");
     
 }
-  
-  
+
 function showDropDown(){
   
     const menuDrop = document.querySelector('#user-menu-dropdown');
+    const userButton = document.querySelector('#user-menu-button');
     menuDrop.classList.toggle('hidden');
     menuDrop.classList.toggle('flex');
-  
+    userButton.classList.toggle('rounded-xl')
+    userButton.classList.toggle('rounded-t-xl')
+
 }

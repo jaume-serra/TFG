@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <!-- Secondary Navbar items -->
-                <div class="hidden md:flex flex-col  p-3 overflow-x-hidden transform hover:scale-105 motion-reduce:transform-none duration-200">
-                    <button type="button" class="m-3 hover:bg-[#2b6777] rounded-full py-1 px-1   flex items-stretch focus:outline-none" id="user-menu-button" onclick="showDropDown()">
+                <div class="hidden md:flex flex-col my-4 px-3 overflow-x-hidden ">
+                    <button type="button" class="p-2 rounded-xl space-x-8 bg-[#f2f2f2] flex items-stretch focus:outline-none" id="user-menu-button"  onclick="showDropDown()">
                         <% if (user) {%>
                             <img class="h-8 w-8 rounded-full"
                             src= "<%= user.image %>"
@@ -40,17 +40,10 @@
                         
                         <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
                             <% if(user) {%>
-                                <%= user.displyName %>
+                                <%= user.firstName %>
                             <% }else{ %>
                                 Account
                             <%}%> 
-                            <!--
-                            {% if not session['name'] %}
-                            Account
-                            {% else %}
-                            {{ session['name'] }}
-                            {% endif %}
-                            -->
                                 <svg class="w-3 h-3 ml-2 font-black" viewBox="0 0 48 48"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g transform="matrix(2,0,0,2,0,0)">
@@ -60,22 +53,21 @@
                                     </g>
                                 </svg>
                         </p>
-
                     </button>
-                    <div class="mt-1 bg-[#f2f2f2] hidden border-2 border-t-0 divide-y border-green-200 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
+                    <div class="bg-[#f2f2f2] hidden  divide-y space-y-4 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
                         <!--Dropdown menu-->
                         <% if  (user) {%>
-                        <a href="/profile" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
-                        <%= user.firstName %></a>
-                        <a href="/logout" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
+                        <a href="/profile" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">
+                        <a href="/logout" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">
                             Log out</a> 
                         <% }else{ %>
-                        <a href="login" class="px-2 pb-1 mx-2 hover:bg-[#2b6777] rounded  transform hover:scale-105 motion-reduce:transform-none">
+                        <a href="login" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">
                             Sign in</a>
                         <% } %>
-                        <a href="#" class="px-2 py-1 mx-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">Register</a>
-                        <a href="#" class="px-2 py-1 mx-2 mb-2 hover:bg-[#2b6777] rounded transform hover:scale-105 motion-reduce:transform-none">List
-                            space</a>
+                        <a href="#" class="px-2  mx-2  rounded transform hover:scale-105 motion-reduce:transform-none">
+                            Register</a>
+                        <a href="#" class="px-2  mx-2  rounded transform hover:scale-105 motion-reduce:transform-none">
+                            List space</a>
                     </div>
                 </div>
 

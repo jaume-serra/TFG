@@ -13,22 +13,45 @@
                 </g>
             </svg>
         </div>
-        <ul class="mx-5 mt-16 py-6 mb-4">
-            <!--<li class="flex items-center">
-                    <svg class="rounded-full border-2 border-gray-200"width="16" height="16" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(2,0,0,2,0,0)"><path d="M6.750 6.000 A5.250 5.250 0 1 0 17.250 6.000 A5.250 5.250 0 1 0 6.750 6.000 Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path d="M2.25,23.25a9.75,9.75,0,0,1,19.5,0" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></g></svg>
-                    <a class="px-4" href="#">Usuari</a>
-                </li>-->
-            <!--TODO: Afegir menu mobil quan estas log in -->
-            <button class="bg-red-400 text-white w-full py-2 mb-6 rounded-xl hover:bg-red-600">List your
-                space</button>
-            <li class="mb- p-2  hover:bg-gray-200 rounded-xl"><a href="#">Storage</a></li>
-            <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">Parking</a></li>
-            <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">List your space</a></li>
-            <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">Blog</a></li>
-            <li class="mb- p-2 hover:bg-gray-200 rounded-xl"><a href="#">About</a></li>
-            <a href="login"><button
-                    class="bg-green-400 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Sign in
-                </button></a>
+        <ul class="mx-5 mt-16 py-6 space-y-4 text-center ">
+            <li class="p-2 rounded-xl bg-white"><a href="#">Storage</a></li>
+            <li class="p-2 rounded-xl bg-white"><a href="#">Parking</a></li>
+            <li class="p-2 rounded-xl bg-white"><a href="#">List your space</a></li>
+            <li class="p-2 rounded-xl bg-white"><a href="#">Blog</a></li>
+            <li class="p-2 rounded-xl bg-white"><a href="#">About</a></li>
+            <% if(user){ %>
+                <li><a href="profile">
+                    <button
+                        class="bg-[#2b6777] text-white w-full mt-6 py-2 rounded-xl hover:bg-[#c8d8e4] ">Profile
+                    </button>
+                </a>
+                </li>
+                <li>
+                    <a href="logout">
+                        <button class="bg-red-500 text-white w-full py-2  rounded-xl hover:bg-red-600">
+                           Log out
+                        </button>
+                    </a>
+                    
+                </li>
+
+            <% }else{ %>
+                <li><a href="login">
+                    <button
+                        class="bg-green-500 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Sign in
+                    </button>
+                </a>
+                </li>
+                <li><a href="register">
+                    <button
+                        class="bg-[#2b6777] text-white w-full py-2 rounded-xl hover:bg-[#c8d8e4]">Register
+                    </button>
+                </a>
+                </li>
+            <% } %>
+           
+ 
+            
 
 
         </ul>
