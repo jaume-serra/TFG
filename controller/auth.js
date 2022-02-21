@@ -103,7 +103,7 @@ const verifyToken = async(token) => {
 //GET Login
 
 const getLogin = (req,res) => {
-    res.render("login")
+    res.render("login", { user: req.user })
 }
 
 
