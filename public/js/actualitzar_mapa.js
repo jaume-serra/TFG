@@ -81,7 +81,7 @@ function actualitzar_llistat(place) {
   var html_llistat;
   if (place.img.length == 1) {
     html_llistat =
-      `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2 z-0 items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + place.id + `" >
+      `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2  items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + place.id + `" >
            <div class="col-span-1 px-2 max-w-screen-md"> <!--imatges-->
              <img class = " image h-max  w-full rounded-lg object-cover" src= "${place.img[0]}">
            </div>
@@ -102,7 +102,7 @@ function actualitzar_llistat(place) {
 
   } else {
     html_llistat =
-      `<div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2 z-0  md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + place.id + `">
+      `<div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + place.id + `">
          <div class="col-span-1 container px-2 max-w-screen-md"> <!--imatges-->
              <input id="input_`+ place.id + `" type="hidden" value="0">
              <div class = "text-left arrow arrow-left" onclick="previous(`+ place.id + `)"></div>

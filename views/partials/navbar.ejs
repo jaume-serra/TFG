@@ -1,6 +1,6 @@
 <div id="change-bg" class="change-bg">
     <!-- Menu navegacio -->
-    <nav class="bg-[#c8d8e4]  h-20 max-h-20 border-b-1">
+    <nav class="bg-[#c8d8e4]  h-20 max-h-20 border-b-1 z-[100]">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
                 <div class="flex space-x-7">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <!-- Secondary Navbar items -->
-                <div class="hidden md:flex flex-col my-4 px-3 overflow-x-hidden ">
+                <div class="hidden md:flex flex-col my-4 px-3 overflow-x-hidden z-50 ">
                     <button type="button" class="p-2 rounded-xl space-x-8 bg-[#f2f2f2] flex items-stretch focus:outline-none" id="user-menu-button"  onclick="showDropDown()">
                         <% if (user) {%>
                             <img class="h-8 w-8 rounded-full"
@@ -54,7 +54,7 @@
                                 </svg>
                         </p>
                     </button>
-                    <div class="bg-[#f2f2f2] hidden  divide-y space-y-4 flex-col rounded-b text-center text-sm z-40 shadow-xl" id="user-menu-dropdown">
+                    <div class="bg-[#f2f2f2] hidden  divide-y space-y-4 flex-col rounded-b text-center text-sm  shadow-xl" id="user-menu-dropdown">
                         <!--Dropdown menu-->
                         <% if  (user) {%>
                         <a href="/profile" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">

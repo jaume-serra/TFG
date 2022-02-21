@@ -18,7 +18,7 @@ router.get("/",authControler.getUserToRequest, (req, res) => {
 });
 
 router.all("/mapa", authControler.getUserToRequest, (req, res) => {
-    res.render("mapa.ejs");
+    res.render("mapa.ejs",{ user: req.user });
 });
 
 

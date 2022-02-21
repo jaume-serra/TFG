@@ -11,117 +11,10 @@ src="https://developers.google.com/maps/documentation/javascript/examples/marker
 
 <body>
   <!-- Menu navegacio -->
-  <nav class="bg-white-100 border-b-2 border-gray-200  p-0 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16 p-1">
-        <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
-          <!-- Mobile menu button-->
-          <button type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-            aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <!--
-              Icon when menu is closed.
+  <%- include('../views/partials/navbar') %>
+  
 
-              Heroicon name: outline/menu
-
-              Menu open: "hidden", Menu closed: "block"
-          -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!--
-              Icon when menu is open.
-
-              Heroicon name: outline/x
-
-              Menu open: "block", Menu closed: "hidden"
-          -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-start m-5">
-          <div class="flex-shrink-0 flex items-center m-3">
-            <img class="block lg:hidden h-8 w-auto items-center"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="KIPPER" href="#">
-            <img class="hidden lg:block h-8 w-auto items-center"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="KIPPER" href="#">
-          </div>
-          <div class="hidden md:block md:ml-6 items-center m-5">
-            <div class="flex space-x-4 items-center m-5">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#"
-                class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide  no-underline m-1 p-1"
-                aria-current="page">Storage</a>
-
-              <a href="#"
-                class="text-gray-500 hover:bg-gray-200 hover:text-white  hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Parking</a>
-
-              <a href="#"
-                class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Business</a>
-
-              <a href="#"
-                class="text-gray-500 hover:bg-gray-200 hover:text-white hover:shadow-lg px-3 py-2 rounded-md text-l font-extrabold tracking-wide no-underline m-1 p-1">Blog</a>
-              <button href="#"
-                class="bg-gray-200 border-2 text-gray-500 hover:bg-gray-500 hover:text-white hover:shadow-lg  rounded-md text-l text-align-center whitespace-nowrap font-extrabold tracking-wide no-underline  py-1 px-6 min-w-100">List
-                space </button>
-
-            </div>
-          </div>
-        </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2  sm:ml-6 sm:pr-0 ">
-          <button type="button"
-            class="lg:visible invisible bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-            <span class="sr-only md:visible invisible">View notifications</span>
-            <!-- Heroicon name: outline/bell -->
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
-          </button>
-
-          <!-- Profile dropdown -->
-
-          <div>
-            <button type="button" class="m-4 border-4 rounded-full py-1 px-1 w-12 lg:w-32 flex items-stretch"
-              id="user-menu-button">
-              <img class="h-8 w-8 rounded-full"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU"
-                alt="">
-              <p class="font-black text-gray-900 m-1 invisible lg:visible">Account</p>
-            </button>
-          </div>
-
-          <!--
-          Dropdown menu, show/hide based on menu state.
-
-          Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-          Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-          <!--
-          <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-          </div>
-          -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-  </nav>
-
-  <nav class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-50 overflow-hidden">
+  <nav class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-40 overflow-hidden">
     <div class="flex flex-wrap items-center mt-2 ml-2 mb-2 px-2">
       <div>
         <button
@@ -161,7 +54,7 @@ src="https://developers.google.com/maps/documentation/javascript/examples/marker
     <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible bg-[#c8d8e4]" id='div_taula'>
       <div id="taula_disponible" class="overflow-hidden">
       </div>
-      <div class="relative z-50">
+      <div class="relative z-40">
         <div class="flex items-center justify-center">
           <button
             class="flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
