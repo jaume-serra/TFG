@@ -20,7 +20,7 @@ function showDropDown(){
     const userButton = document.querySelector('#user-menu-button');
     menuDrop.classList.toggle('hidden');
     menuDrop.classList.toggle('flex');
-    userButton.classList.toggle('rounded-xl')
+    userButton.classList.toggle('rounded-full')
     userButton.classList.toggle('rounded-t-xl')
 
 }
