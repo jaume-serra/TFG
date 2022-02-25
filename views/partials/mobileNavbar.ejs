@@ -2,9 +2,9 @@
         
     <nav class="nav bg-gray-100 h-full overflow-y-auto shadow-lg">
         <div class="relative">
-            <img class="absolute left-0 m-5 h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="#">
+            <img class="absolute left-0 m-5 h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="/">
 
-            <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black" width="16" height="16" onclick="changeVisibility()" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black p-1 border-2 rounded-full border-gray-400 " width="32" height="32" onclick="changeVisibility()" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <g transform="matrix(2,0,0,2,0,0)">
                     <path d="M4.5 19.5L19.5 4.5" fill="none" stroke="#000000" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="1.5"></path>
@@ -14,11 +14,11 @@
             </svg>
         </div>
         <ul class="mx-5 mt-16 py-6 space-y-4 text-center ">
-            <li class="p-2 rounded-xl bg-white"><a href="#">Storage</a></li>
-            <li class="p-2 rounded-xl bg-white"><a href="#">Parking</a></li>
-            <li class="p-2 rounded-xl bg-white"><a href="#">List your space</a></li>
-            <li class="p-2 rounded-xl bg-white"><a href="#">Blog</a></li>
-            <li class="p-2 rounded-xl bg-white"><a href="#">About</a></li>
+            <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">Storage</a></li>
+            <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">Parking</a></li>
+            <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">List your space</a></li>
+            <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">Blog</a></li>
+            <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">About</a></li>
             <% if(locals.user){ %>
                 <li><a href="profile">
                     <button
