@@ -13,12 +13,11 @@ dotenv.config({ path: "./config/config.env" });
 
 
 router.get("/",authControler.getUserToRequest, (req, res) => {
-    console.log('req.user :>> ', req.user);
-    res.render("index",{ user:req.user }); /* FIXME: arreglar user */
+    res.render("index");
 });
 
 router.all("/mapa", authControler.getUserToRequest, (req, res) => {
-    res.render("mapa.ejs",{ user: req.user });
+    res.render("mapa.ejs");
 });
 
 
@@ -32,8 +31,8 @@ router.post("/login", authControler.postLogin)
 
 
 router.get("/profile", authControler.checkAuthenticated, (req, res) => {
-    console.log('req.user :>> ', req.user);
-    res.render("profile", { user: req.user });
+
+    res.render("profile");
 });
 
 

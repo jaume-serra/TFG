@@ -26,7 +26,7 @@
                 <!-- Secondary Navbar items -->
                 <div class="hidden md:flex flex-col my-4 px-3 overflow-x-hidden z-50 ">
                     <button type="button" class="px-4 py-2 rounded-full space-x-8 bg-[#f2f2f2] flex items-stretch focus:outline-none" id="user-menu-button"  onclick="showDropDown()">
-                        <% if (user) {%>
+                        <% if (locals.user) {%>
                             <img class="h-8 w-8 rounded-full"
                             src= "<%= user.image %>"
                             alt="">
@@ -39,8 +39,8 @@
                         
                         
                         <p class="flex items-center mx-2 font-black text-gray-900 m-1 invisible lg:visible ">
-                            <% if(user) {%>
-                                <%= user.firstName %>
+                            <% if(locals.user) {%>
+                                <%= locals.user.firstName %>
                             <% }else{ %>
                                 Account
                             <%}%> 
@@ -56,7 +56,7 @@
                     </button>
                     <div class="bg-[#f2f2f2] hidden space-y-4 flex-col rounded-b text-center text-sm py-4" id="user-menu-dropdown">
                         <!--Dropdown menu-->
-                        <% if  (user) {%>
+                        <% if  (locals.user) {%>
                         <a href="/profile" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">
                         <a href="/logout" class="px-2  mx-2  rounded  transform hover:scale-105 motion-reduce:transform-none">
                             Log out</a> 

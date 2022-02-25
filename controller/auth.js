@@ -20,6 +20,8 @@ const checkAuthenticated = (req, res, next) => {
     verifyToken(token)
         .then((user) => {
             req.user = user;
+            res.locals.user = user;
+
             next();
             return
         })
@@ -62,8 +64,9 @@ const getUserToRequest = (req, res, next) => {
 
     verifyToken(token).then((user) => {
         req.user = user;
+        res.locals.user = user;
         next()
-    })
+    }).catch((err) => console.log('err :>> ', err))
 }
 
 /* Verifica el token que rep i retorna l'usuari */
@@ -74,26 +77,36 @@ const verifyToken = async(token) => {
     */
     let newUser;
     if(token["googleToken"]){
-        const ticket = await client.verifyIdToken({
-            idToken: token["googleToken"],
-            audience: process.env.CLIENT_ID,
-        });
-    
-        const payload = ticket.getPayload();
-         newUser = {
-            googleId: payload["sub"],
-            displayName: payload["name"],
-            email: payload["email"],
-            firstName: payload["given_name"],
-            lastName: payload["family_name"],
-            image: payload["picture"]
+        try{
+            const ticket = await client.verifyIdToken({
+                idToken: token["googleToken"],
+                audience: process.env.CLIENT_ID,
+            });
+        
+            const payload = ticket.getPayload();
+             newUser = {
+                googleId: payload["sub"],
+                displayName: payload["name"],
+                email: payload["email"],
+                firstName: payload["given_name"],
+                lastName: payload["family_name"],
+                image: payload["picture"]
+            }
+        }catch(err){
+            return new Error(err)
         }
+        
     }
     else if(token["defaultToken"]){
-        jwt.verify(token["defaultToken"],process.env.TOKEN_KEY, (err,authData) => {
-            if(err) return new Error("Error al comprovar token")
-            else newUser = authData
-        })
+        try{
+            jwt.verify(token["defaultToken"],process.env.TOKEN_KEY, (err,authData) => {
+                if(err) return new Error("Error al comprovar token")
+                else newUser = authData
+            })
+        }catch(err){
+            return new Error(err)
+        }
+
     }
     
     if (!newUser) return new Error("Error al comprovar token")

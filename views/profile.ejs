@@ -4,9 +4,9 @@
 <body>
     <h1>Profile</h1>
     <p>Hi,
-        <%= user.email %>
+        <%= locals.user.email %>
     </p>
-    <img src='<%= user.picture %>' alt="">
+    <img src='<%= locals.user.picture %>' alt="">
     <a href="/logout">Logout</a>
     <div class="h-screen"></div>
 </body>
