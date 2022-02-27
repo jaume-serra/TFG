@@ -52,6 +52,7 @@ app.use(cors(corsOptions));
 
 app.use("/", require("./routes/main"))
 app.use("/api", require("./routes/api"));
+app.use("/place", require("./routes/place"));
 
 
 

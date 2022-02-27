@@ -26,7 +26,7 @@ const checkAuthenticated = (req, res, next) => {
             return
         })
         .catch((err) => {
-            res.redirect("/login");
+            res.redirect("main/login");
         });
 };
 
@@ -116,7 +116,7 @@ const verifyToken = async(token) => {
 //GET Login
 
 const getLogin = (req,res) => {
-    res.render("login", { user: req.user })
+    res.render("main/login")
 }
 
 
@@ -210,7 +210,7 @@ const postLogin = async (req,res) => {
 }
 
 const getRegister = (req,res) => {
-    res.render("register",{user:req.user})
+    res.render("main/register") //FIXME: {user:req.user}
 }
 
 
