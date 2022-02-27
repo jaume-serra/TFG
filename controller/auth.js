@@ -11,13 +11,24 @@ connectDB()
 
 
 /* Comprova si l'usuari està loggejat  */
-const checkAuthenticated = (req, res, next) => {
+const checkAuthenticated = async (req, res, next) => {
     let token = {
         "defaultToken": req.cookies["session-token-default"],
         "googleToken" : req.cookies["session-token"]
     };
 
-    verifyToken(token)
+    try{
+        const user = await verifyToken(token)
+        req.user = user;
+        res.locals.user = user;
+        next();
+        return;
+
+
+    }catch{
+        res.redirect("/login")
+    }
+   /*  verifyToken(token)
         .then((user) => {
             req.user = user;
             res.locals.user = user;
@@ -26,8 +37,9 @@ const checkAuthenticated = (req, res, next) => {
             return
         })
         .catch((err) => {
+            console.log('err :>> ', err);
             res.redirect("main/login");
-        });
+        }); */
 };
 
 /* Comprova si l'usuari no està loggejat */
@@ -93,23 +105,23 @@ const verifyToken = async(token) => {
                 image: payload["picture"]
             }
         }catch(err){
-            return new Error(err)
+            throw new Error(err)
         }
         
     }
     else if(token["defaultToken"]){
         try{
             jwt.verify(token["defaultToken"],process.env.TOKEN_KEY, (err,authData) => {
-                if(err) return new Error("Error al comprovar token")
+                if(err) throw new Error("Error al comprovar token")
                 else newUser = authData
             })
         }catch(err){
-            return new Error(err)
+            throw new Error(err)
         }
 
     }
     
-    if (!newUser) return new Error("Error al comprovar token")
+    if (!newUser) throw new Error("Error al comprovar token")
     return newUser
 }
 
@@ -188,12 +200,13 @@ const postLogin = async (req,res) => {
             .catch(() => {
                 throw new Error("Error to get Google Access");
             }) 
+            return
         }
 
         /* Login normal */
 
         const user = await loginUser(email, password)
-        
+        console.log('user :>> ', user);
         if(!user){
             res.status(400).send("Invalid user or password")
         }

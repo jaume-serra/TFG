@@ -27,11 +27,10 @@ router.post("/register", authControler.checkNotAuthenticated, authControler.post
 
 
 router.get("/login", authControler.checkNotAuthenticated, authControler.getLogin);
-router.post("/login", authControler.postLogin)
+router.post("/login",authControler.checkNotAuthenticated, authControler.postLogin)
 
 
 router.get("/profile", authControler.checkAuthenticated, (req, res) => {
-
     res.render("profile");
 });
 

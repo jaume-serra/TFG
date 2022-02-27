@@ -9,14 +9,15 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-router.get("/",authControler.getUserToRequest, (req, res) => {
-    res.render("place");
+router.get("/",authControler.checkAuthenticated, (req, res) => {
+    res.render("place/place");
 });
 
 
 
-router.get("/create",authControler.getUserToRequest, (req, res) => {
-    res.render("place");
+router.get("/create",authControler.checkAuthenticated, (req, res) => {
+    console.log('req.user :>> ', req.user);
+    res.render("place/create_place");
 });
 
 

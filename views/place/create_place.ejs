@@ -1,0 +1,110 @@
+
+<%- include('../partials/head') %>
+<link type="text/css" href="/public/css/login.css" />
+
+<script type="text/javascript" src="/public/js/register.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
+
+<body>
+      <!-- Menu navegacio -->
+    <%- include('../partials/navbar') %>
+
+    <div  id="change-bg" class="change-bg">
+
+        <!--Inici Register-->
+
+
+        <!-- Root element for center items -->
+        <div class="flex flex-col bg-gray-100 overflow-x-auto">
+            <!-- Auth Card Container -->
+            <div class="grid place-items-center mx-2 my-10">
+                <!-- Auth Card -->
+                <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
+                px-6 py-10 sm:px-10 sm:py-6 
+                bg-white rounded-lg shadow-md lg:shadow-lg">
+
+                    <!-- Card Title -->
+                    <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
+                        Registrar-se
+                    </h2>
+
+
+
+                    <form class="" method="POST">
+                        <!-- Name Input -->
+                        <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom</label>
+                        <input id="firstName"  name="firstName" placeholder="Bob"  class="block w-full py-3 px-1 mt-2 
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+
+                        <!-- secondName Input -->
+                        <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Cognoms</label>
+                        <input id="secondName"  name="secondName" placeholder="Alice"  class="block w-full py-3 px-1 mt-2 
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+
+
+                        <!-- Email Input -->
+                        <label for="email" class="block text-xs font-semibold text-gray-600 uppercase mt-5">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Adreça e-mail" autocomplete="email" class="block w-full py-3 px-1 mt-2 
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+
+                        <!-- Password Input -->
+                        <label for="password" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Contrasenya</label>
+                        <input id="password" type="password" name="password" placeholder="Contrasenya" autocomplete="current-password" class="block w-full py-3 px-1 mt-2 mb-2
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+
+                        <!-- Repeat Password Input -->
+                        <label for="password" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Repetir contrasenya</label>
+                        <input id="passwordRepeat" type="password" name="passwordRepeat" placeholder="Contrasenya" autocomplete="current-password" class="block w-full py-3 px-1 mt-2 mb-2
+                        text-gray-800 appearance-none 
+                        border-b-2 border-gray-100
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+                        
+                        <a href="/login" class="flex-2 mt-0 px-1 text-sm text-gray-500 hover:text-gray-800">
+                        Already have an account?
+                    </a>
+
+
+                        <!-- Auth Buttton -->
+                    <button type="submit" onclick = "return Validate()" class="w-full py-2 mt-10 bg-blue-400 rounded-full
+                        font-medium text-white uppercase
+                        focus:outline-none hover:bg-blue-600 hover:shadow-none">
+                        Register
+                    </button>
+                 
+
+                    </form>
+
+
+                    <!--Line seperator -->
+
+                    <div class="grid place-items-center h-10 py-5">
+                        <p class="text-blue-600 text-sm">or</p>
+                    </div>
+
+
+                    <!--Google or facebook buttons-->
+                    <div class="grid grid-cols-1 gap-x-4 place-items-center pt-5 pb-3">
+                        <!--<a href="/auth/google" class="btn red darken-1">
+                        <i class="fab fa-google left"></i> Login with google
+                        </a> -->
+                        <div class="g-signin2 min-w-fit" data-onsuccess="onSignIn" style="width:auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <%- include("../partials/footer") %>
+    </div>
+
+</body>
+</html>
