@@ -26,6 +26,7 @@ const checkAuthenticated = async (req, res, next) => {
 
 
     }catch{
+        console.log("hola")
         res.redirect("/login")
     }
    /*  verifyToken(token)
@@ -56,10 +57,11 @@ const checkNotAuthenticated = (req, res, next) => {
     verifyToken(token)
         .then((user) => {
             req.user = user;
-            res.redirect("/profile");
+            next()
         })
         .catch((err) => {
             console.log('err :>> ', err);
+            res.redirect("/")
         });
 };
 
@@ -106,6 +108,7 @@ const verifyToken = async(token) => {
             }
         }catch(err){
             throw new Error(err)
+            
         }
         
     }
