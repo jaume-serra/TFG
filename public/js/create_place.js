@@ -1,12 +1,34 @@
 
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
+var lastTab = -1;
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
-
+  let progress = document.getElementById("progressBarCreatePlace");
+  
+  var progressValue = ((n-1)/(x.length-1))*100
+  progress.classList.remove(`w-[${progressValue}%]`);
+  /* If Previous  */
+  if(currentTab < lastTab) {
+    progressValue = ((n+1)/(x.length-1))*100
+    progress.classList.remove(`w-[${progressValue}%]`);
+  }
+  /* Next */
+  progressValue = (n/(x.length-1))*100
+  progress.classList.add(`w-[${progressValue}%]`)
+  
+  /* Change color progressbar when completed */
+  if(progressValue == 100){
+    progress.classList.add(`bg-green-600`);
+    progress.classList.remove(`bg-blue-600`);
+  }
+  else if(progress.classList.contains(`bg-green-600`)){
+    progress.classList.remove(`bg-green-600`);
+    progress.classList.add(`bg-blue-600`);
+  }
 
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
@@ -18,6 +40,7 @@ function showTab(n) {
   if (n == (x.length - 1)) {
     document.getElementById("submit").classList.remove("hidden")
     document.getElementById("nextBtn").classList.add("hidden")
+
 
   } else {
     document.getElementById("submit").classList.add("hidden")
@@ -35,6 +58,7 @@ function nextPrev(n) {
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
+  lastTab = currentTab;
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
@@ -43,6 +67,7 @@ function nextPrev(n) {
     return false;
   }
   // Otherwise, display the correct tab:
+
   showTab(currentTab);
 }
 
