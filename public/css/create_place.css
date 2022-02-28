@@ -1,31 +1,27 @@
+.tab {
+  display: none;
+}
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #04AA6D;
+}
 .card {
-    /*background-color: white;
-     border: 1px solid #333;
-    border-radius: .5rem;
-    padding: .5rem;
-    max-width: 300px; 
-    margin: 0 auto;*/
     animation: fade 250ms ease-in-out forwards;
   }
   
-  /* .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: .5rem;
-    gap: .25em;
-  } */
-  
-/*   .form-group:last-child {
-    margin: 0;
-  }
-   */
- /*  .form-group > label {
-    font-weight: bold;
-    font-size: .8em;
-    color: #333;
-  }
-  
- */
 
   
   .card.active {
