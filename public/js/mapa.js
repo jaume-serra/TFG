@@ -29,11 +29,12 @@ function initMap() {
 
 
   let url_init = new URL(document.baseURI);
-  //console.log("latitud",url_init.get("lat"));
   if (url_init.searchParams.get("lat") && url_init.searchParams.get("lng")) {
     map.setCenter(new google.maps.LatLng(url_init.searchParams.get("lat"), url_init.searchParams.get("lng")));
   }
   let infowindow = new google.maps.InfoWindow({ maxWidth: 400 }); //objecte infowindow per afegir als markers
+  
+  // Autocomplete
   const input = document.getElementById("search-box");
   const options = {
     componentRestrictions: { country: "es" }
@@ -59,10 +60,9 @@ function initMap() {
     if (new_place.length == 0) {
       return;
     }
-
     map.setCenter(new_place.geometry.location);
     map.setZoom(13);
-    check_bounds();
+    check_bounds();  
 
   });
 
@@ -102,7 +102,6 @@ function initMap() {
     //checkeja si hi ha elements a dins del bound actual i afegeix els markers corresponents.
     var bound = map.getBounds();
     var places = get_places();   //cridar api per agafar llocs
-    console.log("api:");
 
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
@@ -112,7 +111,6 @@ function initMap() {
     for (let i = 0; i < places.length; i++) {
       var pos = new google.maps.LatLng(places[i].lat, places[i].long);
       if (bound.contains(pos)) {
-        console.log("c:", places[i].id, bound);
         no_result = false;
 
         var html = getHtml(places[i]); // retorna el html personalitzat pel place
@@ -133,8 +131,6 @@ function initMap() {
 
 
       } else {
-        console.log("new_item:", places[i]);
-        console.log("e:", places[i].id, bound);
         if (markers.hasOwnProperty(places[i].id)) {
           // si existeix el marker el fa invisible
           //TODO: eliminar marker?
