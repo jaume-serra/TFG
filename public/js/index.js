@@ -28,7 +28,7 @@ function initAutocomplete() {
     if (!new_place) {
       return;
     }
-    let url = new URL("llistat", document.baseURI);
+    let url = new URL("mapa", document.baseURI);
     url.searchParams.set("type", "storage");
     url.searchParams.set("lat", new_place.geometry.location.lat());
     url.searchParams.set("lng", new_place.geometry.location.lng());
@@ -42,7 +42,7 @@ function initAutocomplete() {
     if (!new_place) {
       return;
     }
-    let url = new URL("llistat", document.baseURI);
+    let url = new URL("mapa", document.baseURI);
     url.searchParams.set("type", "parking");
     url.searchParams.set("lat", new_place.geometry.location.lat());
     url.searchParams.set("lng", new_place.geometry.location.lng());
