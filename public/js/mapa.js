@@ -62,7 +62,10 @@ function initMap() {
     }
     map.setCenter(new_place.geometry.location);
     map.setZoom(13);
-    check_bounds();  
+    check_bounds();
+    url_init.searchParams.set("lat", new_place.geometry.location.lat());
+    url_init.searchParams.set("lng", new_place.geometry.location.lng());
+    window.history.pushState("string", "Title", url_init);
 
   });
 
@@ -146,7 +149,6 @@ function initMap() {
       document.getElementById('taula_disponible').innerHTML = llistat_esquerra;
       markers.forEach(elements => {
         document.getElementById("id_mouse" + elements.id).addEventListener("mouseenter", function () {
-          //elements.setAnimation(google.maps.Animation.BOUNCE);
           closeLastInfowindow(lastInfowindow);
           infowindow.setContent(getHtml(elements.place));
           infowindow.open(map, elements);
@@ -154,14 +156,9 @@ function initMap() {
         });
 
         document.getElementById("id_mouse" + elements.id).addEventListener("mouseleave", function () {
-          //elements.setAnimation(null);
           closeLastInfowindow(lastInfowindow);
         });
-
-
       });
-
-
     }
   }
 
