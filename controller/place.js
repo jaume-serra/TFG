@@ -6,7 +6,6 @@ connectDB()
  */
 
 const postCreatePlace = (req, res) => {
-    console.log('req.body :>> ', req.body);
     res.render ("place/create_place")
 }
 

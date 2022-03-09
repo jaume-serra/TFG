@@ -39,21 +39,19 @@
                         
                     </div>
                     <div class="tab">
-                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">ad</label>
-                      <input id="firstName"  name="firstName" placeholder="Bob"  class="block w-full py-3 px-1 mt-2 
+                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Direcció</label>
+                      <div class="flex w-full py-3 px-1 mt-2 
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
-                      focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
-                        
+                      focus:text-gray-500 focus:outline-none focus:border-gray-200">
+                        <input type="text" placeholder="Enter location" class="w-full rounded-xl border-none p-1" id="search-box-index" name="address" required>
+                      </div>
                     </div>
 
-                    <div class="tab">
-                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">asdasd</label>
-                      <input id="firstName"  name="firstName" placeholder="Bob"  class="block w-full py-3 px-1 mt-2 
-                      text-gray-800 appearance-none 
-                      border-b-2 border-gray-100
-                      focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
-                        
+                    <div class="tab overflow-hidden h-60">
+                      
+                      <div id="map" class="hidden"></div>
+                      <div id="panorama" class="h-full w-full"></div>     
                     </div>
                    
                     <div class="tab">
@@ -123,5 +121,9 @@
         
         <%- include('../partials/footer') %>
       </div>
+      <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMaps&v=weekly&libraries=places"
+      async>
+      </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
 var lastTab = -1;
+let lat,lng;
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
@@ -102,3 +103,68 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+
+function loadStreetView(map){
+
+
+/* Fer una altra funció? */
+}
+
+
+
+function initMaps() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    minZoom: 12,
+    maxZoom: 20,
+    center: { lat: 41.7923, lng: 1.99657 },
+    disableDefaultUI: true, //elimina default google maps gui
+    gestureHandling: "greedy",
+    zoomControl: true,
+  });
+
+  
+
+
+  const input = document.getElementById("search-box-index");
+  const options = {
+    componentRestrictions: { country: "es" }
+  };
+
+  let autocomplete = new google.maps.places.Autocomplete(input, options);
+  var new_place;
+
+  autocomplete.addListener('place_changed', () => {
+    new_place = autocomplete.getPlace();
+    
+    if (!new_place.geometry) {
+      window.alert("Cap resultat per: '" + new_place.name + "'");
+      document.getElementById("search-box-index").placeholder = "";
+      return;
+    }
+    if (new_place.length == 0) {
+      return;
+    }
+    map.setCenter(new google.maps.LatLng(new_place.geometry.location.lat(),new_place.geometry.location.lng()))
+    const panorama = new google.maps.StreetViewPanorama(
+      document.getElementById("panorama"),
+      {
+        position: new google.maps.LatLng(new_place.geometry.location.lat(),new_place.geometry.location.lng()),
+        pov: {
+          heading: 34,
+          pitch: 10,
+        },
+      }
+    );
+    map.setStreetView(panorama);
+  });
+
+
+  //Centrar steet view
+  
+}
+
+
+
+  
