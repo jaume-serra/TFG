@@ -32,6 +32,13 @@ const postCreatePlace = async (req, res) => {
 
     //Save images link to mongodb
     console.log(images)
+    const place = await Place.create({
+        email: 'jaumeserra@gmail.com',
+        address: 'mastrullas',
+        lat:-10,
+        lng: 100,
+        images
+    })
     res.render("place/create_place")
 }
 

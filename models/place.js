@@ -19,7 +19,7 @@ const PlaceSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    image: {
+    images: {
         type: Array,
         default: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27oOKcnLPxWi6NIE37JPkhTh2rum8Auc-jI1R90lRDDjQ508J86kjJ8E4S2qYaIa9MpM&usqp=CAU']
     },
