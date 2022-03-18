@@ -7,13 +7,17 @@ const unlinkFile = util.promisify(fs.unlink)
 
 
 const postCreatePlace = async (req, res) => {
-console.log(req.files)
-
+    //Guardem espai i després fotos de l'espai
+    
     for(const file of req.files){
         try{
-            const result = await uploadFile(file)
+            //Guardar imatge a S3
+            //folderPath es el id del espai 
+            const folderPath = "hola"
+            const result = await uploadFile(file,folderPath)
             await unlinkFile(file.path)
         }catch(err){
+            res.send(err)
             console.log('err :>> ', err);
         }
     }
