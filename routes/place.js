@@ -4,6 +4,11 @@ const router = express.Router();
 const authControler = require('../controller/auth');  
 const placeControler = require('../controller/place');
 const dotenv = require("dotenv");
+
+//Pujar imatges
+const multer = require("multer")
+const upload = multer({ dest: 'uploads/' })
+
 dotenv.config({ path: "./config/config.env" });
 
 
@@ -19,6 +24,6 @@ router.get("/create",authControler.checkAuthenticated, (req, res) => {
     res.render("place/create_place");
 });
 
-router.post("/create", authControler.checkAuthenticated,placeControler.postCreatePlace);
+router.post("/create",upload.array('files',10), placeControler.postCreatePlace);
 
 module.exports = router;
