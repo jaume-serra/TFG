@@ -12,21 +12,26 @@ const unlinkFile = util.promisify(fs.unlink)
 const postCreatePlace = async (req, res) => {
     //Guardem espai i després fotos de l'espai
     console.log(req.body);
-
-
+    const email = req.user
+    console.log('email :>> ', email);
 
     //Guardar imatge a S3
-    for(const file of req.files){
-        try{
+    const images = []
+    try{
+        for(const file of req.files){
             //folderPath es el id del espai 
-            const folderPath = "hola"
-            // const result = await uploadFile(file,folderPath)
+            const folderPath = 'images'
+            const newImage = await uploadFile(file,folderPath)
             await unlinkFile(file.path)
-        }catch(err){
-            res.send(err)
-            console.log('err :>> ', err);
+            images.push(newImage.Location)
         }
+    }catch(err){
+        res.send(err)
+        console.log('err :>> ', err);
     }
+
+    //Save images link to mongodb
+    console.log(images)
     res.render("place/create_place")
 }
 
