@@ -201,7 +201,7 @@ window.onload = function(){
               picReader.addEventListener("load",function(event){
                   var picFile = event.target;
                   var div = document.createElement("div");
-                  div.innerHTML = "<img class='h-80 w-80 p-5' src='" + picFile.result + "'" +
+                  div.innerHTML = "<img class='flex h-80 w-80 p-5 overflow-auto' src='" + picFile.result + "'" +
                           "title='" + picFile.name + "'/>";
                   output.insertBefore(div,null);            
               });

@@ -24,6 +24,6 @@ router.get("/create",authControler.checkAuthenticated, (req, res) => {
     res.render("place/create_place");
 });
 
-router.post("/create",upload.array('files',10), placeControler.postCreatePlace);
+router.post("/create",[authControler.checkAuthenticated, upload.array('files',10)], placeControler.postCreatePlace);
 
 module.exports = router;
