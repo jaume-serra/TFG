@@ -1,15 +1,15 @@
 <%- include('../views/partials/head') %>
-<%- include('../views/partials/navbar') %>
+    <%- include('../views/partials/navbar') %>
 
-<body>
-    <h1>Profile</h1>
-    <p>Hi,
-        <%= locals.user.email %>
-    </p>
-    <img src='<%= locals.user.picture %>' alt="">
-    <a href="/logout">Logout</a>
-    <div class="h-screen"></div>
-</body>
-<%- include("../views/partials/footer") %>
+        <body>
+            <h1>Profile</h1>
+            <p>Hi,
+                <%= locals.user.email %>
+            </p>
+            <img src='<%= locals.user.picture %>' alt="">
+            <a href="/logout">Logout</a>
+            <div class="h-screen"></div>
+        </body>
+        <%- include("../views/partials/footer") %>
 
-</html>
+            </html>

@@ -29,9 +29,9 @@ const UserSchema = new mongoose.Schema({
         default: Date.now()
     },
     password: {
-        type:String,
+        type: String,
     },
-    deletedAT:{
+    deletedAT: {
         type: Date
     }
 })

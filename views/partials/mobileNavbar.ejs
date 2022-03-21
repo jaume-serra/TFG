@@ -1,10 +1,14 @@
-<div class="offsite-container w-4/6 hidden md:hidden  h-screen z-50  bg-gray-500 fixed right-0 top-0" id="off_site-object">
-        
+<div class="offsite-container w-4/6 hidden md:hidden  h-screen z-50  bg-gray-500 fixed right-0 top-0"
+    id="off_site-object">
+
     <nav class="nav bg-gray-100 h-full overflow-y-auto shadow-lg">
         <div class="relative">
-            <img class="absolute left-0 m-5 h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="/">
+            <img class="absolute left-0 m-5 h-8 w-auto"
+                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="" href="/">
 
-            <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black p-1 border-2 rounded-full border-gray-400 " width="32" height="32" onclick="changeVisibility()" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <svg class="sidebar-button absolute right-0 m-5 focus:outline-none mobile-menu-button font-black p-1 border-2 rounded-full border-gray-400 "
+                width="32" height="32" onclick="changeVisibility()" viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg">
                 <g transform="matrix(2,0,0,2,0,0)">
                     <path d="M4.5 19.5L19.5 4.5" fill="none" stroke="#000000" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="1.5"></path>
@@ -21,37 +25,35 @@
             <li class="p-2 rounded-xl bg-white hover:bg-gray-200"><a href="#">About</a></li>
             <% if(locals.user){ %>
                 <li><a href="profile">
-                    <button
-                        class="bg-[#2b6777] text-white w-full mt-6 py-2 rounded-xl hover:bg-[#c8d8e4] ">Profile
-                    </button>
-                </a>
+                        <button class="bg-[#2b6777] text-white w-full mt-6 py-2 rounded-xl hover:bg-[#c8d8e4] ">Profile
+                        </button>
+                    </a>
                 </li>
                 <li>
                     <a href="logout">
                         <button class="bg-red-500 text-white w-full py-2  rounded-xl hover:bg-red-600">
-                           Log out
+                            Log out
                         </button>
                     </a>
-                    
+
                 </li>
 
-            <% }else{ %>
-                <li><a href="login">
-                    <button
-                        class="bg-green-500 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Sign in
-                    </button>
-                </a>
-                </li>
-                <li><a href="register">
-                    <button
-                        class="bg-blue-400 text-white w-full py-2 rounded-xl hover:bg-blue-600">Register
-                    </button>
-                </a>
-                </li>
-            <% } %>
-           
- 
-            
+                <% }else{ %>
+                    <li><a href="login">
+                            <button class="bg-green-500 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Sign
+                                in
+                            </button>
+                        </a>
+                    </li>
+                    <li><a href="register">
+                            <button class="bg-blue-400 text-white w-full py-2 rounded-xl hover:bg-blue-600">Register
+                            </button>
+                        </a>
+                    </li>
+                    <% } %>
+
+
+
 
 
         </ul>

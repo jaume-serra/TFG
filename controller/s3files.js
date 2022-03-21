@@ -7,18 +7,19 @@ const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
 
-const s3 = new S3({  
-    region,  
-    accessKeyId,  
-    secretAccessKey,});
+const s3 = new S3({
+    region,
+    accessKeyId,
+    secretAccessKey,
+});
 
 // UPLOAD FILE TO S3
-function uploadFile(file,folder) {  
+function uploadFile(file, folder) {
     const fileStream = fs.createReadStream(file.path);
-    const key = folder +'/'+ file.filename    
-    const uploadParams = {    
-        Bucket: bucketName,    
-        Body: fileStream,    
+    const key = folder + '/' + file.filename
+    const uploadParams = {
+        Bucket: bucketName,
+        Body: fileStream,
         Key: key
     }
     return s3.upload(uploadParams).promise()

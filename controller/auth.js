@@ -14,10 +14,10 @@ connectDB()
 const checkAuthenticated = async (req, res, next) => {
     let token = {
         "defaultToken": req.cookies["session-token-default"],
-        "googleToken" : req.cookies["session-token"]
+        "googleToken": req.cookies["session-token"]
     };
 
-    try{
+    try {
         const user = await verifyToken(token)
         req.user = user;
         res.locals.user = user;
@@ -25,28 +25,28 @@ const checkAuthenticated = async (req, res, next) => {
         return;
 
 
-    }catch{
+    } catch {
         console.log("hola")
         res.redirect("/login")
     }
-   /*  verifyToken(token)
-        .then((user) => {
-            req.user = user;
-            res.locals.user = user;
-
-            next();
-            return
-        })
-        .catch((err) => {
-            console.log('err :>> ', err);
-            res.redirect("main/login");
-        }); */
+    /*  verifyToken(token)
+         .then((user) => {
+             req.user = user;
+             res.locals.user = user;
+ 
+             next();
+             return
+         })
+         .catch((err) => {
+             console.log('err :>> ', err);
+             res.redirect("main/login");
+         }); */
 };
 
 /* Comprova si l'usuari no està loggejat */
 const checkNotAuthenticated = (req, res, next) => {
     let token = {
-        "defaultToken":req.cookies["session-token-default"],
+        "defaultToken": req.cookies["session-token-default"],
         "googleToken": req.cookies["session-token"]
     };
     if (!(token["defaultToken"] || token["googleToken"])) {
@@ -68,7 +68,7 @@ const checkNotAuthenticated = (req, res, next) => {
 
 const getUserToRequest = (req, res, next) => {
     let token = {
-        "defaultToken":req.cookies["session-token-default"],
+        "defaultToken": req.cookies["session-token-default"],
         "googleToken": req.cookies["session-token"]
     };
     if (!(token["defaultToken"] || token["googleToken"])) {
@@ -84,21 +84,21 @@ const getUserToRequest = (req, res, next) => {
 }
 
 /* Verifica el token que rep i retorna l'usuari */
-const verifyToken = async(token) => {
+const verifyToken = async (token) => {
     /* Rep:
         "defaultToken": req.cookies["session-token-default"],
         "googleToken" : req.cookies["session-token"]
     */
     let newUser;
-    if(token["googleToken"]){
-        try{
+    if (token["googleToken"]) {
+        try {
             const ticket = await client.verifyIdToken({
                 idToken: token["googleToken"],
                 audience: process.env.CLIENT_ID,
             });
-        
+
             const payload = ticket.getPayload();
-             newUser = {
+            newUser = {
                 googleId: payload["sub"],
                 displayName: payload["name"],
                 email: payload["email"],
@@ -106,69 +106,69 @@ const verifyToken = async(token) => {
                 lastName: payload["family_name"],
                 image: payload["picture"]
             }
-        }catch(err){
+        } catch (err) {
             throw new Error(err)
-            
+
         }
-        
+
     }
-    else if(token["defaultToken"]){
-        try{
-            jwt.verify(token["defaultToken"],process.env.TOKEN_KEY, (err,authData) => {
-                if(err) throw new Error("Error al comprovar token")
+    else if (token["defaultToken"]) {
+        try {
+            jwt.verify(token["defaultToken"], process.env.TOKEN_KEY, (err, authData) => {
+                if (err) throw new Error("Error al comprovar token")
                 else newUser = authData
             })
-        }catch(err){
+        } catch (err) {
             throw new Error(err)
         }
 
     }
-    
+
     if (!newUser) throw new Error("Error al comprovar token")
     return newUser
 }
 
 //GET Login
 
-const getLogin = (req,res) => {
+const getLogin = (req, res) => {
     res.render("main/login")
 }
 
 
 //POST Login
 
-const loginUser = async(email,password) => {
-    if(!(email && password)) return false
-    const user = await User.findOne({email})
-    if (user && (await bcrypt.compare(password, user.password))){
-        
+const loginUser = async (email, password) => {
+    if (!(email && password)) return false
+    const user = await User.findOne({ email })
+    if (user && (await bcrypt.compare(password, user.password))) {
+
         const token = jwt.sign(
-            { 
-                user_id: user._id, 
+            {
+                user_id: user._id,
                 email,
                 firstName: user.firstName,
                 image: user.image
             },
             process.env.TOKEN_KEY,
             {
-              expiresIn: "2h",
+                expiresIn: "2h",
             }
-          );
-    
+        );
+
         // save user token
         user.token = token;
         return user
 
     }
-    else{
+    else {
         return false
     }
 }
 
 //Funcio cridada quan l'usuari vol iniciar amb token
- const loginGoogle = async (token) => {
+const loginGoogle = async (token) => {
     verifyToken(token)
-        .then(async(newUser) => {
+        .then(async (newUser) => {
             try {
 
                 let user = await User.findOne({ email: newUser.email })
@@ -184,25 +184,25 @@ const loginUser = async(email,password) => {
 
 
 
-const postLogin = async (req,res) => {
-    try{
-        const {email, password, token} = req.body
+const postLogin = async (req, res) => {
+    try {
+        const { email, password, token } = req.body
         /* Login with Google */
-        if(token){
+        if (token) {
             /* Pot rebre token i tenir sessio? En teoria no*/
 
-            loginGoogle({"googleToken":token})
-             .then(() => {
-                if(! req.cookies["session-token"]){
-                    res.cookie("session-token", token);
-                }
-                res.status(200).send("success");
-                return
-                 
-             })
-            .catch(() => {
-                throw new Error("Error to get Google Access");
-            }) 
+            loginGoogle({ "googleToken": token })
+                .then(() => {
+                    if (!req.cookies["session-token"]) {
+                        res.cookie("session-token", token);
+                    }
+                    res.status(200).send("success");
+                    return
+
+                })
+                .catch(() => {
+                    throw new Error("Error to get Google Access");
+                })
             return
         }
 
@@ -210,71 +210,73 @@ const postLogin = async (req,res) => {
 
         const user = await loginUser(email, password)
         console.log('user :>> ', user);
-        if(!user){
+        if (!user) {
             res.status(400).send("Invalid user or password")
         }
-        else{
-            res.cookie("session-token-default",user.token)
+        else {
+            res.cookie("session-token-default", user.token)
             res.status(200).redirect("/profile")
         }
 
 
-    }catch(err){
+    } catch (err) {
         console.log('err :>> ', err)
         res.status(400).send(err)
     }
 }
 
-const getRegister = (req,res) => {
+const getRegister = (req, res) => {
     res.render("main/register") //FIXME: {user:req.user}
 }
 
 
 
-const postRegister = async (req,res) => {
+const postRegister = async (req, res) => {
 
-    try{
-        const { firstName, secondName, email , password, passwordRepeat } = req.body  
-        if(!(secondName && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
-    
+    try {
+        const { firstName, secondName, email, password, passwordRepeat } = req.body
+        if (!(secondName && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
+
         const oldUser = await User.findOne({ email })
-        if(oldUser) {
+        if (oldUser) {
             res.status(409)
             return
         }
-        encryptedPassword = await bcrypt.hash(password,10)
+        encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
         const user = await User.create({
             displayName,
             firstName,
             lastName: secondName,
             email: email.toLowerCase(),
-            password:encryptedPassword,
+            password: encryptedPassword,
         })
 
         // Create token
         const token = jwt.sign(
-        { user_id: user._id, 
-            email,
-            firstName: user.firstName,
-            image: user.image,
-        },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        });
-        
+            {
+                user_id: user._id,
+                email,
+                firstName: user.firstName,
+                image: user.image,
+            },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2h",
+            });
+
         // save user token
         user.token = token;
-        res.cookie("session-token-default",user.token)
-        res.status(201).render("profile",{user})
-   
-   
-    }catch(err){
+        res.cookie("session-token-default", user.token)
+        res.status(201).render("profile", { user })
+
+
+    } catch (err) {
         /* TODO: acabar aixo */
+
         console.log('err :>> ', err);
     }
 
 }
 
-module.exports = { getLogin,postLogin,getRegister, postRegister, checkAuthenticated,checkNotAuthenticated , getUserToRequest }
+module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest }

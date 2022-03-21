@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const PlaceSchema = new mongoose.Schema({
 
-    email: {   
+    email: {
         type: String,
         required: true,
         unique: true
@@ -27,7 +27,7 @@ const PlaceSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    deletedAT:{
+    deletedAT: {
         type: Date
     }
 })

@@ -1,38 +1,37 @@
-
 <%- include('../partials/head') %>
 
-<link rel='stylesheet' type="text/css" href="/public/css/create_place.css">
+  <link rel='stylesheet' type="text/css" href="/public/css/create_place.css">
 
-<script type="text/javascript" src="/public/js/create_place.js" defer></script>
+  <script type="text/javascript" src="/public/js/create_place.js" defer></script>
 
 
-<body  onLoad="clearForms()" onUnload="clearForms()">
-      <!-- Menu navegacio -->
-      <%- include('../partials/navbar') %>
-      <div  id="change-bg" class="change-bg">
+  <body onLoad="clearForms()" onUnload="clearForms()">
+    <!-- Menu navegacio -->
+    <%- include('../partials/navbar') %>
+      <div id="change-bg" class="change-bg">
         <!-- Inici formulari -->
         <div class="flex flex-col bg-gray-100  py-20 ">
 
           <div class="grid place-items-center mx-2  my-10 ">
 
-              <div class="w-3/5 mx-auto">
-                  <form  id="regForm"   method="POST" enctype="multipart/form-data">
-                    <!-- Progression bar --> 
-                    <div class="mx-auto  bg-gray-200 h-2 my-6 rounded-full">
-                      <div id="progressBarCreatePlace" class="bg-green-600 h-2 rounded-full" ></div>
-                    </div>
-                    <div class="tab">
-                      <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
-                        Crear Espai
-                      </h2>
-            
-                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom</label>
-                      <input id="firstName"  name="firstName" placeholder="Bob"  class="block w-full p-3 mt-2 rounded-full
+            <div class="w-3/5 mx-auto">
+              <form id="regForm" method="POST" enctype="multipart/form-data">
+                <!-- Progression bar -->
+                <div class="mx-auto  bg-gray-200 h-2 my-6 rounded-full">
+                  <div id="progressBarCreatePlace" class="bg-green-600 h-2 rounded-full"></div>
+                </div>
+                <div class="tab">
+                  <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
+                    Crear Espai
+                  </h2>
+
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom</label>
+                  <input id="firstName" name="firstName" placeholder="Bob" class="block w-full p-3 mt-2 rounded-full
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
                       focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
-                    </div>
-<!-- 
+                </div>
+                <!-- 
                     <div class="tab">
                       <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Direcció</label>
                       <div class="flex w-full py-3 px-1 mt-2 
@@ -47,70 +46,71 @@
                       <div id="map" class="hidden"></div>
                       <div id="panorama" class="h-96 w-screen"></div>     
                     </div>  -->
-                    <div class="tab ">
-                      <label  for="files" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Imatges</label>
-                      <input  type="file" id="files"  name="files" accept="image/*" multiple class="block w-full py-3 mt-2" required />
-                      <output id="result" class="block max-h-80  overflow-x-auto" />
-                    </div>
-                    <div class="tab">
-                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">asdasd</label>
-                      <input id="firstName"  name="firstName" placeholder="Bob"  class="block w-full p-3 mt-2 
+                <div class="tab ">
+                  <label for="files" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Imatges</label>
+                  <input type="file" id="files" name="files" accept="image/*" multiple class="block w-full py-3 mt-2"
+                    required />
+                  <output id="result" class="block max-h-80  overflow-x-auto" />
+                </div>
+                <div class="tab">
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">asdasd</label>
+                  <input id="firstName" name="firstName" placeholder="Bob" class="block w-full p-3 mt-2 
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
                       focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
-                        
-                    </div>
+                </div>
 
-                    <div class="flex place-items-center">
-                    
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)"  class="w-full md:w-1/5 py-2 mr-4  mt-5 bg-gray-400 rounded-full hidden
+                <div class="flex place-items-center">
+
+                  <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="w-full md:w-1/5 py-2 mr-4  mt-5 bg-gray-400 rounded-full hidden
                         font-medium text-white uppercase
                         focus:outline-none hover:bg-gray-600 hover:shadow-none">
-                        Previous
-                        </button>
+                    Previous
+                  </button>
 
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)"  class="w-full md:w-1/5 py-2 mt-5 bg-blue-400 rounded-full hidden
+                  <button type="button" id="nextBtn" onclick="nextPrev(1)" class="w-full md:w-1/5 py-2 mt-5 bg-blue-400 rounded-full hidden
                         font-medium text-white uppercase
                         focus:outline-none hover:bg-blue-600 hover:shadow-none">
-                        Next
-                        </button>
+                    Next
+                  </button>
 
-                        <button id ="submit" type="submit" class="w-full md:w-1/5 py-2 mt-5 bg-green-400 rounded-full hidden
+                  <button id="submit" type="submit" class="w-full md:w-1/5 py-2 mt-5 bg-green-400 rounded-full hidden
                         font-medium text-white uppercase
                         focus:outline-none hover:bg-green-600 hover:shadow-none">
-                        Crear l'espai
-                        </button>
-                        
-                      
-                    </div>
-              
-                    <div style="text-align:center;margin-top:40px;" class="hidden">
-                      <span class="step"></span>
-                      <span class="step"></span>
-                      <span class="step"></span>
-                      <span class="step"></span>
-                      <span class="step"></span>
-                    </div>
+                    Crear l'espai
+                  </button>
 
-                    
-                </form>
 
-                <!-- <a href="/">
+                </div>
+
+                <div style="text-align:center;margin-top:40px;" class="hidden">
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                </div>
+
+
+              </form>
+
+              <!-- <a href="/">
                   <button class="w-full py-2 mt-5 bg-red-400 rounded-full
                   font-medium text-white uppercase
                   focus:outline-none hover:bg-red-600 hover:shadow-none">
                   Cancelar
                   </button> -->
-                </a>
-              </div>
-          </div> 
+              </a>
+            </div>
+          </div>
         </div>
-        
+
         <%- include('../partials/footer') %>
       </div>
-<!--        <script type="text/javascript"
+      <!--        <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMaps&v=weekly&libraries=places"
       async>
       </script>  -->
-</body>
-</html>
+  </body>
+
+  </html>

@@ -16,22 +16,22 @@ const postCreatePlace = async (req, res) => {
     console.log(email1)
     //Guardar imatge a S3
     const images = []
-    try{
-        for(const file of req.files){
+    try {
+        for (const file of req.files) {
             //folderPath es el id del espai 
             const folderPath = 'images'
             //const newImage = await uploadFile(file,folderPath)
             await unlinkFile(file.path)
             //images.push(newImage.Location)
         }
-    }catch(err){
+    } catch (err) {
         res.send(err)
         console.log('err :>> ', err);
     }
 
     //Crear lloc a mongodb
     console.log(images)
-    
+
     /* const place = await Place.create({
         email: 'jaumeserra@gmail.com',
         address: 'mastrullas',

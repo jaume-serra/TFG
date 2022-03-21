@@ -2,31 +2,31 @@
 
 var currentTab = 0; // Current tab is set to be the first tab (0)
 var lastTab = -1;
-let lat,lng;
+let lat, lng;
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
   let progress = document.getElementById("progressBarCreatePlace");
-  
-  var progressValue = ((n-1)/(x.length-1))*100
+
+  var progressValue = ((n - 1) / (x.length - 1)) * 100
   progress.classList.remove(`w-[${progressValue}%]`);
   /* If Previous  */
-  if(currentTab < lastTab) {
-    progressValue = ((n+1)/(x.length-1))*100
+  if (currentTab < lastTab) {
+    progressValue = ((n + 1) / (x.length - 1)) * 100
     progress.classList.remove(`w-[${progressValue}%]`);
   }
   /* Next */
-  progressValue = (n/(x.length-1))*100
+  progressValue = (n / (x.length - 1)) * 100
   progress.classList.add(`w-[${progressValue}%]`)
-  
+
   /* Change color progressbar when completed */
-  if(progressValue == 100){
+  if (progressValue == 100) {
     progress.classList.add(`bg-green-600`);
     progress.classList.remove(`bg-blue-600`);
   }
-  else if(progress.classList.contains(`bg-green-600`)){
+  else if (progress.classList.contains(`bg-green-600`)) {
     progress.classList.remove(`bg-green-600`);
     progress.classList.add(`bg-blue-600`);
   }
@@ -118,7 +118,7 @@ function initMaps() {
     zoomControl: true,
   });
 
-  
+
 
 
   const input = document.getElementById("search-box-index");
@@ -131,7 +131,7 @@ function initMaps() {
 
   autocomplete.addListener('place_changed', () => {
     new_place = autocomplete.getPlace();
-    
+
     if (!new_place.geometry) {
       window.alert("Cap resultat per: '" + new_place.name + "'");
       document.getElementById("search-box-index").placeholder = "";
@@ -140,11 +140,11 @@ function initMaps() {
     if (new_place.length == 0) {
       return;
     }
-    map.setCenter(new google.maps.LatLng(new_place.geometry.location.lat(),new_place.geometry.location.lng()))
+    map.setCenter(new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()))
     const panorama = new google.maps.StreetViewPanorama(
       document.getElementById("panorama"),
       {
-        position: new google.maps.LatLng(new_place.geometry.location.lat(),new_place.geometry.location.lng()),
+        position: new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()),
         pov: {
           heading: 34,
           pitch: 10,
@@ -156,64 +156,60 @@ function initMaps() {
 
 
   //Centrar steet view
-  
+
 }
 
 
 
-  
+
 function clearForms() {
   var i;
   for (i = 0; (i < document.forms.length); i++) {
-  document.forms[i].reset();
+    document.forms[i].reset();
   }
-} 
+}
 
 
 
 
 //Images form
 
-window.onload = function(){
-        
+window.onload = function () {
+
   //Check File API support
-  if(window.File && window.FileList && window.FileReader)
-  {
-      var filesInput = document.getElementById("files");
-      
-      filesInput.addEventListener("change", function(event){
-          
-          var files = event.target.files; //FileList object
-          var output = document.getElementById("result");
-          //Clear output
-          output.innerHTML=""
+  if (window.File && window.FileList && window.FileReader) {
+    var filesInput = document.getElementById("files");
 
-          for(var i = 0; i< files.length; i++)
-          {
-              var file = files[i];
+    filesInput.addEventListener("change", function (event) {
 
-              //Only pics
-              if(!file.type.match('image'))
-                continue;
-              
-              var picReader = new FileReader();
-              
-              picReader.addEventListener("load",function(event){
-                  var picFile = event.target;
-                  var div = document.createElement("div");
-                  div.innerHTML = "<img class='flex h-80 w-80 p-5 overflow-auto' src='" + picFile.result + "'" +
-                          "title='" + picFile.name + "'/>";
-                  output.insertBefore(div,null);            
-              });
-               //Read the image
-              picReader.readAsDataURL(file);
-          }                               
-         
-      });
+      var files = event.target.files; //FileList object
+      var output = document.getElementById("result");
+      //Clear output
+      output.innerHTML = ""
+
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+
+        //Only pics
+        if (!file.type.match('image'))
+          continue;
+
+        var picReader = new FileReader();
+
+        picReader.addEventListener("load", function (event) {
+          var picFile = event.target;
+          var div = document.createElement("div");
+          div.innerHTML = "<img class='flex h-80 w-80 p-5 overflow-auto' src='" + picFile.result + "'" +
+            "title='" + picFile.name + "'/>";
+          output.insertBefore(div, null);
+        });
+        //Read the image
+        picReader.readAsDataURL(file);
+      }
+
+    });
   }
-  else
-  {
-      console.log("Your browser does not support File API");
+  else {
+    console.log("Your browser does not support File API");
   }
 }
-  
