@@ -12,8 +12,9 @@ const unlinkFile = util.promisify(fs.unlink)
 const postCreatePlace = async (req, res) => {
     //Guardem espai i després fotos de l'espai
     console.log(req.body);
-    var email1 = req.locals;
-    console.log(email1)
+
+    const { type, title, description, measures, price, address } = req.body;
+
     //Guardar imatge a S3
     const images = []
     try {
@@ -41,8 +42,6 @@ const postCreatePlace = async (req, res) => {
     }) */
     res.render("place/create_place")
 }
-
-
 
 
 module.exports = { postCreatePlace }

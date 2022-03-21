@@ -20,45 +20,74 @@
                 <div class="mx-auto  bg-gray-200 h-2 my-6 rounded-full">
                   <div id="progressBarCreatePlace" class="bg-green-600 h-2 rounded-full"></div>
                 </div>
+
                 <div class="tab">
                   <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
                     Crear Espai
                   </h2>
 
-                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom</label>
-                  <input id="firstName" name="firstName" placeholder="Bob" class="block w-full p-3 mt-2 rounded-full
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom de l'espai</label>
+                  <input id="title" name="title" type="text" placeholder="Espai del Jaume" class="block w-full p-3 mt-2 rounded-full
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
                       focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
                 </div>
-                <!-- 
-                    <div class="tab">
-                      <label  class="block text-xs font-semibold text-gray-600 uppercase mt-5">Direcció</label>
-                      <div class="flex w-full py-3 px-1 mt-2 
+
+                <div class="tab">
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Descripció</label>
+                  <textarea id="description" cols="30" rows="10" name="description" placeholder="Descriu l'espai..."
+                    class="block w-full p-3 mt-2
+                      text-gray-800 appearance-none 
+                      border-b-2 border-gray-100
+                      focus:text-gray-500 focus:outline-none focus:border-gray-200" required></textarea>
+                </div>
+
+                <div class="tab">
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Mides de l'espai</label>
+                  <div class="flex items-center space-x-2">
+                    <input id="measures" type="number" name="measures" placeholder="40" class="block w-5/6 p-3 mt-2 
+                    text-gray-800 appearance-none 
+                    border-b-2 border-gray-100
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+                    <p>m2</p>
+                  </div>
+
+                </div>
+
+                <div class="tab">
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Preu per mes</label>
+                  <div class="flex items-center">
+                    <input id="price" type="number" name="price" placeholder="300 $" class="block w-full p-3 mt-2
+                      text-gray-800 appearance-none 
+                      border-b-2 border-gray-100
+                      focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+                    <p class="pl-2"> / Mes</p>
+                  </div>
+                </div>
+
+                <div class="tab">
+                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Direcció</label>
+                  <div class="flex w-full py-3 px-1 mt-2 
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
                       focus:text-gray-500 focus:outline-none focus:border-gray-200">
-                        <input type="text" placeholder="Enter location" class="w-full rounded-xl border-none p-3" id="search-box-index" name="address" value="" required>
-                      </div>
-                    </div>
- 
-                    <div class="tab overflow-hidden">
-                      <div id="map" class="hidden"></div>
-                      <div id="panorama" class="h-96 w-screen"></div>     
-                    </div>  -->
-                <div class="tab ">
+                    <input type="text" placeholder="Enter location" class="w-full rounded-xl border-none p-3"
+                      id="search-box-index" name="address" value="" required>
+                  </div>
+                </div>
+
+                <div class="tab overflow-hidden">
+                  <div id="map" class="hidden"></div>
+                  <div id="panorama" class="h-96 w-screen"></div>
+                </div>
+
+                <div class="tab">
                   <label for="files" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Imatges</label>
                   <input type="file" id="files" name="files" accept="image/*" multiple class="block w-full py-3 mt-2"
                     required />
                   <output id="result" class="block max-h-80  overflow-x-auto" />
                 </div>
-                <div class="tab">
-                  <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">asdasd</label>
-                  <input id="firstName" name="firstName" placeholder="Bob" class="block w-full p-3 mt-2 
-                      text-gray-800 appearance-none 
-                      border-b-2 border-gray-100
-                      focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
-                </div>
+
 
                 <div class="flex place-items-center">
 
@@ -84,6 +113,8 @@
                 </div>
 
                 <div style="text-align:center;margin-top:40px;" class="hidden">
+                  <span class="step"></span>
+                  <span class="step"></span>
                   <span class="step"></span>
                   <span class="step"></span>
                   <span class="step"></span>

@@ -33,7 +33,7 @@ function initMap() {
     map.setCenter(new google.maps.LatLng(url_init.searchParams.get("lat"), url_init.searchParams.get("lng")));
   }
   let infowindow = new google.maps.InfoWindow({ maxWidth: 400 }); //objecte infowindow per afegir als markers
-  
+
   // Autocomplete
   const input = document.getElementById("search-box");
   const options = {
@@ -197,20 +197,20 @@ function actualitzar_llistat_notfound() {
 
 function getHtml(place) {
   var html_generate;
-  if (place.img.length == 1) {
+  if (place.images.length == 1) {
     html_generate = `
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
     <h1 class="title font-black text-3xl center-text p-1 m-1">${place.title}</h1>
       <div class="containter-md m-1 p-1 text-center">
-        <img src="${place.img[0]}" class="img-fluid rounded-xl" heigth = "200px" width="300px" > 
+        <img src="${place.images[0]}" class="img-fluid rounded-xl" heigth = "200px" width="300px" > 
       </div>
       <div>
-        <p>Espai:${place.mides}</p>  
+        <p>Espai:${place.measures}</p>  
       </div>
       <div>
         <p> PREU:
           <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
-          ${place.preu}€
+          ${place.price}€
           </div>
         </p>
       </div>
@@ -223,16 +223,16 @@ function getHtml(place) {
       <div class="containter-md m-1 p-1 text-center">
         <input id="infowindow_input_`+ place.id + `" type="hidden" value="0">
         <div class = "text-left-infowindow arrow arrow-left" onclick="previous_infowindow(`+ place.id + `)"></div>
-        <img class = "image  rounded-lg" id="infowindow_slider_`+ place.id + `" src= "${place.img[0]}" value = "` + place.img + `" width="300px" height="200px">
+        <img class = "image  rounded-lg" id="infowindow_slider_`+ place.id + `" src= "${place.images[0]}" value = "` + place.images + `" width="300px" height="200px">
         <div class = "text-right-infowindow arrow arrow-right" onclick="next_infowindow(`+ place.id + `)"></div>
       </div>
       <div>
-        <p>Espai:${place.mides}</p>  
+        <p>Espai:${place.measures}</p>  
       </div>
       <div>
         <p> PREU:
           <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
-          ${place.preu}€
+          ${place.price}€
           </div>
         </p>
       </div>
