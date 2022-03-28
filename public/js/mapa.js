@@ -105,17 +105,15 @@ function initMap() {
     //checkeja si hi ha elements a dins del bound actual i afegeix els markers corresponents.
     var bound = map.getBounds();
     var places = get_places();   //cridar api per agafar llocs
-
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
     markers = [];
     marker_clusterer.clearMarkers();
 
     for (let i = 0; i < places.length; i++) {
-      var pos = new google.maps.LatLng(places[i].lat, places[i].long);
+      var pos = new google.maps.LatLng(places[i].lat, places[i].lng);
       if (bound.contains(pos)) {
         no_result = false;
-
         var html = getHtml(places[i]); // retorna el html personalitzat pel place
         var marker = new google.maps.Marker({
           position: pos,
@@ -124,21 +122,21 @@ function initMap() {
           // animation: google.maps.Animation.BOUNCE
         });
 
-        markers[places[i].id] = marker;
+        markers[places[i]._id] = marker;
         marker_clusterer.addMarker(marker);
         afegir_infowindow_marker(map, marker, html, lastInfowindow, infowindow);
         llistat_esquerra += actualitzar_llistat(places[i]);
-        markers[places[i].id].place = places[i]; //guardem el lloc per poder obtenir el html de la infowindow
-        markers[places[i].id].id = places[i].id;
+        markers[places[i]._id].place = places[i]; //guardem el lloc per poder obtenir el html de la infowindow
+        markers[places[i]._id].id = places[i]._id;
 
 
 
       } else {
-        if (markers.hasOwnProperty(places[i].id)) {
+        if (markers.hasOwnProperty(places[i]._id)) {
           // si existeix el marker el fa invisible
           //TODO: eliminar marker?
-          marker_clusterer.removeMarker(places[i].id);
-          markers[places[i].id].setVisible(false);
+          marker_clusterer.removeMarker(places[i]._id);
+          markers[places[i]._id].setVisible(false);
         }
       }
     }
@@ -271,8 +269,6 @@ function changeButtonMap() {
   document.getElementById('div_taula').style.display = 'none';
   document.getElementById('div_mapa').classList.remove('invisible', 'h-0');
   document.getElementById('div_mapa').classList.add('h-screen');
-  console.log("funcio changmape cridada");
-
 }
 function changeButtonList() {
   //TODO: canviar per toggle
@@ -280,9 +276,6 @@ function changeButtonList() {
   document.getElementById('div_taula').style.display = 'inline';
   document.getElementById('div_mapa').classList.add('invisible', 'h-0');
   document.getElementById('div_mapa').classList.remove('h-screen');
-  console.log("funcio changlist cridada");
-
-
 }
 
 function getType() {

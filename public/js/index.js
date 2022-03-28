@@ -58,12 +58,12 @@ function changeTypeSpace(id_button) { //Pot ser
   for (let j = 0; j < buttons.length; j++) {
     if (buttons[j].classList.contains("active")) {
       if (buttons[j].id !== id_button) {
-        buttons[j].classList.remove("active", "bg-[#2b6777]", "font-black","text-white"); //button actiu pero un altre clicat
+        buttons[j].classList.remove("active", "bg-[#2b6777]", "font-black", "text-white"); //button actiu pero un altre clicat
       }
 
     }
     if (buttons[j].id === id_button) {
-      buttons[j].classList.add("active", "bg-[#2b6777]","font-black","text-white");
+      buttons[j].classList.add("active", "bg-[#2b6777]", "font-black", "text-white");
 
     }
   }

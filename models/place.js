@@ -7,17 +7,17 @@ const PlaceSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    type:{
+    type: {
         type: String,
         default: "storage"
     },
-    title:{
+    title: {
         type: String
     },
     description: {
         type: String
     },
-    measures :{
+    measures: {
         type: Number,
         required: true
     },
@@ -41,13 +41,34 @@ const PlaceSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    
+    country: {
+        type: String
+    },
+    countryCode: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    },
+    city: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now()
     },
     deletedAT: {
         type: Date
+    },
+
+    active: {
+        type: Boolean,
+        default: false
+    },
+
+    available: {
+        type: Boolean,
+        default: true
     }
 })
 
