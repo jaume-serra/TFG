@@ -49,7 +49,7 @@ const postCreatePlace = async (req, res) => {
         }
 
         //Crear lloc a mongodb
-        const newPlace = new Place({
+        await Place.create({
             email: user,
             title,
             description,
@@ -64,7 +64,6 @@ const postCreatePlace = async (req, res) => {
             zipcode,
             city
         })
-        newPlace.save()
         res.render("place/create_place")
 
     } catch (err) {

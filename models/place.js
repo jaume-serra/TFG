@@ -5,7 +5,6 @@ const PlaceSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
     },
     type: {
         type: String,
