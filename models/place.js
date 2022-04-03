@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 
 const PlaceSchema = new mongoose.Schema({
-
+    id: {
+        type: String,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,

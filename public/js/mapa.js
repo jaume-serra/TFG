@@ -74,7 +74,6 @@ function initMap() {
     var map_bounds = map.getBounds()
     setTimeout(function () {
       if (map_bounds != map.getBounds()) {
-
         check_bounds()
       }
     }, 200) //TODO: 200 ms canviar a 0
@@ -107,10 +106,12 @@ function initMap() {
     var places = get_places();   //cridar api per agafar llocs
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
+
     markers = [];
     marker_clusterer.clearMarkers();
-
+    
     for (let i = 0; i < places.length; i++) {
+      places[i].id = "p"+places[i].id;
       var pos = new google.maps.LatLng(places[i].lat, places[i].lng);
       if (bound.contains(pos)) {
         no_result = false;
@@ -122,21 +123,21 @@ function initMap() {
           // animation: google.maps.Animation.BOUNCE
         });
 
-        markers[places[i]._id] = marker;
+        markers[places[i].id] = marker;
         marker_clusterer.addMarker(marker);
         afegir_infowindow_marker(map, marker, html, lastInfowindow, infowindow);
         llistat_esquerra += actualitzar_llistat(places[i]);
-        markers[places[i]._id].place = places[i]; //guardem el lloc per poder obtenir el html de la infowindow
-        markers[places[i]._id].id = places[i]._id;
+        markers[places[i].id].place = places[i]; //guardem el lloc per poder obtenir el html de la infowindow
+        markers[places[i].id].id = places[i].id;
 
 
 
       } else {
-        if (markers.hasOwnProperty(places[i]._id)) {
+        if (markers.hasOwnProperty(places[i].id)) {
           // si existeix el marker el fa invisible
           //TODO: eliminar marker?
-          marker_clusterer.removeMarker(places[i]._id);
-          markers[places[i]._id].setVisible(false);
+          marker_clusterer.removeMarker(places[i].id);
+          markers[places[i].id].setVisible(false);
         }
       }
     }
@@ -195,6 +196,7 @@ function actualitzar_llistat_notfound() {
 
 function getHtml(place) {
   var html_generate;
+  console.log(place)
   if (place.images.length == 1) {
     html_generate = `
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
@@ -220,9 +222,9 @@ function getHtml(place) {
     <h1 class="title font-black text-3xl center-text p-1 m-1">${place.title}</h1>
       <div class="containter-md m-1 p-1 text-center">
         <input id="infowindow_input_`+ place.id + `" type="hidden" value="0">
-        <div class = "text-left-infowindow arrow arrow-left" onclick="previous_infowindow(`+ place.id + `)"></div>
+        <div class = "text-left-infowindow arrow arrow-left" onclick="previous_infowindow('`+ place.id + `')"></div>
         <img class = "image  rounded-lg" id="infowindow_slider_`+ place.id + `" src= "${place.images[0]}" value = "` + place.images + `" width="300px" height="200px">
-        <div class = "text-right-infowindow arrow arrow-right" onclick="next_infowindow(`+ place.id + `)"></div>
+        <div class = "text-right-infowindow arrow arrow-right" onclick="next_infowindow('`+ place.id + `')"></div>
       </div>
       <div>
         <p>Espai:${place.measures}</p>  

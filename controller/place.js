@@ -50,6 +50,7 @@ const postCreatePlace = async (req, res) => {
 
         //Crear lloc a mongodb
         await Place.create({
+            id: folderId,
             email: user,
             title,
             description,

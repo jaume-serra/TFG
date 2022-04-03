@@ -32,7 +32,6 @@ function next(id_place, type) {
   }
 
   slider.src = images[value];
-  console.log("img:", images[value], value);
   if (type == "infowindow") {
     document.getElementById('infowindow_input_' + id_place).value = value;
 
@@ -79,9 +78,14 @@ function previous(id_place, type) {
 
 function actualitzar_llistat(place) {
   var html_llistat;
+  try {
+    id = place._id;
+  } catch (err) {
+    console.log('err :>> ', err);
+  }
   if (place.images.length == 1) {
     html_llistat =
-      `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2  items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + place.id + `" >
+      `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2  items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + id + `" >
            <div class="col-span-1 px-2 max-w-screen-md"> <!--imatges-->
              <img class = " image h-max  w-full rounded-lg object-cover" src= "${place.images[0]}">
            </div>
@@ -102,12 +106,12 @@ function actualitzar_llistat(place) {
 
   } else {
     html_llistat =
-      `<div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + place.id + `">
+      `<div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + id + `">
          <div class="col-span-1 container px-2 max-w-screen-md"> <!--imatges-->
-             <input id="input_`+ place.id + `" type="hidden" value="0">
-             <div class = "text-left arrow arrow-left" onclick="previous(`+ place.id + `)"></div>
-             <img class = "image   w-full rounded-lg object-cover" id="slider_`+ place.id + `" src= "${place.images[0]}" value = "` + place.images + `">
-             <div class = "text-right arrow arrow-right" onclick="next(`+ place.id + `)"></div>
+             <input id="input_`+ id + `" type="hidden" value="0">
+             <div class = "text-left arrow arrow-left" onclick="previous('`+ id + `')"></div>
+             <img class = "image   w-full rounded-lg object-cover" id="slider_`+ id + `" src= "${place.images[0]}" value = "` + place.images + `">
+             <div class = "text-right arrow arrow-right" onclick="next('`+ id + `')"></div>
          </div>
          <div class="col-span-1 px-4 py-2  w-full text-left "> <!--informacio local-->
            <div>
