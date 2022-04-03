@@ -109,9 +109,9 @@ function initMap() {
 
     markers = [];
     marker_clusterer.clearMarkers();
-    
+
     for (let i = 0; i < places.length; i++) {
-      places[i].id = "p"+places[i].id;
+
       var pos = new google.maps.LatLng(places[i].lat, places[i].lng);
       if (bound.contains(pos)) {
         no_result = false;
@@ -196,7 +196,6 @@ function actualitzar_llistat_notfound() {
 
 function getHtml(place) {
   var html_generate;
-  console.log(place)
   if (place.images.length == 1) {
     html_generate = `
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
@@ -214,6 +213,11 @@ function getHtml(place) {
           </div>
         </p>
       </div>
+      <a href="place/${place.id}">
+        <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
+        Veure més info
+        </button>
+      </a> 
      
   </div>`
   } else {
@@ -236,7 +240,11 @@ function getHtml(place) {
           </div>
         </p>
       </div>
-     
+      <a href="place/${place.id}">
+        <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
+        Veure més info
+        </button>
+      </a> 
   </div>`
 
   }

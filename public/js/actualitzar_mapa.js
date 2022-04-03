@@ -98,6 +98,11 @@ function actualitzar_llistat(place) {
                <p class = "text-lg">Espai: ${place.measures}</p>  
              </div>
              <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €/m2</p>
+             <a href="place/${place.id}">
+              <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
+              Veure més info
+              </button>
+             </a> 
              </div>
            </div>
          </div>
@@ -106,7 +111,8 @@ function actualitzar_llistat(place) {
 
   } else {
     html_llistat =
-      `<div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + id + `">
+      `
+      <div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none"  id="id_mouse` + id + `">
          <div class="col-span-1 container px-2 max-w-screen-md"> <!--imatges-->
              <input id="input_`+ id + `" type="hidden" value="0">
              <div class = "text-left arrow arrow-left" onclick="previous('`+ id + `')"></div>
@@ -122,7 +128,13 @@ function actualitzar_llistat(place) {
                <p class = "text-lg">Espai: ${place.measures}</p>  
              </div>
              <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €/m2</p>
+             <a href="place/${place.id}">
+               <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
+               Veure més info
+               </button>
+             </a> 
             </div>
+            </a>
          </div>
        </div>`;
   }
