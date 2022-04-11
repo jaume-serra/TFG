@@ -1,0 +1,59 @@
+<%- include('../partials/head') %>
+
+    <link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
+    <script type="text/javascript" src="/public/js/actualitzar_mapa.js" defer></script>
+    <script type="text/javascript" src="/public/js/showArrows.js" defer></script>
+
+
+
+    <body>
+        <!-- Menu navegacio -->
+        <%- include('../partials/navbar') %>
+            <div id="change-bg" class="change-bg">
+                <div class="w-4/5 mx-auto min-h-screen py-10">
+                    <div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2   md:hover:shadow-none"
+                        id="id_mouse` + <%= place.id %> + `">
+                        <div id="image" class="col-span-1 container px-2 h-4/5 max-w-screen-md">
+                            <!--imatges-->
+                            <input id="input_`+ <%= place.id %> + `" type="hidden" value="0">
+                            <div class="hidden text-left arrow arrow-left" onclick="previous('`+ <%= place.id %> + `')">
+                            </div>
+                            <img class="image  w-full rounded-lg object-cover" id="slider_`+ <%= place.id %> + `"
+                                src="<%= place.images[0] %>" value="` + <%= place.images %> + `">
+                            <div class="hidden text-right arrow arrow-right" onclick="next('`+ <%= place.id %> + `')">
+                            </div>
+                        </div>
+                        <div class="col-span-1 px-4 py-2  w-full text-left ">
+                            <!--informacio local-->
+                            <div>
+                                <h1 class="font-black text-2xl text-[#2b6777]">
+                                    <%= place.title %>
+                                </h1>
+                                <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
+                                <p class="text-lg">
+                                    <%= place.description %>Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit. Id, ipsam.
+                                </p>
+                                <div>
+                                    <p class="text-lg">Espai: <%= place.measures %>
+                                    </p>
+                                </div>
+                                <p class="text-left text-[#2b6777] text-3xl font-black ">
+                                    <%= place.price %> €/m2
+                                </p>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <%- include('../partials/footer') %>
+            </div>
+            <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMaps&v=weekly"
+                async>
+                </script>
+    </body>
+
+    </html>

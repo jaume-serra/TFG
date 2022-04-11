@@ -1,105 +1,104 @@
-
-
 <%- include('../partials/head') %>
-<link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
-<script type="text/javascript" src=/public/js/styled_map.js></script>
-<script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script type="text/javascript" src="/public/js/mapa.js"></script>
-<script type="text/javascript" src="/public/js/actualitzar_mapa.js"></script>
-<script type="text/javascript"
-src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+  <link rel='stylesheet' type="text/css" href="/public/css/actualitzar_mapa.css">
+  <script type="text/javascript" src=/public/js/styled_map.js></script>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script type="text/javascript" src="/public/js/mapa.js"></script>
+  <script type="text/javascript" src="/public/js/actualitzar_mapa.js"></script>
+  <script type="text/javascript"
+    src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 
-<body>
-  <!-- Menu navegacio -->
-  <%- include('../partials/navbar') %>
-  
-  <div id="change-bg" class="change-bg">
+  <body>
+    <!-- Menu navegacio -->
+    <%- include('../partials/navbar') %>
 
-    <nav class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-40 overflow-hidden">
-      <div class="flex flex-wrap items-center mt-2 ml-2 mb-2 px-2">
-        <div>
-          <button
-            class="text-[#52ab98] rounded-md  text-xl px-4 pb-1 font-black  border-b-2 border-[#52ab98] rounded-b-none focus:outline-none"
-            id="storage_button" onclick="changeStorage()">Storage</button>
-        </div>
-        <div>
-          <button
-            class="text-white rounded-md  text-xl px-4 pb-1 border-b-2 border-white rounded-b-none focus:outline-none"
-            id="parking_button" onclick="changeParking()">Parking</button>
-        </div>
-        <!-- Inici cercador -->
-        <div class="flex flex-shrink-0 rounded-full  bg-white mt-4 lg:mt-2  w-11/12 mx-1 lg:w-2/5 lg:mx-8">
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 hover:bg-grey-500" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </button>
-          <input type="text" placeholder="Search.." class="w-full rounded mr-4 ml-2" id="search-box">
-        </div>
-        <!-- Final cercador -->
+      <div id="change-bg" class="change-bg">
 
-        <a href="#"
-          class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mr-4">Time
-          in</a>
-        <a href="#"
-          class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mx-4">Time
-          out</a>
-      </div>
-    </nav>
-    <!-- Llistat esquerra-->
-    <div class="grid md:grid-cols-2  h-screen max-h-screen resize-none">
-      <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible bg-[#c8d8e4]" id='div_taula'>
-        <div id="taula_disponible" class="overflow-hidden">
-        </div>
-        <div class="relative z-40">
-          <div class="flex items-center justify-center">
-            <button
-              class="flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
-              href='div_mapa' id="button_map" onclick="changeButtonMap()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Mapa</span>
-            </button>
+        <nav
+          class="bg-[#2b6777] border-b-2 focus:border-gray-400  hover:shadow-lg p-1 sticky top-0  z-40 overflow-hidden">
+          <div class="flex flex-wrap items-center mt-2 ml-2 mb-2 px-2">
+            <div>
+              <button
+                class="text-[#52ab98] rounded-md  text-xl px-4 pb-1 font-black  border-b-2 border-[#52ab98] rounded-b-none focus:outline-none"
+                id="storage_button" onclick="changeStorage()">Storage</button>
+            </div>
+            <div>
+              <button
+                class="text-white rounded-md  text-xl px-4 pb-1 border-b-2 border-white rounded-b-none focus:outline-none"
+                id="parking_button" onclick="changeParking()">Parking</button>
+            </div>
+            <!-- Inici cercador -->
+            <div class="flex flex-shrink-0 rounded-full  bg-white mt-4 lg:mt-2  w-11/12 mx-1 lg:w-2/5 lg:mx-8">
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 hover:bg-grey-500" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+              <input type="text" placeholder="Search.." class="w-full rounded mr-4 ml-2" id="search-box">
+            </div>
+            <!-- Final cercador -->
+
+            <a href="#"
+              class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mr-4">Time
+              in</a>
+            <a href="#"
+              class="text-white hover:shadow-lg px-2 py-2 rounded-md text-l font-extrabold tracking-wide no-underline mx-4">Time
+              out</a>
+          </div>
+        </nav>
+        <!-- Llistat esquerra-->
+        <div class="grid md:grid-cols-2  h-screen max-h-screen resize-none">
+          <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible bg-[#c8d8e4]" id='div_taula'>
+            <div id="taula_disponible" class="overflow-hidden">
+            </div>
+            <div class="relative z-40">
+              <div class="flex items-center justify-center">
+                <button
+                  class="flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+                  href='div_mapa' id="button_map" onclick="changeButtonMap()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Mapa</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Mapa -->
+          <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0" id='div_mapa'>
+            <div id="map" style="width:100%; height:100%" class="fluid-container focus:outline-none"></div>
+            <div class="flex items-center justify-center">
+              <button
+                class="flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+                href='div_taula' id="button_list" onclick="changeButtonList()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Llista</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Mapa -->
-      <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0" id='div_mapa'>
-        <div id="map" style="width:100%; height:100%" class="fluid-container focus:outline-none"></div>
-        <div class="flex items-center justify-center">
-          <button
-            class="flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
-            href='div_taula' id="button_list" onclick="changeButtonList()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-            <span class="ml-1 mt-2 mr-4 mb-2 text-white font-black">Mostrar Llista</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
-    async>
-  </script>
-  <!-- Link per agrupar markers -->
-  <script type="text/javascript"
-    src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-  <!-- TODO:S'ha dinstalar, no importar -->
+      <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+      <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initMap&v=weekly&libraries=places"
+        async>
+        </script>
+      <!-- Link per agrupar markers -->
+      <script type="text/javascript"
+        src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+      <!-- TODO:S'ha dinstalar, no importar -->
 
-</body>
+  </body>
 
-</html>
+  </html>

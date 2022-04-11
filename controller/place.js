@@ -74,4 +74,19 @@ const postCreatePlace = async (req, res) => {
 }
 
 
-module.exports = { postCreatePlace }
+const getPlace = async (req, res) => {
+    const id = req.params.id
+    try {
+        const place = await Place.findOne({ 'id': id })
+        console.log(place)
+        res.render("place/place", { 'place': place })
+
+
+    } catch (err) {
+        res.send(err)
+        console.log(err)
+    }
+}
+
+
+module.exports = { postCreatePlace, getPlace }
