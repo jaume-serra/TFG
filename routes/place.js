@@ -14,7 +14,7 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-router.get("/:id", authControler.checkAuthenticated, placeControler.getPlace);
+router.get("/:id", placeControler.getPlace);
 
 
 
