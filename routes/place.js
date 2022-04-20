@@ -14,14 +14,15 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-router.get("/:id", placeControler.getPlace);
 
 
 
-router.get("/create", authControler.checkAuthenticated, (req, res) => {
-    res.render("place/create_place");
-});
+router.get("/create", authControler.checkAuthenticated, placeControler.getCreatePlace);
 
 router.post("/create", [authControler.checkAuthenticated, upload.array('files', 10)], placeControler.postCreatePlace);
+
+
+//Ha de ser la última ruta
+router.get("/:id", authControler.getUserToRequest, placeControler.getPlace);
 
 module.exports = router;

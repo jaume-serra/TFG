@@ -19,45 +19,31 @@ const checkAuthenticated = async (req, res, next) => {
 
     try {
         const user = await verifyToken(token)
-        req.user = user;
+        // res.user = user;
         res.locals.user = user;
-        next();
-        return;
-
-
+        return next()
     } catch {
-        console.log("hola")
         res.redirect("/login")
     }
-    /*  verifyToken(token)
-         .then((user) => {
-             req.user = user;
-             res.locals.user = user;
- 
-             next();
-             return
-         })
-         .catch((err) => {
-             console.log('err :>> ', err);
-             res.redirect("main/login");
-         }); */
 };
 
 /* Comprova si l'usuari no està loggejat */
+
 const checkNotAuthenticated = (req, res, next) => {
     let token = {
         "defaultToken": req.cookies["session-token-default"],
         "googleToken": req.cookies["session-token"]
     };
-    if (!(token["defaultToken"] || token["googleToken"])) {
+    if (!(token["defaultToken"]) && !(token["googleToken"])) {
         next();
         return
     }
 
     verifyToken(token)
         .then((user) => {
-            req.user = user;
-            next()
+            // res.user = user;
+            res.locals.user = user;
+            res.redirect("/")
         })
         .catch((err) => {
             console.log('err :>> ', err);
@@ -65,22 +51,26 @@ const checkNotAuthenticated = (req, res, next) => {
         });
 };
 
+/* Afegir usuari a la request */
 
 const getUserToRequest = (req, res, next) => {
     let token = {
         "defaultToken": req.cookies["session-token-default"],
         "googleToken": req.cookies["session-token"]
     };
-    if (!(token["defaultToken"] || token["googleToken"])) {
+    if (!(token["defaultToken"]) && !(token["googleToken"])) {
         next();
         return
     }
 
-    verifyToken(token).then((user) => {
-        req.user = user;
-        res.locals.user = user;
-        next()
-    }).catch((err) => console.log('err :>> ', err))
+    verifyToken(token)
+        .then((user) => {
+            res.locals.user = user;
+            next()
+        })
+        .catch((err) => {
+            next()
+        })
 }
 
 /* Verifica el token que rep i retorna l'usuari */
@@ -184,7 +174,7 @@ const loginGoogle = async (token) => {
 
 
 
-const postLogin = async (req, res) => {
+const postLogin = async (req, res, next) => {
     try {
         const { email, password, token } = req.body
         /* Login with Google */

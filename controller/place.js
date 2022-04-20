@@ -13,9 +13,9 @@ const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 const crypto = require('crypto');
 
+// Options for geocoder
 const options = {
     provider: 'google',
-
     // Optional depending on the providers
     apiKey: process.env.GOOGLE_GEOCODER_API_KEY, // for Mapquest, OpenCage, Google Premier
     formatter: null // 'gpx', 'string', ...
@@ -24,7 +24,16 @@ const options = {
 const geocoder = NodeGeocoder(options);
 
 
+//@GET create
+const getCreatePlace = (req, res) => {
+    try {
+        console.log('req.user :>> ', req.user);
+        console.log('req.locals.user :>> ', req.locals.user);
+        res.render("place/create_place")
+    } catch (err) { console.log(err) }
+}
 
+//@POST create
 const postCreatePlace = async (req, res) => {
     //Guardem espai i després fotos de l'espai
     const { title, description, measures, price, address } = req.body;
@@ -73,15 +82,12 @@ const postCreatePlace = async (req, res) => {
     }
 }
 
-
+//@GET /:id
 const getPlace = async (req, res) => {
     const id = req.params.id
     try {
         const place = await Place.findOne({ 'id': id })
-        console.log(place)
         res.render("place/place", { 'place': place })
-
-
     } catch (err) {
         res.send(err)
         console.log(err)
@@ -89,4 +95,4 @@ const getPlace = async (req, res) => {
 }
 
 
-module.exports = { postCreatePlace, getPlace }
+module.exports = { postCreatePlace, getPlace, getCreatePlace }
