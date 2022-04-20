@@ -27,8 +27,6 @@ const geocoder = NodeGeocoder(options);
 //@GET create
 const getCreatePlace = (req, res) => {
     try {
-        console.log('req.user :>> ', req.user);
-        console.log('req.locals.user :>> ', req.locals.user);
         res.render("place/create_place")
     } catch (err) { console.log(err) }
 }
@@ -74,7 +72,7 @@ const postCreatePlace = async (req, res) => {
             zipcode,
             city
         })
-        res.render("place/create_place")
+        res.redirect(`${folderId}`)
 
     } catch (err) {
         res.send(err)

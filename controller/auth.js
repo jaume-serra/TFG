@@ -19,11 +19,12 @@ const checkAuthenticated = async (req, res, next) => {
 
     try {
         const user = await verifyToken(token)
-        // res.user = user;
         res.locals.user = user;
+        req.user = user;
         return next()
+
     } catch {
-        res.redirect("/login")
+        res.redirect(`/login?next=${req.originalUrl}`)
     }
 };
 
@@ -41,7 +42,7 @@ const checkNotAuthenticated = (req, res, next) => {
 
     verifyToken(token)
         .then((user) => {
-            // res.user = user;
+            req.user = user;
             res.locals.user = user;
             res.redirect("/")
         })
@@ -66,6 +67,7 @@ const getUserToRequest = (req, res, next) => {
     verifyToken(token)
         .then((user) => {
             res.locals.user = user;
+            req.user = user;
             next()
         })
         .catch((err) => {
@@ -205,6 +207,11 @@ const postLogin = async (req, res, next) => {
         }
         else {
             res.cookie("session-token-default", user.token)
+            console.log(req.query)
+            if (req.query.next) {
+                res.status(200).redirect(req.query.next)
+                return
+            }
             res.status(200).redirect("/profile")
         }
 
