@@ -8,4 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link type="text/css" href="/public/css/style.css" />
     <script type="text/javascript" src="/public/js/menu.js"></script>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/public/js/sw.js');
+            });
+        }
+    </script>
 </head>

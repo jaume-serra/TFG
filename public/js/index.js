@@ -1,3 +1,4 @@
+
 function initAutocomplete() {
   const input = document.getElementById("search-box-index");
   input.value = "";
