@@ -1,0 +1,22 @@
+{
+    "name": "Kipeer",
+    "short_name": "Kipper",
+    "start_url": "./view/main/index.ejs",
+    "display": "standalone",
+    "background_color": "#FFE9D2",
+    "theme_color": "#FFE1C4",
+    "orientation": "portrait-primary",
+    "icons":[
+        {
+            "src":"/img/a1.png",
+            "type":"image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src":"/img/facebook.png",
+            "type":"image/png",
+            "sizes": "144x144"
+        }
+        
+    ]
+}
