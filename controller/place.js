@@ -1,6 +1,7 @@
 const { Error } = require('mongoose');
 //BBDD
 const Place = require('../models/place')
+const User = require('../models/users')
 
 
 //Maps api
@@ -85,7 +86,12 @@ const getPlace = async (req, res) => {
     const id = req.params.id
     try {
         const place = await Place.findOne({ 'id': id })
-        res.render("place/place", { 'place': place })
+        const user = await User.findOne({ 'email': place.email })
+        if (user.phone) {
+            return res.render("place/place", { 'place': place, 'user': user.phone })
+        }
+        res.render("place/place", { 'place': place, 'user': user.email })
+
     } catch (err) {
         res.send(err)
         console.log(err)

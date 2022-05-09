@@ -33,6 +33,9 @@ const UserSchema = new mongoose.Schema({
     },
     deletedAT: {
         type: Date
+    },
+    phone: {
+        type: String
     }
 })
 
