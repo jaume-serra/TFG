@@ -11,8 +11,8 @@
         <%- include('../partials/navbar') %>
             <div id="change-bg" class="change-bg">
                 <div class="w-4/5 mx-auto min-h-screen py-10">
-                    <div class="grid max-w-max h-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2 ">
-                        <div class="max-w-2xl mx-auto">
+                    <div class="flex flex-wrap items-center">
+                        <div class=" mx-auto">
                             <div id="default-carousel" class="relative" data-carousel="static">
                                 <!-- Carousel wrapper -->
                                 <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96 w-96">
@@ -63,25 +63,29 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-span-1 px-4 py-2  w-full text-left ">
+                        <div class=" px-4 py-10 mx-auto">
                             <!--informacio local-->
-                            <div>
-                                <h1 class="font-black text-2xl text-[#2b6777]">
-                                    <%= place.title %>
-                                </h1>
-                                <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
-                                <p class="text-lg">
-                                    <%= place.description %>Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. Id, ipsam.
-                                </p>
-                                <div>
-                                    <p class="text-lg">Espai: <%= place.measures %>
+                            <h2 class="font-black text-xl pl-4 text-[#2b6777]">
+                                Mensual
+                            </h2>
+                            <div class="border-2 p-4 rounded-md  w-[28rem]">
+                                <div class="grid grid-cols-2 gap-2 mb-2">
+                                    Subtotal
+                                    <p class="font-black text-right">€ <%= place.price %>
+                                    </p>
+                                    Comissió Releaser
+                                    <p class="font-black text-right">€ 0.00</p>
+                                </div>
+
+                                <div class="bg-[#2b6777] p-4">
+                                    <p class=" text-white text-xl font-black ">
+                                        Total <%= place.price %> €
                                     </p>
                                 </div>
-                                <p class="text-left text-[#2b6777] text-3xl font-black ">
-                                    <%= place.price %> €/m2
-                                </p>
+                                <button class="mt-5 w-full h-8 rounded-xl bg-green-400">Veure telefon
+                                    propietari</button>
                             </div>
+
                             </a>
                         </div>
                     </div>
