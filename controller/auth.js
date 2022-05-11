@@ -207,14 +207,14 @@ const postLogin = async (req, res, next) => {
         }
         else {
             res.cookie("session-token-default", user.token)
-            console.log(req.query)
             if (req.query.next) {
-                res.status(200).redirect(req.query.next)
-                return
+                if (req.query.lng) {
+                    return res.status(200).redirect(req.query.next + "&lng=" + req.query.lng)
+                }
+                return res.status(200).redirect(req.query.next)
             }
             res.status(200).redirect("/profile")
         }
-
 
     } catch (err) {
         console.log('err :>> ', err)

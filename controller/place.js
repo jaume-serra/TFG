@@ -99,4 +99,14 @@ const getPlace = async (req, res) => {
 }
 
 
-module.exports = { postCreatePlace, getPlace, getCreatePlace }
+
+//@POST /:id
+
+const postPlace = async (req, res) => {
+    console.log(req.body)
+    res.status(200)
+}
+
+
+
+module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace }

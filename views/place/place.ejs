@@ -2,11 +2,6 @@
 
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
-
-
-
-
-
     <body>
         <!-- Menu navegacio -->
         <%- include('../partials/navbar') %>
@@ -140,6 +135,12 @@
                         <div class=" h-full w-full py-5">
                             <h3 class="font-black text-2xl mb-2">Ubicació de l'espai</h3>
                             <div id="mapa" class="relative rounded-lg" style="min-height: 400px;"></div>
+                        </div>
+
+                        <!-- Ratings -->
+                        <hr class="col-span-1 lg:col-span-2  border-1 border-gray-500 ">
+                        <div id="ratings" class="col-span-1 lg:col-span-2 mb-10">
+                            <%- include('../place/partials/ratings.ejs') %>
                         </div>
 
                     </div>

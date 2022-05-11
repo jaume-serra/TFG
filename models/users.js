@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
     googleId: {
         type: String
     },
-    email: {   //FIXME: Posar type email?
+    email: {   
         type: String,
         required: true,
         unique: true

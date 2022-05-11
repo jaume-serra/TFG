@@ -24,5 +24,6 @@ router.post("/create", [authControler.checkAuthenticated, upload.array('files', 
 
 //Ha de ser la última ruta
 router.get("/:id", authControler.getUserToRequest, placeControler.getPlace);
+router.post("/:id", authControler.getUserToRequest, placeControler.postPlace);
 
 module.exports = router;
