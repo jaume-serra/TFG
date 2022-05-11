@@ -88,9 +88,9 @@ const getPlace = async (req, res) => {
         const place = await Place.findOne({ 'id': id })
         const user = await User.findOne({ 'email': place.email })
         if (user.phone) {
-            return res.render("place/place", { 'place': place, 'owner': user.phone })
+            return res.render("place/place", { 'place': place, 'owner': { 'contact': user.phone, 'image': user.image } })
         }
-        res.render("place/place", { 'place': place, 'user': user.email })
+        res.render("place/place", { 'place': place, 'owner': { 'contact': user.email, 'image': user.image } })
 
     } catch (err) {
         res.send(err)
