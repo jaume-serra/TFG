@@ -1,7 +1,4 @@
 
-/*places esta declarat a places.js 
-type:
-[{ id: str, title:str, descripcio: str,mides: str, preu: int, img:list[str],lat: int,long: int },...] */
 
 let map;
 
