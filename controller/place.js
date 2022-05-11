@@ -2,6 +2,7 @@ const { Error } = require('mongoose');
 //BBDD
 const Place = require('../models/place')
 const User = require('../models/users')
+const Rating = require('../models/rating')
 
 
 //Maps api
@@ -87,10 +88,12 @@ const getPlace = async (req, res) => {
     try {
         const place = await Place.findOne({ 'id': id })
         const user = await User.findOne({ 'email': place.email })
+        const ratings = await Rating.find({ 'idPlace': id })
+        console.log(ratings)
         if (user.phone) {
-            return res.render("place/place", { 'place': place, 'owner': { 'contact': user.phone, 'image': user.image } })
+            return res.render("place/place", { 'place': place, 'owner': { 'contact': user.phone, 'image': user.image }, 'ratings': ratings })
         }
-        res.render("place/place", { 'place': place, 'owner': { 'contact': user.email, 'image': user.image } })
+        res.render("place/place", { 'place': place, 'owner': { 'contact': user.email, 'image': user.image }, 'ratings': ratings })
 
     } catch (err) {
         res.send(err)
@@ -104,7 +107,46 @@ const getPlace = async (req, res) => {
 
 const postPlace = async (req, res) => {
     console.log(req.body)
-    res.status(200)
+    const { message, email, star, placeId } = req.body;
+    if (!message || !email || !star || !placeId) {
+        //TODO: Ensenyar error
+        return res.redirect(req.originalUrl)
+    }
+    try {
+        /* Agafem el nombre d'estrelles */
+        let starCount = 0;
+        star.forEach((element, index) => {
+            if (element != "") {
+                starCount = index + 1;
+            }
+        });
+
+        /* Comprovem existencia d'usuari i de l'espai */
+        const place = await Place.findOne({ 'id': placeId })
+        const user = await User.findOne({ 'email': email })
+
+        if (!user || !place) {
+            //TODO: retornar error
+            return res.redirect(req.originalUrl)
+        }
+
+        // Creem l'entrada a la taula de Ratings
+        await Rating.create({
+            idPlace: placeId,
+            email,
+            description: message,
+            stars: starCount,
+            image: user.image,
+            displayName: user.displayName
+
+        })
+        return res.redirect(req.originalUrl)
+
+
+    } catch (error) {
+        res.send(error)
+        console.log(error)
+    }
 }
 
 

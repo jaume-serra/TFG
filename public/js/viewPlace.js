@@ -52,7 +52,7 @@ const input3 = document.getElementById('input-3')
 const input4 = document.getElementById('input-4')
 const input5 = document.getElementById('input-5')
 
-
+// const inputs = [input1,input2,input3,input4,input5]
 const star1 = document.getElementById('star-1')
 const star2 = document.getElementById('star-2')
 const star3 = document.getElementById('star-3')
@@ -60,7 +60,13 @@ const star4 = document.getElementById('star-4')
 const star5 = document.getElementById('star-5')
 
 star1.addEventListener('click', () => {
-    input1.focus()
+
+    input1.getElementsByClassName("input")[0].value = 1
+    input2.getElementsByClassName("input")[0].value = ""
+    input3.getElementsByClassName("input")[0].value = ""
+    input4.getElementsByClassName("input")[0].value = ""
+    input5.getElementsByClassName("input")[0].value = ""
+
     star2.classList.remove('text-yellow-600')
     star2.classList.add('text-gray-400')
     star3.classList.remove('text-yellow-600')
@@ -72,8 +78,11 @@ star1.addEventListener('click', () => {
 })
 star2.addEventListener('click', () => {
 
-    input2.focus()
-
+    input1.getElementsByClassName("input")[0].value = ""
+    input2.getElementsByClassName("input")[0].value = 2
+    input3.getElementsByClassName("input")[0].value = ""
+    input4.getElementsByClassName("input")[0].value = ""
+    input5.getElementsByClassName("input")[0].value = ""
     star2.classList.add('text-yellow-600')
     star2.classList.remove('text-gray-400')
 
@@ -86,9 +95,12 @@ star2.addEventListener('click', () => {
 })
 
 star3.addEventListener('click', () => {
-    input3.focus()
 
-
+    input1.getElementsByClassName("input")[0].value = ""
+    input2.getElementsByClassName("input")[0].value = ""
+    input3.getElementsByClassName("input")[0].value = 3
+    input4.getElementsByClassName("input")[0].value = ""
+    input5.getElementsByClassName("input")[0].value = ""
     star2.classList.add('text-yellow-600')
     star2.classList.remove('text-gray-400')
 
@@ -102,9 +114,12 @@ star3.addEventListener('click', () => {
 })
 
 star4.addEventListener('click', () => {
-    input4.focus()
 
-
+    input1.getElementsByClassName("input")[0].value = ""
+    input2.getElementsByClassName("input")[0].value = ""
+    input3.getElementsByClassName("input")[0].value = ""
+    input4.getElementsByClassName("input")[0].value = 4
+    input5.getElementsByClassName("input")[0].value = ""
     star2.classList.add('text-yellow-600')
     star2.classList.remove('text-gray-400')
 
@@ -119,8 +134,11 @@ star4.addEventListener('click', () => {
 })
 
 star5.addEventListener('click', () => {
-    input5.focus()
-
+    input1.getElementsByClassName("input")[0].value = ""
+    input2.getElementsByClassName("input")[0].value = ""
+    input3.getElementsByClassName("input")[0].value = ""
+    input4.getElementsByClassName("input")[0].value = ""
+    input5.getElementsByClassName("input")[0].value = 5
     star2.classList.add('text-yellow-600')
     star2.classList.remove('text-gray-400')
 
