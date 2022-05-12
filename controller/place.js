@@ -89,7 +89,6 @@ const getPlace = async (req, res) => {
         const place = await Place.findOne({ 'id': id })
         const user = await User.findOne({ 'email': place.email })
         const ratings = await Rating.find({ 'idPlace': id })
-        console.log(ratings)
         if (user.phone) {
             return res.render("place/place", { 'place': place, 'owner': { 'contact': user.phone, 'image': user.image }, 'ratings': ratings })
         }
