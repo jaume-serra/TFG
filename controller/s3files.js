@@ -24,4 +24,19 @@ function uploadFile(file, folder) {
     }
     return s3.upload(uploadParams).promise()
 }
-module.exports = { uploadFile };
+
+
+
+
+// UPLOAD FILE TO S3
+function uploadFileV2(file, folder) {
+    const fileStream = fs.createReadStream(file);
+    const key = folder + '/' + file
+    const uploadParams = {
+        Bucket: bucketName,
+        Body: fileStream,
+        Key: key
+    }
+    return s3.upload(uploadParams).promise()
+}
+module.exports = { uploadFile,uploadFileV2 };

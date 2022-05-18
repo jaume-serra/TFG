@@ -201,7 +201,6 @@ const postLogin = async (req, res, next) => {
         /* Login normal */
 
         const user = await loginUser(email, password)
-        console.log('user :>> ', user);
         if (!user) {
             res.status(400).send("Invalid user or password")
         }

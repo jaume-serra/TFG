@@ -40,7 +40,7 @@
                     <div
                         class="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
                         <div class="px-4 pt-4">
-                            <form action="#" type="POST" class="flex flex-col space-y-10">
+                            <form enctype="multipart/form-data" method="POST" class="flex flex-col space-y-10">
 
                                 <div>
                                     <h3 class="text-2xl font-semibold">Perfil</h3>
@@ -50,13 +50,15 @@
                                 <div class="form-item w-full md:w-10/12 ">
                                     <label class="text-xl ">Nom i cognoms</label>
                                     <input type="text" name="displayName" value="<%= user.displayName%>"
-                                        class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2  mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200">
+                                        class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2  mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200"
+                                        required>
                                 </div>
 
                                 <div class="form-item w-full md:w-10/12  ">
                                     <label class="text-xl ">Telèfon</label>
                                     <input type="tel" name="phone" value="<%= user.phone %>"
-                                        class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2 mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200">
+                                        class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2 mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200"
+                                        required>
                                 </div>
                                 <div class="form-item w-full md:w-9/12 hidden">
                                     <label class="text-xl ">Email</label>
@@ -64,20 +66,17 @@
                                         class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2 mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200 ">
                                 </div>
                                 <div class="form-item w-full">
-                                    <label class="text-xl ">Imatge perfil</label>
-                                    <div class="overflow-hidden w-64 items-center  ">
-                                        <input class="cursor-pointer w-full  py-2" type="file" name="documents[]"
-                                            accept="image/*">
-                                    </div>
+                                    <label for="file" class="text-xl ">Imatge perfil</label>
+                                    <input class="cursor-pointer w-full  py-2" type="file" name="file"=" image/*">
                                 </div>
                                 <div class="flex flex-wrap gap-x-8">
                                     <div class="form-item w-full md:w-5/12">
-                                        <label class="text-xl ">Contrasenya actual</label>
+                                        <label class="text-xl ">Contrasenya</label>
                                         <input type="password" name="password" placeholder="******"
                                             class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2 mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200 ">
                                     </div>
                                     <div class="form-item w-full md:w-5/12">
-                                        <label class="text-xl ">Nova Contrasenya</label>
+                                        <label class="text-xl ">Repetir Contrasenya</label>
                                         <input type="password" name="newPassword" placeholder="******"
                                             class="w-full appearance-none text-black text-opacity-75 rounded shadow py-1 px-2 mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200 ">
                                     </div>

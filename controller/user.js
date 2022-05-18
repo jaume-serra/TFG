@@ -1,6 +1,7 @@
 
 
 const User = require('../models/users')
+const bcrypt = require('bcrypt');
 
 //Images to S3
 const { uploadFile } = require('./s3files')
@@ -8,6 +9,8 @@ const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 const crypto = require('crypto');
+const { getUserToRequest } = require('./auth');
+const { auth } = require('google-auth-library');
 
 
 
@@ -24,17 +27,47 @@ const getProfile = (req, res) => {
 //@POST Profile
 const postProfile = async (req, res) => {
     const { displayName, phone, email, password, newPassword } = req.body;
-    const images = []
+    const file = req.file;
 
     try {
-        const user = await User.findOne({ 'email': "hola" })
+        const user = await User.findOne({ 'email': email })
 
+        //Comprovem user
+        console.log(user)
+        if (!user) {
+            throw 'Usuari no vàlid'
+        }
+        //Canvi password
+        if ((password != "") && (newPassword != "")) {
+            if (password !== newPassword) {
+                throw "Les contrasenyes no coincideixen"
+            }
 
-
-
+            encryptedPassword = await bcrypt.hash(password, 10)
+            await User.findOneAndUpdate({ 'email': email }, {
+                displayName,
+                phone,
+                encryptedPassword,
+            })
+        }
+        
+        //Actualitzem foto perfil
+        if (file) {
+            const folderId = user._id.toString()
+            const folderPath = `profileImages/${folderId}`
+            const newImage = await uploadFile(file, folderPath)
+            await unlinkFile(file.path)
+            await User.findOneAndUpdate({ 'email': email },
+                {
+                    'image': newImage.Location
+                })
+        }
+        return res.render("user/profile", { 'msg': 'Perfil actualitzat correctament', 'valid': true })
 
 
     } catch (err) {
+        console.log(err)
+        return res.render("user/profile", { 'msg': err, 'error': true })
 
     }
 
