@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const authControler = require('../controller/auth');  
+const authControler = require('../controller/auth');
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
@@ -12,7 +12,7 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-router.get("/",authControler.getUserToRequest, (req, res) => {
+router.get("/", authControler.getUserToRequest, (req, res) => {
     res.render("main/index");
 });
 
@@ -27,16 +27,16 @@ router.post("/register", authControler.checkNotAuthenticated, authControler.post
 
 
 router.get("/login", authControler.checkNotAuthenticated, authControler.getLogin);
-router.post("/login",authControler.checkNotAuthenticated, authControler.postLogin)
+router.post("/login", authControler.checkNotAuthenticated, authControler.postLogin)
 
 
 router.get("/profile", authControler.checkAuthenticated, (req, res) => {
-    res.render("profile");
+    res.redirect("user/profile");
 });
 
 
 router.get("/logout", (req, res) => {
-    if(req.cookies["session-token"]) res.clearCookie("session-token")
+    if (req.cookies["session-token"]) res.clearCookie("session-token")
     if (req.cookies["session-token-default"]) res.clearCookie("session-token-default")
     res.redirect("/");
 });

@@ -12,7 +12,7 @@ function onSignIn(googleUser) {
             if (nextURL) {
                 location.assign(nextURL)
             } else {
-                location.assign("/profile")
+                location.assign("/user/profile")
             }
         }
     }

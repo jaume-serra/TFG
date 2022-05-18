@@ -213,7 +213,7 @@ const postLogin = async (req, res, next) => {
                 }
                 return res.status(200).redirect(req.query.next)
             }
-            res.status(200).redirect("/profile")
+            res.status(200).redirect("/user/profile")
         }
 
     } catch (err) {
@@ -265,7 +265,7 @@ const postRegister = async (req, res) => {
         // save user token
         user.token = token;
         res.cookie("session-token-default", user.token)
-        res.status(201).render("profile", { user })
+        res.status(201).render("/user/profile", { user })
 
 
     } catch (err) {
