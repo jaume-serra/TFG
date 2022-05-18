@@ -33,7 +33,6 @@ const postProfile = async (req, res) => {
         const user = await User.findOne({ 'email': email })
 
         //Comprovem user
-        console.log(user)
         if (!user) {
             throw 'Usuari no vàlid'
         }
@@ -45,12 +44,10 @@ const postProfile = async (req, res) => {
 
             encryptedPassword = await bcrypt.hash(password, 10)
             await User.findOneAndUpdate({ 'email': email }, {
-                displayName,
-                phone,
-                encryptedPassword,
+                'password': encryptedPassword
             })
         }
-        
+
         //Actualitzem foto perfil
         if (file) {
             const folderId = user._id.toString()
@@ -60,6 +57,18 @@ const postProfile = async (req, res) => {
             await User.findOneAndUpdate({ 'email': email },
                 {
                     'image': newImage.Location
+                })
+        }
+        if (displayName) {
+            await User.findOneAndUpdate({ 'email': email },
+                {
+                    displayName
+                })
+        }
+        if (phone) {
+            await User.findOneAndUpdate({ 'email': email },
+                {
+                    phone
                 })
         }
         return res.render("user/profile", { 'msg': 'Perfil actualitzat correctament', 'valid': true })
