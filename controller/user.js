@@ -21,7 +21,27 @@ const getProfile = (req, res) => {
     } catch (err) { console.log(err) }
 }
 
+//@POST Profile
+const postProfile = async (req, res) => {
+    const { displayName, phone, email, password, newPassword } = req.body;
+    const images = []
+
+    try {
+        const user = await User.findOne({ 'email': "hola" })
 
 
 
-module.exports = { getProfile }
+
+
+
+    } catch (err) {
+
+    }
+
+}
+
+
+
+
+
+module.exports = { getProfile, postProfile }

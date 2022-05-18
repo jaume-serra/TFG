@@ -18,8 +18,7 @@ dotenv.config({ path: "./config/config.env" });
 
 
 router.get("/profile", authControler.checkAuthenticated, userControler.getProfile);
-
-// router.post("/create", [authControler.checkAuthenticated, upload.array('files', 10)], placeControler.postCreatePlace);
+router.post("/profile", [authControler.checkAuthenticated, upload.array('files', 1)], userControler.postProfile);
 
 
 // //Ha de ser la última ruta
