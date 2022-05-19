@@ -34,7 +34,6 @@ router.get("/profile", authControler.checkAuthenticated, (req, res) => {
     res.redirect("user/profile");
 });
 
-
 router.get("/logout", (req, res) => {
     if (req.cookies["session-token"]) res.clearCookie("session-token")
     if (req.cookies["session-token-default"]) res.clearCookie("session-token-default")

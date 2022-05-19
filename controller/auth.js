@@ -138,6 +138,7 @@ const loginUser = async (email, password) => {
             {
                 user_id: user._id,
                 email,
+                displayName: user.displayName,
                 firstName: user.firstName,
                 image: user.image
             },
@@ -236,7 +237,7 @@ const postRegister = async (req, res) => {
         const oldUser = await User.findOne({ email })
         if (oldUser) {
             res.status(409)
-            return
+            return res.redirect("main/login")
         }
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
@@ -255,6 +256,7 @@ const postRegister = async (req, res) => {
                 email,
                 firstName: user.firstName,
                 image: user.image,
+                displayName,
             },
             process.env.TOKEN_KEY,
             {
