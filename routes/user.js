@@ -19,6 +19,8 @@ dotenv.config({ path: "./config/config.env" });
 
 router.get("/profile", authControler.checkAuthenticated, userControler.getProfile);
 router.post("/profile", [authControler.checkAuthenticated, upload.single('file')], userControler.postProfile);
+router.get("/spacerent", authControler.checkAuthenticated, userControler.getSpaceRent);
+router.post("/sparcerent/anular", authControler.checkAuthenticated, userControler.postStopRent);
 
 
 

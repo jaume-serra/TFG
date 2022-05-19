@@ -69,9 +69,8 @@ const PlaceSchema = new mongoose.Schema({
         default: false
     },
 
-    available: {
-        type: Boolean,
-        default: true
+    renter: {
+        type: String
     }
 })
 
