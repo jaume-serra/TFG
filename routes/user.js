@@ -22,6 +22,8 @@ router.post("/profile", [authControler.checkAuthenticated, upload.single('file')
 router.get("/spacerent", authControler.checkAuthenticated, userControler.getSpaceRent);
 router.post("/sparcerent/anular", authControler.checkAuthenticated, userControler.postStopRent);
 
+router.get("/myspaces", authControler.checkAuthenticated, userControler.getMySpaces);
+router.post("/myspaces", authControler.checkAuthenticated, userControler.postMySpaces);
 
 
 module.exports = router;

@@ -90,14 +90,19 @@ const postProfile = async (req, res) => {
 const getSpaceRent = async (req, res) => {
     try {
         const places = await Place.find({ 'renter': req.user.email })
-        return res.render("user/spaceRent", { "places": places })
+        let userInfo = []
+        for (let i = 0; i < places.length; i++) {
+            const user = await User.findOne({ 'email': places[i].email })
+            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
+            userInfo.push(info)
+        }
+        return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo })
     } catch (err) { console.log(err) }
 }
 
-
 const postStopRent = async (req, res) => {
 
-    const { id, email } = req.body
+    const { id } = req.body
     try {
         const place = await Place.findById(id)
         if (!place) {
@@ -106,9 +111,7 @@ const postStopRent = async (req, res) => {
 
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'renter': req.user.email })
-
         msg = "Espai eliminat correctament"
-        console.log(msg)
         //TODO: Acabar això
         return res.render("user/spaceRent", { 'msg': msg, 'places': places })
 
@@ -122,4 +125,39 @@ const postStopRent = async (req, res) => {
 
 }
 
-module.exports = { getProfile, postProfile, getSpaceRent, postStopRent }
+
+const getMySpaces = async (req, res) => {
+    /* Informació pis i llogater  */
+
+    const { userEmail } = req.body;
+    try {
+        if (!userEmail) {
+            throw "Invalid user"
+        }
+        /* Info pisos propietari */
+        /* 
+        Active true
+        Active false
+        Renter = ""
+        Renter = email@email.aemaa
+        deleteadAtr
+        */
+        await Place.find({ 'email': userEmail })
+        return res.render('user/mySpaces')
+
+    } catch (error) {
+        return res.render('user/mySpaces', { 'error': error })
+
+    }
+
+}
+
+
+const postMySpaces = async (req, res) => {
+    /* Validar o eliminar lloguer  */
+
+
+    return res.render('user/mySpaces')
+}
+
+module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postMySpaces }
