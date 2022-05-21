@@ -96,7 +96,7 @@ const getSpaceRent = async (req, res) => {
             var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
             userInfo.push(info)
         }
-        return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo })
+        return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo, 'hide': true })
     } catch (err) { console.log(err) }
 }
 
@@ -109,15 +109,27 @@ const postStopRent = async (req, res) => {
             throw ("Error! Espai no dispobile")
         }
 
-        await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
+        // await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'renter': req.user.email })
+        let userInfo = []
+        for (let i = 0; i < places.length; i++) {
+            const user = await User.findOne({ 'email': places[i].email })
+            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
+            userInfo.push(info)
+        }
         msg = "Espai eliminat correctament"
         //TODO: Acabar això
-        return res.render("user/spaceRent", { 'msg': msg, 'places': places })
+        return res.render("user/spaceRent", { 'msg': msg, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     } catch (error) {
         const places = await Place.find({ 'renter': req.user.email })
-        return res.render("user/spaceRent", { 'msg': error, "error": true, 'places': places })
+        let userInfo = []
+        for (let i = 0; i < places.length; i++) {
+            const user = await User.findOne({ 'email': places[i].email })
+            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
+            userInfo.push(info)
+        }
+        return res.render("user/spaceRent", { 'msg': error, "error": true, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     }
 

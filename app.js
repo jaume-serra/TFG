@@ -10,7 +10,6 @@ const dotenv = require("dotenv");
 const morgan = require("morgan"); //Per printar resultat pantalla
 const { connect } = require("http2");
 
-
 //Config file 
 dotenv.config({ path: './config/config.env' });
 

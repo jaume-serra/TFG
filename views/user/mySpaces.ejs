@@ -1,0 +1,140 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <body>
+
+            <div class="w-11/12 mx-auto relative shadow-2xl mb-24 rounded  overflow-hidden">
+
+                <div class="pt-10">
+
+                    <div class="flex flex-col">
+                        <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="overflow-hidden ">
+                                    <% if(places.length==0) { %>
+                                        <p class="p-2 text-xl h-screen text-center">Actualment no tens cap traster ni
+                                            pàrquing
+                                            llogat. Pots visitar el <a
+                                                class="text-blue-700 hover:text-blue-400 hover:underline"
+                                                href="/mapa">Mapa</a> per descobrir totes les ofertes.
+                                        </p>
+                                        <% } else {%>
+                                            <table class="min-w-full divide-y divide-gray-200 table-fixed ">
+                                                <thead class="bg-gray-100 ">
+                                                    <tr>
+
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Propietari
+                                                        </th>
+
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Telèfon
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Email
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Tipus
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Mides m<sup>2</sup>
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Preu €/mes
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                            Ciutat
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                            Anul·lar lloguer
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200 ">
+                                                    <% for(let i=0; i < places.length ; i++) { %>
+
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                                                <%= userInfo[i].displayName %>
+                                                            </td>
+
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                                                <%= userInfo[i].phone %>
+                                                            </td>
+
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                                <%= places[i].email %>
+                                                            </td>
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">
+                                                                <%- places[i].type=="storage" ? "Traster" : "Parking" %>
+                                                            </td>
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-left text-gray-900 whitespace-nowrap ">
+                                                                <%= places[i].measures %>
+                                                            </td>
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-left text-gray-900 whitespace-nowrap ">
+                                                                <%= places[i].price %>
+                                                            </td>
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                                <%= places[i].city %>
+                                                            </td>
+                                                            <td
+                                                                class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
+                                                                <form action="/user/sparcerent/anular" method="POST"
+                                                                    onsubmit="return confirm('Estàs segur que vols cancel·lar el lloguer?');">
+                                                                    <button type="submit">
+                                                                        <svg class="h-6 w-6 "
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            aria-hidden="true" role="img" height="1em"
+                                                                            preserveAspectRatio="xMidYMid meet"
+                                                                            viewBox="0 0 1024 1024">
+                                                                            <path fill="#FF0000"
+                                                                                d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z" />
+                                                                        </svg>
+                                                                        <input type="text" value="<%- places[i]._id %>"
+                                                                            name="id" class="hidden">
+                                                                        <input type="text"
+                                                                            value="<%- places[i].email %>" name="email"
+                                                                            class="hidden">
+
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+
+                                                        </tr>
+                                                        <% } %>
+
+                                                </tbody>
+                                            </table>
+                                            <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </body>
+
+
+        <%- include("../partials/footer") %>
+
+            </html>
