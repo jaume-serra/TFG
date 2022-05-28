@@ -109,7 +109,7 @@ const postStopRent = async (req, res) => {
             throw ("Error! Espai no dispobile")
         }
 
-        // await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
+        await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'renter': req.user.email })
         let userInfo = []
         for (let i = 0; i < places.length; i++) {
@@ -117,7 +117,7 @@ const postStopRent = async (req, res) => {
             var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
             userInfo.push(info)
         }
-        msg = "Espai eliminat correctament"
+        const msg = "Espai eliminat correctament"
         //TODO: Acabar això
         return res.render("user/spaceRent", { 'msg': msg, 'places': places, 'hide': false, 'userInfo': userInfo })
 
@@ -140,10 +140,10 @@ const postStopRent = async (req, res) => {
 
 const getMySpaces = async (req, res) => {
     /* Informació pis i llogater  */
-
-    const { userEmail } = req.body;
+    //TODO: ACABAR AIXO
+    const { email } = req.user;
     try {
-        if (!userEmail) {
+        if (!email) {
             throw "Invalid user"
         }
         /* Info pisos propietari */
@@ -154,11 +154,32 @@ const getMySpaces = async (req, res) => {
         Renter = email@email.aemaa
         deleteadAtr
         */
-        await Place.find({ 'email': userEmail })
-        return res.render('user/mySpaces')
+        const places = await Place.find({ 'email': email })
+        let renterInfo = []
+        for (let i = 0; i < places.length; i++) {
+
+
+            /* Invalid place or renter */
+            // if (!places[i].renter) {
+            //     throw "Invalid place"
+            // }
+            /* No renter */
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+                console.log(info)
+            }
+            renterInfo.push(info)
+
+        }
+        return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': true })
 
     } catch (error) {
-        return res.render('user/mySpaces', { 'error': error })
+        const places = await Place.find({ 'email': email })
+        return res.render('user/mySpaces', { 'msg': error, "error": true, 'places': places, 'hide': false })
 
     }
 

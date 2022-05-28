@@ -4,126 +4,234 @@
         <body>
 
             <div class="w-11/12 mx-auto relative shadow-2xl mb-24 rounded  overflow-hidden">
+                <div class="top h-52 w-full bg-blue-600 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                        alt="" class="bg w-full h-full object-cover object-center absolute z-0">
+                    <div
+                        class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
+                        <img src="<%= user.image %>" class="h-24 w-24 object-cover rounded-full">
+                        <h1 class="text-2xl font-semibold">
+                            <%= user.displayName %>
+                        </h1>
+                        <h4 class="text-sm font-semibold">
+                            <%= user.email %>
+                        </h4>
+                    </div>
+                </div>
+                <div class="grid grid-cols-12 bg-white ">
 
-                <div class="pt-10">
+                    <div
+                        class="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
 
-                    <div class="flex flex-col">
-                        <div class="overflow-x-auto shadow-md sm:rounded-lg">
-                            <div class="inline-block min-w-full align-middle">
-                                <div class="overflow-hidden ">
-                                    <% if(places.length==0) { %>
-                                        <p class="p-2 text-xl h-screen text-center">Actualment no tens cap traster ni
-                                            pàrquing
-                                            llogat. Pots visitar el <a
-                                                class="text-blue-700 hover:text-blue-400 hover:underline"
-                                                href="/mapa">Mapa</a> per descobrir totes les ofertes.
-                                        </p>
-                                        <% } else {%>
-                                            <table class="min-w-full divide-y divide-gray-200 table-fixed ">
-                                                <thead class="bg-gray-100 ">
-                                                    <tr>
+                        <a href="/user/profile"
+                            class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Perfil
+                        </a>
 
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Propietari
-                                                        </th>
+                        <a href="/user/spacerent"
+                            class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Espais
+                            llogats</a>
 
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Telèfon
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Email
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Tipus
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Mides m<sup>2</sup>
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Preu €/mes
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                                            Ciutat
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
-                                                            Anul·lar lloguer
-                                                        </th>
+                        <a href="/user/myspaces"
+                            class="text-sm p-2 bg-indigo-900 text-white text-center rounded font-bold">Els
+                            meus espais
+                        </a>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-200 ">
-                                                    <% for(let i=0; i < places.length ; i++) { %>
+                    </div>
 
-                                                        <tr class="hover:bg-gray-100">
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                    <div
+                        class="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
+                        <div class="px-4 pt-4">
+                            <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden ">
+                                        <div class="my-5">
+                                            <h3 class=" text-2xl font-semibold">Els meus espais</h3>
+                                            <hr>
+                                        </div>
+                                        <% if(places.length==0) { %>
+                                            <p class=" p-2 text-xl h-screen text-center">Actualment no tens
+                                                cap traster ni
+                                                pàrquing
+                                                per llogar. <a class="text-blue-700 hover:text-blue-400 hover:underline"
+                                                    href="/place/create">Publica el teu espai aquí</a>
+                                                <% } else {%>
+                                                    <table class="min-w-full divide-y divide-gray-200 table-fixed ">
+                                                        <thead class="bg-gray-100 ">
+                                                            <tr>
 
-                                                                <%= userInfo[i].displayName %>
-                                                            </td>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Llogater
+                                                                </th>
 
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Telèfon
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Email
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Tipus
+                                                                </th>
 
-                                                                <%= userInfo[i].phone %>
-                                                            </td>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Preu €/mes
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Ciutat
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Informació addicional
+                                                                </th>
 
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                                <%= places[i].email %>
-                                                            </td>
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">
-                                                                <%- places[i].type=="storage" ? "Traster" : "Parking" %>
-                                                            </td>
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-left text-gray-900 whitespace-nowrap ">
-                                                                <%= places[i].measures %>
-                                                            </td>
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-left text-gray-900 whitespace-nowrap ">
-                                                                <%= places[i].price %>
-                                                            </td>
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                                <%= places[i].city %>
-                                                            </td>
-                                                            <td
-                                                                class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
-                                                                <form action="/user/sparcerent/anular" method="POST"
-                                                                    onsubmit="return confirm('Estàs segur que vols cancel·lar el lloguer?');">
-                                                                    <button type="submit">
-                                                                        <svg class="h-6 w-6 "
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                                    Anul·lar espai
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="bg-white divide-y divide-gray-200 ">
+                                                            <% for(let i=0; i < places.length ; i++) { %>
+
+                                                                <tr class="hover:bg-gray-100">
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                                                        <%= renterInfo[i].displayName %>
+                                                                    </td>
+
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                                                        <%= renterInfo[i].phone %>
+                                                                    </td>
+
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                                        <%= renterInfo[i].email %>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">
+                                                                        <%- places[i].type=="storage" ? "Traster"
+                                                                            : "Parking" %>
+                                                                    </td>
+
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-left text-gray-900 whitespace-nowrap ">
+                                                                        <%= places[i].price %>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+                                                                        <%= places[i].city %>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-blue-700 underline hover:text-blue-500 whitespace-nowrap ">
+                                                                        <a
+                                                                            href="/place/<%= places[i].id %>?<%= places[i].lat %>&<%= places[i].lng %>">
+                                                                            Més info
+                                                                        </a>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
+                                                                        <form action="/user/sparcerent/anular"
+                                                                            method="POST"
+                                                                            onsubmit="return confirm('Estàs segur que vols cancel·lar el lloguer?');">
+                                                                            <button type="submit">
+                                                                                <svg class="h-6 w-6 "
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="img"
+                                                                                    height="1em"
+                                                                                    preserveAspectRatio="xMidYMid meet"
+                                                                                    viewBox="0 0 1024 1024">
+                                                                                    <path fill="#FF0000"
+                                                                                        d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z" />
+                                                                                </svg>
+                                                                                <input type="text"
+                                                                                    value="<%- places[i]._id %>"
+                                                                                    name="id" class="hidden">
+                                                                                <input type="text"
+                                                                                    value="<%- places[i].email %>"
+                                                                                    name="email" class="hidden">
+
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <% } %>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <% } %>
+                                                        <% if(!hide){ %>
+                                                            <% if(msg){ %>
+                                                                <!-- Tot correcte  -->
+                                                                <div class=" w-full" id="alertbox">
+                                                                    <div class=" w-full bg-green-500 flex items-center text-white text-sm font-bold px-4 py-3 relative"
+                                                                        role="alert">
+                                                                        <svg class="fill-current w-4 h-4 mr-2"
                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                            aria-hidden="true" role="img" height="1em"
-                                                                            preserveAspectRatio="xMidYMid meet"
-                                                                            viewBox="0 0 1024 1024">
-                                                                            <path fill="#FF0000"
-                                                                                d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z" />
+                                                                            viewBox="0 0 20 20">
+                                                                            <path
+                                                                                d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
                                                                         </svg>
-                                                                        <input type="text" value="<%- places[i]._id %>"
-                                                                            name="id" class="hidden">
-                                                                        <input type="text"
-                                                                            value="<%- places[i].email %>" name="email"
-                                                                            class="hidden">
+                                                                        <p>
+                                                                            <%= msg %>
+                                                                        </p>
 
-                                                                    </button>
-                                                                </form>
-                                                            </td>
+                                                                        <span
+                                                                            class="absolute top-0 bottom-0 right-0 px-4 py-3 closealertbutton">
+                                                                            <svg class="fill-current h-6 w-6 text-white"
+                                                                                role="button"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20">
+                                                                                <title>Close</title>
+                                                                                <path
+                                                                                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <% } else if(error && msg){ %>
+                                                                    <div class="container" id="alertbox">
+                                                                        <div class="container bg-red-500 flex items-center text-white text-sm font-bold px-4 py-3 relative"
+                                                                            role="alert">
+                                                                            <svg class="fill-current w-4 h-4 mr-2"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20">
+                                                                                <path
+                                                                                    d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                                                                            </svg>
+                                                                            <p>
+                                                                                <%= msg %>
+                                                                            </p>
 
-                                                        </tr>
-                                                        <% } %>
+                                                                            <span
+                                                                                class="absolute top-0 bottom-0 right-0 px-4 py-3 closealertbutton">
+                                                                                <svg class="fill-current h-6 w-6 text-white"
+                                                                                    role="button"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 20 20">
+                                                                                    <title>Close</title>
+                                                                                    <path
+                                                                                        d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                                                                </svg>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Error  -->
 
-                                                </tbody>
-                                            </table>
-                                            <% } %>
+
+                                                                    <% } %>
+                                                                        <% } %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,9 +240,23 @@
 
                 </div>
             </div>
+
         </body>
 
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
+            </script>
+
+        <script>
+            $(".closealertbutton").click(function (e) {
+                // $('.alertbox')[0].hide()
+                // e.preventDefault();
+                pid = $(this).parent().parent().hide(500)
+                console.log(pid)
+                // $(".alertbox", this).hide()
+            })
+        </script>
         <%- include("../partials/footer") %>
 
             </html>
