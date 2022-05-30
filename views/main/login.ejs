@@ -1,96 +1,150 @@
 <%- include('../partials/head') %>
-<script type="text/javascript" src="/public/js/login.js"></script>
+    <script type="text/javascript" src="/public/js/login.js"></script>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
-<link type="text/css" href="/public/css/login.css" />
-
-
-<body>
-  
-    <%- include('../partials/navbar') %>
-
-    <div id="change-bg" class="change-bg">
-
-        <!--Inici Login-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="376669493463-77rdr7ks9tdrucvoofb721mub5rp0s19.apps.googleusercontent.com">
+    <link type="text/css" href="/public/css/login.css" />
 
 
-        <!-- Root element for center items -->
-        <div class="flex flex-col bg-gray-100 overflow-x-auto py-20">
-            <!-- Auth Card Container -->
-            <div class="grid place-items-center mx-2 ">
-                <!-- Auth Card -->
-                <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
+    <body>
+
+        <%- include('../partials/navbar') %>
+
+            <div id="change-bg" class="change-bg">
+
+                <!--Inici Login-->
+
+
+                <!-- Root element for center items -->
+                <div class="flex flex-col bg-gray-100 overflow-x-auto py-20">
+                    <!-- Auth Card Container -->
+                    <div class="grid place-items-center mx-2 ">
+                        <!-- Auth Card -->
+                        <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
                 px-6 py-10 sm:px-10 sm:py-6 
                 bg-white rounded-lg shadow-md lg:shadow-lg">
 
-                    <!-- Card Title -->
-                    <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
-                        Log in
-                    </h2>
+                            <!-- Card Title -->
+                            <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
+                                Log in
+                            </h2>
 
 
 
-                    <form class="" method="POST">
-                        <!-- Email Input -->
-                        <label for="email" class="block text-xs font-semibold text-gray-600 uppercase mt-5">E-mail</label>
-                        <input id="email" type="email" name="email" placeholder="Adreça e-mail" autocomplete="email" class="block w-full py-3 px-1 mt-2 
+                            <form class="" method="POST">
+                                <!-- Email Input -->
+                                <label for="email"
+                                    class="block text-xs font-semibold text-gray-600 uppercase mt-5">E-mail</label>
+                                <input id="email" type="email" name="email" placeholder="Adreça e-mail"
+                                    autocomplete="email" class="block w-full py-3 px-1 mt-2 
                         text-gray-800 appearance-none 
                         border-b-2 border-gray-100
-                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" />
 
-                        <!-- Password Input -->
-                        <label for="password" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Password</label>
-                        <input id="password" type="password" name="password" placeholder="Contrasenya" autocomplete="current-password" class="block w-full py-3 px-1 mt-2 mb-2
+                                <!-- Password Input -->
+                                <label for="password"
+                                    class="block text-xs font-semibold text-gray-600 uppercase mt-5">Password</label>
+                                <input id="password" type="password" name="password" placeholder="Contrasenya"
+                                    autocomplete="current-password" class="block w-full py-3 px-1 mt-2 mb-2
                         text-gray-800 appearance-none 
                         border-b-2 border-gray-100
-                        focus:text-gray-500 focus:outline-none focus:border-gray-200" required />
+                        focus:text-gray-500 focus:outline-none focus:border-gray-200" />
 
-                        <a href="forgot-password" class="flex-2 mt-0 px-1 text-sm text-gray-500 hover:text-gray-800">
-                        Forgot password?
-                    </a>
+                                <a href="forgot-password"
+                                    class="flex-2 mt-0 px-1 text-sm text-gray-500 hover:text-gray-800">
+                                    Forgot password?
+                                </a>
+
+                                <!-- Error -->
+                                <% if(!hide){ %>
+                                    <% } if(msg && error){ %>
+                                        <div class="container py-5" id="alertbox">
+                                            <div class="container bg-red-500 flex items-center text-white text-sm font-bold px-4 py-3 relative"
+                                                role="alert">
+                                                <svg class="fill-current w-4 h-4 mr-2"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                                                </svg>
+                                                <p>
+                                                    <%= error %>
+                                                </p>
+
+                                                <span
+                                                    class="absolute top-0 bottom-0 right-0 px-4 py-3 closealertbutton">
+                                                    <svg class="fill-current h-6 w-6 text-white" role="button"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <title>Close</title>
+                                                        <path
+                                                            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <% } %>
 
 
-                        <!-- Auth Buttton -->
-                        <button type="submit" class="w-full py-2 mt-10 bg-blue-400 rounded-full
+
+                                            <!-- Auth Buttton -->
+                                            <button type="submit" class="w-full py-2 mt-10 bg-blue-400 rounded-full
                         font-medium text-white uppercase
                         focus:outline-none hover:bg-blue-600 hover:shadow-none">
-                        Login
-                    </button>
-                        <!--Register button-->
-                        <button class="w-full py-2 mt-2 bg-gray-400 rounded-full
-                    font-medium text-white uppercase
-                    focus:outline-none hover:bg-gray-600 hover:shadow-none">
-                    Register
-                    </button>
-
-                    </form>
+                                                Login
+                                            </button>
+                                            <!--Register button-->
 
 
-                    <!--Line seperator -->
 
-                    <div class="grid place-items-center h-10 py-5">
-                        <p class="text-blue-600 text-sm">or</p>
-                    </div>
+                            </form>
+                            <a href="/register">
+                                <button class="w-full py-2 mt-2 bg-gray-400 rounded-full
+                                font-medium text-white uppercase
+                                focus:outline-none hover:bg-gray-600 hover:shadow-none">
+                                    Register
+                                </button>
+
+                            </a>
+
+                            <!--Line seperator -->
+
+                            <div class="grid place-items-center h-10 py-5">
+                                <p class="text-blue-600 text-sm">or</p>
+                            </div>
 
 
-                    <!--Google or facebook buttons-->
-                    <div class="grid grid-cols-1 gap-x-4 place-items-center pt-5 pb-3">
-                        <!--<a href="/auth/google" class="btn red darken-1">
+                            <!--Google or facebook buttons-->
+                            <div class="grid grid-cols-1 gap-x-4 place-items-center pt-5 pb-3">
+                                <!--<a href="/auth/google" class="btn red darken-1">
                         <i class="fab fa-google left"></i> Login with google
                         </a> -->
-                        <div class="g-signin2 min-w-fit" data-onsuccess="onSignIn" style="width:auto"></div>
+                                <div class="g-signin2 min-w-fit" data-onsuccess="onSignIn" style="width:auto"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <%- include("../partials/footer") %>
+
             </div>
-        </div>
-
-    <%- include("../partials/footer") %>
-   
-    </div>
 
 
 
-</body>
+    </body>
 
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
+        </script>
+
+    <script>
+        $(".closealertbutton").click(function (e) {
+            // $('.alertbox')[0].hide()
+            // e.preventDefault();
+            pid = $(this).parent().parent().hide(500)
+            console.log(pid)
+            // $(".alertbox", this).hide()
+        })
+    </script>
+
+
+    </html>

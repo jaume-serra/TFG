@@ -123,7 +123,7 @@ const verifyToken = async (token) => {
 //GET Login
 
 const getLogin = (req, res) => {
-    res.render("main/login")
+    res.render("main/login", { 'hide': true, 'msg': false })
 }
 
 
@@ -203,7 +203,8 @@ const postLogin = async (req, res, next) => {
 
         const user = await loginUser(email, password)
         if (!user) {
-            res.status(400).send("Invalid user or password")
+            let error = "L'usuari o la contrasenya no són vàlids"
+            return res.render("main/login", { 'error': error, 'msg': true, 'hide': false })
         }
         else {
             res.cookie("session-token-default", user.token)
@@ -217,8 +218,7 @@ const postLogin = async (req, res, next) => {
         }
 
     } catch (err) {
-        console.log('err :>> ', err)
-        res.status(400).send(err)
+        return res.render("main/login", { 'error': err, 'msg': true, 'hide': false })
     }
 }
 
@@ -237,7 +237,7 @@ const postRegister = async (req, res) => {
         const oldUser = await User.findOne({ email })
         if (oldUser) {
             res.status(409)
-            return res.redirect("main/login")
+            return res.redirect("main/login", { 'hide': true })
         }
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
