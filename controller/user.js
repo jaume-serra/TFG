@@ -274,4 +274,4 @@ const postDeleteSpace = async (req, res) => {
 }
 
 
-module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postMySpaces, postStopRentPlace, postDeleteSpace }
+module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace }
