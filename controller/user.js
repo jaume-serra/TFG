@@ -20,7 +20,7 @@ const unlinkFile = util.promisify(fs.unlink)
 //@GET Profile
 const getProfile = (req, res) => {
     try {
-        res.render("user/profile")
+        res.render("user/profile", { 'hide': false, 'msg': false, 'error': false })
     } catch (err) { console.log(err) }
 }
 
@@ -34,12 +34,12 @@ const postProfile = async (req, res) => {
 
         //Comprovem user
         if (!user) {
-            throw 'Usuari no vàlid'
+            throw ('Usuari no vàlid')
         }
         //Canvi password
         if ((password != "") && (newPassword != "")) {
             if (password !== newPassword) {
-                throw "Les contrasenyes no coincideixen"
+                throw ("Les contrasenyes no coincideixen")
             }
 
             encryptedPassword = await bcrypt.hash(password, 10)
@@ -71,14 +71,14 @@ const postProfile = async (req, res) => {
                     phone
                 })
         }
-        //TODO: Acabar aixo
-        return res.render("user/profile", { 'msg': 'Perfil actualitzat correctament', 'valid': true })
+        return res.render("user/profile", {
+            'msg': 'Perfil actualitzat correctament. Torna a inciciar sessió per validar els canvis', 'error': false, 'hide': false
+        })
 
 
     } catch (err) {
         console.log(err)
-        //TODO: Acabar aixo
-        return res.render("user/profile", { 'msg': err, 'error': true })
+        return res.render("user/profile", { 'msg': err, 'error': true, 'hide': false })
 
     }
 
