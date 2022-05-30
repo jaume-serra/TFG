@@ -23,7 +23,12 @@ router.get("/spacerent", authControler.checkAuthenticated, userControler.getSpac
 router.post("/sparcerent/anular", authControler.checkAuthenticated, userControler.postStopRent);
 
 router.get("/myspaces", authControler.checkAuthenticated, userControler.getMySpaces);
-router.post("/myspaces", authControler.checkAuthenticated, userControler.postMySpaces);
+router.post("/myspaces/anular", authControler.checkAuthenticated, userControler.postStopRentPlace);
+router.post("/myspaces/delete", authControler.checkAuthenticated, userControler.postDeleteSpace);
+
+
+
+
 
 
 module.exports = router;

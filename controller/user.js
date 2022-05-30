@@ -146,31 +146,15 @@ const getMySpaces = async (req, res) => {
         if (!email) {
             throw "Invalid user"
         }
-        /* Info pisos propietari */
-        /* 
-        Active true
-        Active false
-        Renter = ""
-        Renter = email@email.aemaa
-        deleteadAtr
-        */
         const places = await Place.find({ 'email': email })
         let renterInfo = []
         for (let i = 0; i < places.length; i++) {
-
-
-            /* Invalid place or renter */
-            // if (!places[i].renter) {
-            //     throw "Invalid place"
-            // }
-            /* No renter */
             const renter = await User.findOne({ 'email': places[i].renter })
             if (!renter) {
                 var info = { 'email': '', 'displayName': '', 'phone': '' }
 
             } else {
                 var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-                console.log(info)
             }
             renterInfo.push(info)
 
@@ -180,17 +164,114 @@ const getMySpaces = async (req, res) => {
     } catch (error) {
         const places = await Place.find({ 'email': email })
         return res.render('user/mySpaces', { 'msg': error, "error": true, 'places': places, 'hide': false })
-
     }
-
 }
 
 
-const postMySpaces = async (req, res) => {
-    /* Validar o eliminar lloguer  */
+const postStopRentPlace = async (req, res) => {
+    const { id } = req.body
+    const { email } = req.user;
+    let renterInfo = []
+
+    try {
+        const place = await Place.findById(id)
+        if (!place) {
+            throw ("Error! Espai no dispobile")
+        }
+        /*
+        - Mirar que existeixi
+        - Agafar llogater actual i enviar correu
+        - Eliminar llogater de la bbdd
+        */
+        if (!place.renter) {
+            throw ("L'espai no està llogat actualment")
+        }
+
+        //TODO:enviar correu
+
+        await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
+        const places = await Place.find({ 'email': email })
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+            }
+            renterInfo.push(info)
+
+        }
+        const msg = "Lloguer anul·lat correctament"
+        return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': msg, 'error': false })
 
 
-    return res.render('user/mySpaces')
+    } catch (error) {
+        const places = await Place.find({ 'email': email })
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+            }
+            renterInfo.push(info)
+        }
+        return res.render('user/mySpaces', { 'msg': error, 'error': true, 'places': places, 'hide': false, 'renterInfo': renterInfo })
+    }
 }
 
-module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postMySpaces }
+const postDeleteSpace = async (req, res) => {
+    const { id } = req.body
+    const { email } = req.user;
+    let renterInfo = []
+
+    try {
+        const place = await Place.findById(id)
+        if (!place) {
+            throw ("Error! Espai no dispobile")
+        }
+        /*
+        - Mirar que existeixi
+        - Comprovar que no tingui llogater
+        - Eliminar espai de la bbdd
+        */
+        if (place.renter) {
+            throw ("Primer has d'anul·lar el lloger abans d'eliminar-lo")
+        }
+
+        await Place.findByIdAndRemove({ '_id': id })
+        const places = await Place.find({ 'email': email })
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+            }
+            renterInfo.push(info)
+
+        }
+        const msg = "Espai eliminat correctament"
+        return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': msg, 'error': false })
+
+    } catch (error) {
+        const places = await Place.find({ 'email': email })
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+            }
+            renterInfo.push(info)
+        }
+        return res.render('user/mySpaces', { 'msg': error, 'error': true, 'places': places, 'hide': false, 'renterInfo': renterInfo })
+    }
+}
+
+
+module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postMySpaces, postStopRentPlace, postDeleteSpace }

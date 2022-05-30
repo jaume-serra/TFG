@@ -92,11 +92,10 @@ const getPlace = async (req, res) => {
         if (user.phone) {
             return res.render("place/place", { 'place': place, 'owner': { 'contact': user.phone, 'image': user.image }, 'ratings': ratings })
         }
-        res.render("place/place", { 'place': place, 'owner': { 'contact': user.email, 'image': user.image }, 'ratings': ratings })
+        return res.render("place/place", { 'place': place, 'owner': { 'contact': user.email, 'image': user.image }, 'ratings': ratings })
 
     } catch (err) {
-        res.send(err)
-        console.log(err)
+        return res.status(404).render("main/error404")
     }
 }
 
