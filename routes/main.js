@@ -29,6 +29,8 @@ router.post("/register", authControler.checkNotAuthenticated, authControler.post
 router.get("/login", authControler.checkNotAuthenticated, authControler.getLogin);
 router.post("/login", authControler.checkNotAuthenticated, authControler.postLogin)
 
+router.get("/forgot-password", authControler.checkNotAuthenticated, authControler.getForgotPassword);
+router.post("/forgot-password", authControler.checkNotAuthenticated, authControler.postForgotPassword)
 
 router.get("/profile", authControler.checkAuthenticated, (req, res) => {
     res.redirect("user/profile");

@@ -9,6 +9,11 @@ const User = require('../models/users')
 const connectDB = require('../config/db');
 connectDB()
 
+//Send email
+const { transporter } = require('./sendEmail')
+
+
+
 
 /* Comprova si l'usuari està loggejat  */
 const checkAuthenticated = async (req, res, next) => {
@@ -266,7 +271,7 @@ const postRegister = async (req, res) => {
         // save user token
         user.token = token;
         res.cookie("session-token-default", user.token)
-        res.status(201).render("/user/profile", { user })
+        res.status(201).redirect('user/profile')
 
 
     } catch (err) {
@@ -277,4 +282,43 @@ const postRegister = async (req, res) => {
 
 }
 
-module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest }
+
+
+const getForgotPassword = async (req, res) => {
+    res.render('main/forgotPassword', { 'hide': true, 'msg': false, 'error': false })
+}
+const postForgotPassword = async (req, res) => {
+    const { email, repEmail } = req.body
+    try {
+        console.log(email, repEmail)
+        if (email != repEmail) throw ("Els correus no coincideixen")
+        const newPassword = Math.random().toString(36).slice(-8)
+        encryptedPassword = await bcrypt.hash(newPassword, 10)
+        await User.findOneAndUpdate({ 'email': email }, { 'password': encryptedPassword })
+        const mailData = {
+            from: process.env.USER_EMAIL,
+            to: email,
+            subject: 'Sol·licitud de nova contrasenya',
+            html:
+                `<h3>Nova contrasenya </h3>
+            <p>Benvolgut, has sol·licitat un canvi de contrasenya.
+            <br/>A continuació, la nova contrasenya actual: </br>
+            
+            <b>${newPassword}</b>
+
+            Qualsevol cosa, posa't amb contacte amb nosaltres.
+            <br/>Moltes gràcies, equip Releaser.</p>
+            `
+        }
+        await transporter.sendMail(mailData)
+        return res.render('main/forgotPassword', { 'hide': false, 'msg': `S'ha enviat el correu electrònic correctament`, 'error': false })
+
+
+    } catch (error) {
+        return res.render('main/forgotPassword', { 'hide': false, 'msg': error, 'error': true })
+    }
+}
+
+
+
+module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest, getForgotPassword, postForgotPassword }

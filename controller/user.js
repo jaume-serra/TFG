@@ -15,7 +15,6 @@ const unlinkFile = util.promisify(fs.unlink)
 
 
 //Send email
-
 const { transporter } = require('./sendEmail')
 
 
