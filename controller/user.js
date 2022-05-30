@@ -14,6 +14,10 @@ const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 
 
+//Send email
+
+const { transporter } = require('./sendEmail')
+
 
 
 
@@ -99,6 +103,7 @@ const getSpaceRent = async (req, res) => {
         return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo, 'hide': true })
     } catch (err) { console.log(err) }
 }
+//@POST spaceRent 
 
 const postStopRent = async (req, res) => {
 
@@ -118,7 +123,6 @@ const postStopRent = async (req, res) => {
             userInfo.push(info)
         }
         const msg = "Espai eliminat correctament"
-        //TODO: Acabar això
         return res.render("user/spaceRent", { 'msg': msg, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     } catch (error) {
@@ -140,7 +144,6 @@ const postStopRent = async (req, res) => {
 
 const getMySpaces = async (req, res) => {
     /* Informació pis i llogater  */
-    //TODO: ACABAR AIXO
     const { email } = req.user;
     try {
         if (!email) {
@@ -169,6 +172,12 @@ const getMySpaces = async (req, res) => {
 
 
 const postStopRentPlace = async (req, res) => {
+    /*
+       - Mirar que existeixi
+       - Agafar llogater actual i enviar correu
+       - Eliminar llogater de la bbdd
+    */
+
     const { id } = req.body
     const { email } = req.user;
     let renterInfo = []
@@ -178,16 +187,20 @@ const postStopRentPlace = async (req, res) => {
         if (!place) {
             throw ("Error! Espai no dispobile")
         }
-        /*
-        - Mirar que existeixi
-        - Agafar llogater actual i enviar correu
-        - Eliminar llogater de la bbdd
-        */
+
         if (!place.renter) {
             throw ("L'espai no està llogat actualment")
         }
-
-        //TODO:enviar correu
+        const mailData = {
+            from: process.env.USER_EMAIL,
+            to: place.renter,
+            subject: 'Cancel·lació del lloger per part del propietari',
+            html:
+                `<h2>Cancel·lació del lloger</h2>
+            <p>Benvolgut, el propietari ha acabat amb el lloger de l'espai: ${place.title}.<br/>Qualsevol cosa, posa't amb contacte amb el propietari :<br/> ${email} <br/> Moltes gràcies, equip Releaser </p>
+            `
+        }
+        await transporter.sendMail(mailData)
 
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'email': email })
@@ -223,6 +236,11 @@ const postStopRentPlace = async (req, res) => {
 }
 
 const postDeleteSpace = async (req, res) => {
+    /*
+        - Mirar que existeixi
+        - Comprovar que no tingui llogater
+        - Eliminar espai de la bbdd
+   */
     const { id } = req.body
     const { email } = req.user;
     let renterInfo = []
@@ -232,11 +250,7 @@ const postDeleteSpace = async (req, res) => {
         if (!place) {
             throw ("Error! Espai no dispobile")
         }
-        /*
-        - Mirar que existeixi
-        - Comprovar que no tingui llogater
-        - Eliminar espai de la bbdd
-        */
+
         if (place.renter) {
             throw ("Primer has d'anul·lar el lloger abans d'eliminar-lo")
         }
