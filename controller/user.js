@@ -21,7 +21,8 @@ const unlinkFile = util.promisify(fs.unlink)
 const { transporter } = require('./sendEmail')
 
 //QR
-const qrcode = require('qrcode')
+const qrcode = require('qrcode');
+const { userInfo } = require('os');
 
 
 //@GET Profile
@@ -98,19 +99,17 @@ const getSpaceRent = async (req, res) => {
     try {
         const places = await Place.find({ 'renter': req.user.email })
         let userInfo = []
-        for (let i = 0; i < places.length; i++) {
-            const user = await User.findOne({ 'email': places[i].email })
-            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
-            userInfo.push(info)
-        }
+        userInfo = generateUserInfo(places)
         return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo, 'hide': true })
-    } catch (err) { console.log(err) }
+    } catch (err) { console.log(err) } //TODO:ACABAR AIXO
 }
 //@POST spaceRent 
 
 const postStopRent = async (req, res) => {
 
     const { id } = req.body
+    let userInfo = []
+
     try {
         const place = await Place.findById(id)
         if (!place) {
@@ -119,23 +118,13 @@ const postStopRent = async (req, res) => {
 
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'renter': req.user.email })
-        let userInfo = []
-        for (let i = 0; i < places.length; i++) {
-            const user = await User.findOne({ 'email': places[i].email })
-            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
-            userInfo.push(info)
-        }
+        userInfo = generateUserInfo(places)
         const msg = "Espai eliminat correctament"
         return res.render("user/spaceRent", { 'msg': msg, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     } catch (error) {
         const places = await Place.find({ 'renter': req.user.email })
-        let userInfo = []
-        for (let i = 0; i < places.length; i++) {
-            const user = await User.findOne({ 'email': places[i].email })
-            var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
-            userInfo.push(info)
-        }
+        userInfo = generateUserInfo(places)
         return res.render("user/spaceRent", { 'msg': error, "error": true, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     }
@@ -154,17 +143,8 @@ const getMySpaces = async (req, res) => {
         }
         const places = await Place.find({ 'email': email })
         let renterInfo = []
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
+        renterInfo = await generateRenterInfo(places)
 
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-
-        }
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': true })
 
     } catch (error) {
@@ -207,33 +187,16 @@ const postStopRentPlace = async (req, res) => {
 
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
         const places = await Place.find({ 'email': email })
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
+        renterInfo = await generateRenterInfo(places)
 
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-
-        }
         const msg = "Lloguer anul·lat correctament"
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': msg, 'error': false })
 
 
     } catch (error) {
         const places = await Place.find({ 'email': email })
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
+        renterInfo = await generateRenterInfo(places)
 
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-        }
         return res.render('user/mySpaces', { 'msg': error, 'error': true, 'places': places, 'hide': false, 'renterInfo': renterInfo })
     }
 }
@@ -260,32 +223,15 @@ const postDeleteSpace = async (req, res) => {
 
         await Place.findByIdAndRemove({ '_id': id })
         const places = await Place.find({ 'email': email })
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
+        renterInfo = await generateRenterInfo(places)
 
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-
-        }
         const msg = "Espai eliminat correctament"
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': msg, 'error': false })
 
     } catch (error) {
         const places = await Place.find({ 'email': email })
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
+        renterInfo = await generateRenterInfo(places)
 
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-        }
         return res.render('user/mySpaces', { 'msg': error, 'error': true, 'places': places, 'hide': false, 'renterInfo': renterInfo })
     }
 }
@@ -325,26 +271,41 @@ const postGenerateQR = async (req, res) => {
         });
         const qr = await qrcode.toDataURL(urlFor)
 
-        //TODO: millorar això
         const places = await Place.find({ 'email': email })
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            if (!renter) {
-                var info = { 'email': '', 'displayName': '', 'phone': '' }
-
-            } else {
-                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
-            }
-            renterInfo.push(info)
-
-        }
+        renterInfo = await generateRenterInfo(places)
         console.log(urlFor)
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': false, 'error': false, 'code': qr })
 
     } catch (error) {
+        //TODO: Acabar aixo
         console.log(error)
     }
 
 }
 
+const generateRenterInfo = async (places) => {
+    let renterInfo = []
+    for (let i = 0; i < places.length; i++) {
+        const renter = await User.findOne({ 'email': places[i].renter })
+        if (!renter) {
+            var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+        } else {
+            var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+        }
+        renterInfo.push(info)
+    }
+    return renterInfo
+}
+
+const generateUserInfo = async (places) => {
+    let userInfo = []
+    for (let i = 0; i < places.length; i++) {
+        const user = await User.findOne({ 'email': places[i].email })
+        var info = { 'email': user.email, 'displayName': user.displayName, 'phone': user.phone }
+        userInfo.push(info)
+    }
+    return userInfo
+
+}
 module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace, postGenerateQR }

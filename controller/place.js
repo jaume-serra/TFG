@@ -147,6 +147,7 @@ const postPlace = async (req, res) => {
 
 
     } catch (error) {
+        //TODO: acabar això
         res.send(error)
         console.log(error)
     }
@@ -169,8 +170,6 @@ const getRentPlace = async (req, res) => {
 
         const newRentKey = Math.random().toString(36).slice(-10)
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': emailRenter, 'rentKey': newRentKey })
-        //TODO: enviar correu
-
         const mailData = {
             from: process.env.USER_EMAIL,
             to: emailRenter,
@@ -184,6 +183,7 @@ const getRentPlace = async (req, res) => {
 
         return res.render("place/rentSuccess", { 'place': place, 'email': emailRenter })
     } catch (error) {
+        //TODO: acabar aixo
         console.log(error)
     }
 
