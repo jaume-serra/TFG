@@ -71,7 +71,10 @@ const PlaceSchema = new mongoose.Schema({
 
     renter: {
         type: String
-    }
+    },
+    rentKey: {
+        type: String
+    },
 })
 
 

@@ -317,7 +317,7 @@ const postGenerateQR = async (req, res) => {
                 - Eliminar rentKey
         */
         const rentKey = Math.random().toString(36).slice(-10)
-        // await Place.findByIdAndUpdate({ '_id': id }, { 'rentKey': rentKey })
+        await Place.findByIdAndUpdate({ '_id': id }, { 'rentKey': rentKey })
         const urlFor = url.format({
             protocol: req.protocol,
             host: req.get('host'),
@@ -338,6 +338,7 @@ const postGenerateQR = async (req, res) => {
             renterInfo.push(info)
 
         }
+        console.log(urlFor)
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': false, 'error': false, 'code': qr })
 
     } catch (error) {

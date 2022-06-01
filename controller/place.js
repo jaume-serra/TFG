@@ -4,6 +4,8 @@ const Place = require('../models/place')
 const User = require('../models/users')
 const Rating = require('../models/rating')
 
+//Send Email
+const { transporter } = require("./sendEmail")
 
 //Maps api
 const NodeGeocoder = require('node-geocoder');
@@ -14,6 +16,7 @@ const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 const crypto = require('crypto');
+const place = require('../models/place');
 
 // Options for geocoder
 const options = {
@@ -72,7 +75,9 @@ const postCreatePlace = async (req, res) => {
             country,
             countryCode,
             zipcode,
-            city
+            city,
+            renter: "",
+            rentKey: ""
         })
         res.redirect(`${folderId}`)
 
@@ -147,6 +152,42 @@ const postPlace = async (req, res) => {
     }
 }
 
+const getRentPlace = async (req, res) => {
+    const id = req.params.id
+    const rentKey = req.params.rentKey
+    const emailRenter = req.user.email
+
+    try {
+        const place = await Place.findById(id)
+        if (place.rentKey != rentKey) {
+            return res.status(404).render("main/error404")
+        }
+
+        if (emailRenter == place.email) {
+            throw ("No pots llogar el teu propi espai")
+        }
+
+        const newRentKey = Math.random().toString(36).slice(-10)
+        await Place.findByIdAndUpdate({ '_id': id }, { 'renter': emailRenter, 'rentKey': newRentKey })
+        //TODO: enviar correu
+
+        const mailData = {
+            from: process.env.USER_EMAIL,
+            to: emailRenter,
+            subject: `Val·lidació del lloger del ${place.type == "storage" ? "Traster" : "Pàrking"} `,
+            html:
+                `<h3>Has llogat el ${place.type == "storage" ? "traster" : "pàrking"} correctament!</h3>
+            <p>Benvolgut, s'ha realitzat el lloger de l'espai "${place.title}" correctament.</p><p>Qualsevol cosa, contacte amb el propietari:</p><p>Correu: ${place.email}</p><br><p>Moltes gràcies per confiar amb nosaltres, equip Releaser </p>
+            `
+        }
+        await transporter.sendMail(mailData)
+
+        return res.render("place/rentSuccess", { 'place': place, 'email': emailRenter })
+    } catch (error) {
+        console.log(error)
+    }
 
 
-module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace }
+}
+
+module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace, getRentPlace }

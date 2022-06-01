@@ -21,6 +21,8 @@ router.get("/create", authControler.checkAuthenticated, placeControler.getCreate
 
 router.post("/create", [authControler.checkAuthenticated, upload.array('files', 10)], placeControler.postCreatePlace);
 
+router.get("/:id/:rentKey", authControler.checkAuthenticated, placeControler.getRentPlace);
+
 
 //Ha de ser la última ruta
 router.get("/:id", authControler.getUserToRequest, placeControler.getPlace);
