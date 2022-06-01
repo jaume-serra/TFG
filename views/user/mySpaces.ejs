@@ -92,7 +92,7 @@
 
                                                                 <th scope="col"
                                                                     class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
-                                                                    Cancel·lar lloguer
+                                                                    Lloguer
                                                                 </th>
                                                                 <th scope="col"
                                                                     class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
@@ -108,18 +108,21 @@
                                                                     <td
                                                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
-                                                                        <%= renterInfo[i].displayName %>
+                                                                        <%= renterInfo[i].displayName=="" ? "-" :
+                                                                            renterInfo[i].displayName %>
                                                                     </td>
 
                                                                     <td
                                                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
-                                                                        <%= renterInfo[i].phone %>
+                                                                        <%= renterInfo[i].phone=="" ? "-" :
+                                                                            renterInfo[i].phone %>
                                                                     </td>
 
                                                                     <td
                                                                         class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
-                                                                        <%= renterInfo[i].email %>
+                                                                        <%= renterInfo[i].email=="" ? "-" :
+                                                                            renterInfo[i].email %>
                                                                     </td>
                                                                     <td
                                                                         class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">
@@ -146,7 +149,7 @@
                                                                         class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
                                                                         <% if(places[i].renter){ %>
                                                                             <form action="/user/myspaces/anular"
-                                                                                method="POST"
+                                                                                method="POST" target="hiddenFrame"
                                                                                 onsubmit="return confirm('Estàs segur que vols cancel·lar el lloguer?');">
                                                                                 <button type="submit">
                                                                                     <svg class="h-6 w-6"
@@ -169,12 +172,45 @@
 
                                                                                 </button>
                                                                             </form>
-                                                                            <% } %>
+                                                                            <% } else { %>
+                                                                                <form action="/user/myspaces/qr"
+                                                                                    method="POST">
+                                                                                    <button type="submit"
+                                                                                        target="hiddenFrame"
+                                                                                        onclick="openModal()">
+                                                                                        <svg class="h-6 w-6"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            aria-hidden="true"
+                                                                                            role="img" width="1em"
+                                                                                            height="1em"
+                                                                                            preserveAspectRatio="xMidYMid meet"
+                                                                                            viewBox="0 0 24 24">
+                                                                                            <path fill="#008000"
+                                                                                                d="M6 6h2v2H6V6Z" />
+                                                                                            <path fill="#008000"
+                                                                                                d="M3 11V3h8v8H3Zm2-6v4h4V5H5Zm8 8h3v2h-3v-2Z" />
+                                                                                            <path fill="#008000"
+                                                                                                d="M16 15h2v-2h3v3h-3v1h1v1h2v3h-2v-2h-2v2h-4v-4h2v2h1v-4Zm2-9h-2v2h2V6Z" />
+                                                                                            <path fill="#008000"
+                                                                                                d="M13 3v8h8V3h-8Zm6 2v4h-4V5h4ZM6 16h2v2H6v-2Z" />
+                                                                                            <path fill="#008000"
+                                                                                                d="M3 21v-8h8v8H3Zm2-6v4h4v-4H5Z" />
+                                                                                        </svg>
+                                                                                        <input type="text"
+                                                                                            value="<%- places[i]._id %>"
+                                                                                            name="id" class="hidden">
+                                                                                        <input type="text"
+                                                                                            value="<%- places[i].email %>"
+                                                                                            name="email" class="hidden">
+
+                                                                                    </button>
+                                                                                </form>
+                                                                                <% } %>
                                                                     </td>
                                                                     <td
                                                                         class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
                                                                         <form action="/user/myspaces/delete"
-                                                                            method="POST"
+                                                                            method="POST" target="hiddenFrame"
                                                                             onsubmit="return confirm(`Estàs segur que vols eliminar l'espai?`);">
                                                                             <button type="submit">
                                                                                 <svg class="h-6 w-6 "
@@ -262,8 +298,55 @@
                                                                     <!-- Error  -->
 
 
+
                                                                     <% } %>
                                                                         <% } %>
+                                                                            <% if(locals.code) {%>
+
+                                                                                <div id="main-modal"
+                                                                                    class=" fixed w-full inset-0 z-50 overflow-hidden  justify-center items-center"
+                                                                                    style="background: rgba(0,0,0,.7);">
+                                                                                    <div
+                                                                                        class="border border-blue-500  modal-container bg-white w-6/12 md:max-w-11/12 mx-auto rounded-xl shadow-lg z-50 overflow-y-auto">
+                                                                                        <div
+                                                                                            class="modal-content py-4 text-left px-6">
+                                                                                            <!--Title-->
+                                                                                            <div
+                                                                                                class="flex justify-between items-center pb-3">
+                                                                                                <p
+                                                                                                    class="text-2xl font-bold text-gray-500">
+                                                                                                    Add Caretaker</p>
+                                                                                                <div class="modal-close cursor-pointer z-50"
+                                                                                                    onclick="closeModal()">
+                                                                                                    <svg class="fill-current text-gray-500"
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="18"
+                                                                                                        height="18"
+                                                                                                        viewBox="0 0 18 18">
+                                                                                                        <path
+                                                                                                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                                                                                        </path>
+                                                                                                    </svg>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <!--Body-->
+
+                                                                                            <div
+                                                                                                class="my-5 mr-5 ml-5 flex justify-center">
+                                                                                                <img class="w-full h-full"
+                                                                                                    src="<%= code %>">
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <% } %>
+
+                                                                                    <!-- Evitar redirect form -->
+                                                                                    <iframe name="hiddenFrame" width="0"
+                                                                                        height="0" border="0"
+                                                                                        style="display: none;"></iframe>
+
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +359,25 @@
 
         </body>
 
+        <script>
+            const openModal = () => {
+                console.log("frucnoasd")
+                const modal = document.getElementById('main-modal')
+                modal.classList.add('flex')
+                modal.classList.remove('hidden')
 
+
+            }
+            const closeModal = () => {
+                const modal = document.getElementById('main-modal')
+                modal.classList.add('hidden')
+                modal.classList.remove('flex')
+
+                //Retorna a l'enllaç original
+                let url = new URL(window.location.origin + "/user/myspaces/")
+                window.location.href = url
+            }
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
             </script>

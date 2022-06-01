@@ -27,6 +27,9 @@ router.post("/myspaces/anular", authControler.checkAuthenticated, userControler.
 router.post("/myspaces/delete", authControler.checkAuthenticated, userControler.postDeleteSpace);
 
 
+router.post("/myspaces/qr", authControler.checkAuthenticated, userControler.postGenerateQR);
+
+
 
 
 

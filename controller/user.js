@@ -4,6 +4,9 @@ const User = require('../models/users')
 const Place = require('../models/place')
 
 
+//URL parsing
+const url = require('url')
+
 
 const bcrypt = require('bcrypt');
 
@@ -17,7 +20,8 @@ const unlinkFile = util.promisify(fs.unlink)
 //Send email
 const { transporter } = require('./sendEmail')
 
-
+//QR
+const qrcode = require('qrcode')
 
 
 //@GET Profile
@@ -287,4 +291,59 @@ const postDeleteSpace = async (req, res) => {
 }
 
 
-module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace }
+const postGenerateQR = async (req, res) => {
+    /*
+        - Comprovar que no tingui cap renter l'espai
+        - Generar url aleatoria per cada espai
+        - Generar qr
+        - Afegir renter a la bbdd
+    */
+    const { id } = req.body;
+    const { email } = req.user;
+    let renterInfo = []
+
+    try {
+        const place = await Place.findById(id)
+        if (place.renter) {
+            throw (`L'espai ja està llogat`)
+        }
+        //URL: :idplace/rentKey
+        /*
+            -Generar key aleatoria
+            -Guardar-la taula espai
+            -Generar qr
+            -Al fer get :idplace/rentKey
+                - Afegir renter
+                - Eliminar rentKey
+        */
+        const rentKey = Math.random().toString(36).slice(-10)
+        // await Place.findByIdAndUpdate({ '_id': id }, { 'rentKey': rentKey })
+        const urlFor = url.format({
+            protocol: req.protocol,
+            host: req.get('host'),
+            pathname: `place/${id}/${rentKey}`
+        });
+        const qr = await qrcode.toDataURL(urlFor)
+
+        //TODO: millorar això
+        const places = await Place.find({ 'email': email })
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            if (!renter) {
+                var info = { 'email': '', 'displayName': '', 'phone': '' }
+
+            } else {
+                var info = { 'email': renter.email, 'displayName': renter.displayName, 'phone': renter.phone }
+            }
+            renterInfo.push(info)
+
+        }
+        return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': false, 'error': false, 'code': qr })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace, postGenerateQR }
