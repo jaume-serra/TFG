@@ -101,6 +101,7 @@ function initMap() {
     //checkeja si hi ha elements a dins del bound actual i afegeix els markers corresponents.
     var bound = map.getBounds();
     var places = get_places();   //cridar api per agafar llocs
+    console.log(places)
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
 

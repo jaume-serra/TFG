@@ -2,6 +2,7 @@ const image = document.getElementById("image")
 const arrows = document.getElementsByClassName("arrow")
 
 image.addEventListener('mouseenter', () => {
+    console.log("hola")
     for (let arrow of arrows) {
         arrow.classList.remove('hidden')
         arrow.classList.remove('hidden')
