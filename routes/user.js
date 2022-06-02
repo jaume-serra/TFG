@@ -22,6 +22,8 @@ router.post("/profile", [authControler.checkAuthenticated, upload.single('file')
 router.get("/spacerent", authControler.checkAuthenticated, userControler.getSpaceRent);
 router.post("/sparcerent/anular", authControler.checkAuthenticated, userControler.postStopRent);
 
+router.get("/historic", authControler.checkAuthenticated, userControler.getHistoric)
+
 router.get("/myspaces", authControler.checkAuthenticated, userControler.getMySpaces);
 router.post("/myspaces/anular", authControler.checkAuthenticated, userControler.postStopRentPlace);
 router.post("/myspaces/delete", authControler.checkAuthenticated, userControler.postDeleteSpace);

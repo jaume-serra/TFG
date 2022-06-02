@@ -2,7 +2,10 @@
 
 const User = require('../models/users')
 const Place = require('../models/place')
+const Historic = require('../models/historic')
 
+//Date format
+const dayjs = require('dayjs');
 
 //URL parsing
 const url = require('url')
@@ -23,6 +26,7 @@ const { transporter } = require('./sendEmail')
 //QR
 const qrcode = require('qrcode');
 const { userInfo } = require('os');
+const place = require('../models/place');
 
 
 //@GET Profile
@@ -99,7 +103,8 @@ const getSpaceRent = async (req, res) => {
     try {
         const places = await Place.find({ 'renter': req.user.email })
         let userInfo = []
-        userInfo = generateUserInfo(places)
+
+        userInfo = await generateUserInfo(places)
         return res.render("user/spaceRent", { "places": places, 'userInfo': userInfo, 'hide': true })
     } catch (err) { console.log(err) } //TODO:ACABAR AIXO
 }
@@ -116,15 +121,22 @@ const postStopRent = async (req, res) => {
             throw ("Error! Espai no dispobile")
         }
 
+        //Actualitzem històric
+        //TODO: comprovar q funcioni
+        await Historic.findOneAndUpdate({ 'email': place.email, 'renter': req.user.email, 'placeId': id }, { 'endDate': Date.now() })
+
+        //Eliminem el llogater
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
+
+        //Actualitzem els espais
         const places = await Place.find({ 'renter': req.user.email })
-        userInfo = generateUserInfo(places)
+        userInfo = await generateUserInfo(places)
         const msg = "Espai eliminat correctament"
         return res.render("user/spaceRent", { 'msg': msg, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     } catch (error) {
         const places = await Place.find({ 'renter': req.user.email })
-        userInfo = generateUserInfo(places)
+        userInfo = await generateUserInfo(places)
         return res.render("user/spaceRent", { 'msg': error, "error": true, 'places': places, 'hide': false, 'userInfo': userInfo })
 
     }
@@ -144,7 +156,6 @@ const getMySpaces = async (req, res) => {
         const places = await Place.find({ 'email': email })
         let renterInfo = []
         renterInfo = await generateRenterInfo(places)
-
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': true })
 
     } catch (error) {
@@ -174,6 +185,8 @@ const postStopRentPlace = async (req, res) => {
         if (!place.renter) {
             throw ("L'espai no està llogat actualment")
         }
+
+        //Enviar correu al llogater
         const mailData = {
             from: process.env.USER_EMAIL,
             to: place.renter,
@@ -185,7 +198,14 @@ const postStopRentPlace = async (req, res) => {
         }
         await transporter.sendMail(mailData)
 
+        //Actualitzem històric
+        //TODO: comprovar q funcioni
+        await Historic.findOneAndUpdate({ 'email': place.email, 'renter': place.renter, 'placeId': id }, { 'endDate': Date.now() })
+
+        //Eliminem el llogater
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': '' })
+
+        //Actualitzem els espais
         const places = await Place.find({ 'email': email })
         renterInfo = await generateRenterInfo(places)
 
@@ -283,6 +303,59 @@ const postGenerateQR = async (req, res) => {
 
 }
 
+const getHistoric = async (req, res) => {
+    const { email } = req.user
+    /*     let renterInfo = []
+        let userInfo = [] */
+    let histInfo = []
+
+    //Llistar tots els espais on l'usuari ha estat propietari o llogater
+    try {
+        const hist = await Historic.find().or([{ 'email': email }, { 'renter': email }])
+
+        for (let i = 0; i < hist.length; i++) {
+            const place = await Place.findById(hist[i].placeId)
+
+            if (hist[i].endDate) {
+                var dateInfo = { 'email': hist[i].email, 'renter': hist[i].renter, 'place': { 'type': place.type, 'id': place.id, 'lat': place.lat, 'lng': place.lng }, 'startDate': dayjs(hist[i].startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': dayjs(hist[i].endDate).format("DD-MM-YYYY h:mm").toString() }
+            }
+            else {
+                var dateInfo = { 'email': hist[i].email, 'renter': hist[i].renter, 'place': { 'type': place.type, 'id': place.id, 'lat': place.lat, 'lng': place.lng }, 'startDate': dayjs(hist[i].startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': "" }
+
+            }
+            histInfo.push(dateInfo)
+            console.log(dateInfo)
+        }
+        /*
+        const places = await Place.find().or([{ 'email': email }, { 'renter': email }])
+        for (let i = 0; i < places.length; i++) {
+            const renter = await User.findOne({ 'email': places[i].renter })
+            const user = await User.findOne({ 'email': places[i].email })
+            const hist = await Historic.findOne({ 'placeId': places[i]._id })
+    
+            if (hist.endDate) {
+                var dateInfo = { 'startDate': dayjs(hist.startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': dayjs(hist.endDate).format("DD-MM-YYYY h:mm").toString() }
+            }
+            else {
+                var dateInfo = { 'startDate': dayjs(hist.startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': "" }
+
+            }
+            userInfo.push(infoUser)
+            renterInfo.push(infoRenter)
+            histInfo.push(dateInfo)
+        }
+        */
+
+        return res.render("user/rentHistoric", { 'place': place, 'hist': histInfo })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
+
 const generateRenterInfo = async (places) => {
     let renterInfo = []
     for (let i = 0; i < places.length; i++) {
@@ -308,4 +381,4 @@ const generateUserInfo = async (places) => {
     return userInfo
 
 }
-module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace, postGenerateQR }
+module.exports = { getProfile, postProfile, getSpaceRent, postStopRent, getMySpaces, postStopRentPlace, postDeleteSpace, postGenerateQR, getHistoric }

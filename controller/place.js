@@ -3,6 +3,8 @@ const { Error } = require('mongoose');
 const Place = require('../models/place')
 const User = require('../models/users')
 const Rating = require('../models/rating')
+const Historic = require('../models/historic')
+
 
 //Send Email
 const { transporter } = require("./sendEmail")
@@ -167,9 +169,18 @@ const getRentPlace = async (req, res) => {
         if (emailRenter == place.email) {
             throw ("No pots llogar el teu propi espai")
         }
-
+        //Generem nova clau i guardem el llogater
         const newRentKey = Math.random().toString(36).slice(-10)
         await Place.findByIdAndUpdate({ '_id': id }, { 'renter': emailRenter, 'rentKey': newRentKey })
+
+        //Guardem al històric
+        await Historic.create({
+            'placeId': place._id,
+            'email': place.email,
+            'renter': emailRenter
+        })
+
+        //Enviem correu electronic
         const mailData = {
             from: process.env.USER_EMAIL,
             to: emailRenter,

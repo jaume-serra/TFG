@@ -35,7 +35,8 @@
                             class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Els
                             meus espais
                         </a>
-
+                        <a href="/user/historic"
+                            class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Històric</a>
                     </div>
 
                     <div
@@ -108,13 +109,15 @@
                                                                 <td
                                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
-                                                                    <%= userInfo[i].displayName %>
+                                                                    <%= userInfo[i].displayName=="" ? "-" :
+                                                                        userInfo[i].displayName %>
                                                                 </td>
 
                                                                 <td
                                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
 
-                                                                    <%= userInfo[i].phone =="" ? "-" : userInfo[i].phone  %>
+                                                                    <%= userInfo[i].phone=="" ? "-" : userInfo[i].phone
+                                                                        %>
                                                                 </td>
 
                                                                 <td
