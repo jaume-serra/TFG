@@ -60,9 +60,6 @@ const PlaceSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    deletedAT: {
-        type: Date
-    },
 
     active: {
         type: Boolean,

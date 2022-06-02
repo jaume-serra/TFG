@@ -7,10 +7,9 @@
         <!-- Menu navegacio -->
         <%- include('../partials/navbar') %>
             <div id="change-bg" class="change-bg">
-                <div class="container px-4">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 m-10 gap-20">
-                        <div id="animation-carousel" class="relative" data-carousel="static">
-                            <!-- Carousel wrapper -->
+                <div class="container mx-auto bg-gray-50 shadow-2xl rounded-md">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 m-10  gap-20">
+                        <div id="animation-carousel" class="relative mt-10" data-carousel="static">
                             <div class="overflow-hidden relative h-48 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
                                 <!-- Item 1 -->
                                 <% place.images.forEach((image, index)=> { %>
@@ -27,7 +26,7 @@
                                 class="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
                                 data-carousel-prev>
                                 <span
-                                    class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30  group-hover:bg-white/50  group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
                                     <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,7 +39,7 @@
                                 class="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
                                 data-carousel-next>
                                 <span
-                                    class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30  group-hover:bg-white/50  group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
                                     <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,12 +50,12 @@
                             </button>
                         </div>
 
-                        <div class="mx-auto">
+                        <div class="mx-auto mt-10 bg-gray-100 rounded-md">
                             <!--informacio local-->
                             <h2 class="font-black text-xl pl-4 text-[#2b6777]">
                                 Mensual
                             </h2>
-                            <div class="border-2 p-4 rounded-md  w-[30rem]">
+                            <div class="p-4 rounded-md  w-[30rem]">
                                 <div class="grid grid-cols-2 gap-2 mb-2">
                                     Subtotal
                                     <p class="font-black text-right">€ <%= place.price %>
@@ -65,16 +64,17 @@
                                     <p class="font-black text-right">€ 0.00</p>
                                 </div>
 
-                                <div class="bg-[#2b6777] p-4">
-                                    <p class=" text-white text-xl font-black ">
+                                <div class="bg-blue-100 py-4 px-2 rounded-md">
+                                    <p class="  text-xl font-black ">
                                         Total <%= place.price %> €
                                     </p>
                                 </div>
-                                <button id='showMobile' class="mt-5 w-full h-8 rounded-md bg-black text-white">Reserva
-                                    <%- place.type=="storage" ? "l'espai" : "el parking" %>
+                                <button id='showMobile'
+                                    class="mt-5 w-full h-10 rounded-md bg-blue-500 text-white hover:text-blue-500 hover:bg-white">Reserva
+                                    <%- place.type=="storage" ? "el traster" : "el parking" %>
                                 </button>
                                 <div id="mobileNum"
-                                    class="hidden mt-5 w-full h-10 rounded-md bg-[#2b6777] text-white text-xl font-black align-middle text-center ">
+                                    class="hidden mt-5 w-full h-10 rounded-md bg-blue-500 text-white text-xl font-black align-middle text-center ">
                                     <%= owner.contact %>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             </div>
                             <h3 class="font-black text-2xl mb-2">Caraterístiques principals</h3>
                             <div id="specs"
-                                class="grid grid.-cols-1 lg:grid-cols-2  text-lg bg-slate-300 gap-y-5 p-5 rounded-md">
+                                class="grid grid.-cols-1 lg:grid-cols-2  text-lg bg-blue-100 gap-y-5 p-5 rounded-md">
                                 <div class="flex gap-x-2 items-center ">
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
                                         height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15">
@@ -151,7 +151,7 @@
                                 <h3 class="font-black text-2xl mb-2">Descripció <%- place.type=="storage" ? "de l'espai"
                                         : "del parking" %>
                                 </h3>
-                                <p class="bg-slate-300 gap-y-5 p-5 rounded-md">
+                                <p class="bg-blue-100 gap-y-5 p-5 rounded-md">
                                     <%- place.description %>
                                 </p>
                             </div>
@@ -168,7 +168,7 @@
 
                         <!-- Ratings -->
                         <hr class="col-span-1 lg:col-span-2  border-1 border-gray-500 ">
-                        <div id="ratings" class="col-span-1 lg:col-span-2 mb-10">
+                        <div id="ratings" class="col-span-1 lg:col-span-2 mb-20">
                             <%- include('../place/partials/ratings.ejs') %>
                         </div>
 
