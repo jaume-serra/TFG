@@ -4,13 +4,13 @@ const OAuth2 = google.auth.OAuth2;
 
 const createTransporter = async () => {
     const oauth2Client = new OAuth2(
-        process.env.CLIENT_ID,
-        process.env.CLIENT_SECRET,
+        process.env.ID_EMAIL,
+        process.env.SECRET_EMAIL,
         "https://developers.google.com/oauthplayground"
     );
 
     oauth2Client.setCredentials({
-        refresh_token: process.env.REFRESH_TOKEN
+        refresh_token: process.env.REFRESH_EMAIL
     });
 
     const accessToken = await new Promise((resolve, reject) => {
@@ -26,11 +26,11 @@ const createTransporter = async () => {
         service: "gmail",
         auth: {
             type: "OAuth2",
-            user: process.env.EMAIL,
+            user: process.env.USER_EMAIL,
             accessToken,
-            clientId: process.env.CLIENT_ID,
-            clientSecret: process.env.CLIENT_SECRET,
-            refreshToken: process.env.REFRESH_TOKEN
+            clientId: process.env.ID_EMAIL,
+            clientSecret: process.env.SECRET_EMAIL,
+            refreshToken: process.env.REFRESH_EMAIL
         }
     });
 
@@ -39,7 +39,9 @@ const createTransporter = async () => {
 
 
 const sendEmail = async (emailOptions) => {
+
     let emailTransporter = await createTransporter();
     await emailTransporter.sendMail(emailOptions);
+
 };
 module.exports = { sendEmail }
