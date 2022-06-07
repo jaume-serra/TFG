@@ -108,9 +108,9 @@ function fixStepIndicator(n) {
 
 function initMaps() {
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 13,
+    zoom: 20,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    minZoom: 12,
+    minZoom: 1,
     maxZoom: 20,
     center: { lat: 41.7923, lng: 1.99657 },
     disableDefaultUI: true, //elimina default google maps gui
@@ -135,12 +135,23 @@ function initMaps() {
     if (!new_place.geometry) {
       window.alert("Cap resultat per: '" + new_place.name + "'");
       document.getElementById("search-box-index").placeholder = "";
+      document.getElementById("map").classList.add("hidden")
+
       return;
     }
     if (new_place.length == 0) {
       return;
     }
-    map.setCenter(new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()))
+    let position = new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng());
+
+    map.setCenter(position)
+    map.setZoom(18)
+    let marker = new google.maps.Marker({
+      position: position
+
+    });
+    marker.setMap(map);
+    document.getElementById("map").classList.remove("hidden")
     // const panorama = new google.maps.StreetViewPanorama(
     //   document.getElementById("panorama"),
     //   {

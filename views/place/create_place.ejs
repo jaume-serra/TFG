@@ -11,23 +11,31 @@
       <div id="change-bg" class="change-bg">
         <!-- Inici formulari -->
         <div class="container mx-auto bg-gray-50 shadow-2xl rounded-md  my-20">
-          <div class="grid grid-cols-1  m-10  gap-20  min-h-screen">
+          <div class="grid grid-cols-1  m-10  gap-20  min-h-[640px]">
 
-            <div class="grid place-items-center mx-2  my-10 ">
+            <div class="grid place-items-center mx-2   ">
 
               <div class="w-3/5 mx-auto">
+
                 <form id="regForm" method="POST" enctype="multipart/form-data">
                   <!-- Progression bar -->
-                  <div class="mx-auto  bg-gray-200 h-2 my-6 rounded-full">
+                  <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
+                    Crear Espai
+                  </h2>
+                  <div class="mx-auto  bg-gray-200 h-2 my-10 rounded-full">
                     <div id="progressBarCreatePlace" class="bg-green-600 h-2 rounded-full"></div>
                   </div>
 
                   <div class="tab">
-                    <h2 class="text-center font-semibold text-3xl py-10 lg:text-4xl text-gray-800">
-                      Crear Espai
-                    </h2>
-
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Nom de l'espai</label>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5 mb-3">Títol de
+                      l'espai</label>
+                    <p class="mb-5 font-light  text-sm text-gray-600">
+                      Pots utilitzar aquest camp si vols destacar alguna característica especial del teu espai, o
+                      mostrar la seva adreça als potencials llogaters.
+                      <br>
+                      No cal que esmentes aquí el tipus d'espai que llogues o la ciutat on està, això ja ho farem
+                      nosaltres!
+                    </p>
                     <input id="title" name="title" type="text" placeholder="Espai del Jaume" class="block w-full p-3 mt-2 rounded-full
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
@@ -35,8 +43,15 @@
                   </div>
 
                   <div class="tab">
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Descripció</label>
-                    <textarea id="description" cols="30" rows="10" name="description" placeholder="Descriu l'espai..."
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5 mb-3">Descripció</label>
+                    <p class="mb-5 font-light  text-sm text-gray-600">
+                      Encara que sempre podràs parlar amb els llogaters que s'interessin per resoldre els seus dubtes,
+                      intenta que aquest camp descrigui el teu espai tan bé com sigui possible.
+
+
+                      És important que aquestes mesures coincideixin amb l'espai que poden utilitzar els teus llogaters.
+                    </p>
+                    <textarea id="description" cols="30" rows="5" name="description" placeholder="Descriu l'espai..."
                       class="block w-full p-3 mt-2
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
@@ -44,7 +59,13 @@
                   </div>
 
                   <div class="tab">
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Mides de l'espai</label>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5 mb-3">Mides de
+                      l'espai</label>
+                    <p class="mb-5 font-light  text-sm text-gray-600">
+                      És important que aquestes mesures coincideixin amb l'espai que poden utilitzar els teus llogaters.
+                      Els imports que determinis reflecteixen l'import final que rebràs tant en concepte de lloguer com
+                      de fiança.
+                    </p>
                     <div class="flex items-center space-x-2">
                       <input id="measures" type="number" name="measures" placeholder="40" class="block w-5/6 p-3 mt-2 
                     text-gray-800 appearance-none 
@@ -56,7 +77,11 @@
                   </div>
 
                   <div class="tab">
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Preu per mes</label>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase mt-5 mb-3">Preu per mes</label>
+                    <p class="mb-5 font-light  text-sm text-gray-600">
+                      Els imports que determinis reflecteixen l'import final que rebràs tant en concepte de lloguer com
+                      de fiança.
+                    </p>
                     <div class="flex items-center">
                       <input id="price" type="number" name="price" placeholder="300€" class="block w-full p-3 mt-2
                       text-gray-800 appearance-none 
@@ -68,19 +93,21 @@
 
                   <div class="tab">
                     <label class="block text-xs font-semibold text-gray-600 uppercase mt-5">Direcció</label>
-                    <div class="flex w-full py-3 px-1 mt-2 
+                    <div class="flex w-full py-1 px-1 mt-2 
                       text-gray-800 appearance-none 
                       border-b-2 border-gray-100
                       focus:text-gray-500 focus:outline-none focus:border-gray-200">
                       <input type="text" placeholder="Enter location" class="w-full rounded-xl border-none p-3"
                         id="search-box-index" name="address" value="" required>
+
                     </div>
+                    <div id="map" class="hidden h-96"></div>
+
                   </div>
 
 
 
                   <div class="tab">
-                    <div id="map" class="hidden"></div>
                     <label for="files" class="block text-xs font-semibold text-gray-600 uppercase mt-5">Imatges</label>
                     <input type="file" id="files" name="files" accept="image/*" multiple class="block w-full py-3 mt-2"
                       required />
