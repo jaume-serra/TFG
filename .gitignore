@@ -1,5 +1,4 @@
 *.py
-/config
 *.env
 todo.txt
-/uploads
+mapsApiKey.ejs
