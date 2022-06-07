@@ -324,28 +324,7 @@ const getHistoric = async (req, res) => {
 
             }
             histInfo.push(dateInfo)
-            console.log(dateInfo)
         }
-        /*
-        const places = await Place.find().or([{ 'email': email }, { 'renter': email }])
-        for (let i = 0; i < places.length; i++) {
-            const renter = await User.findOne({ 'email': places[i].renter })
-            const user = await User.findOne({ 'email': places[i].email })
-            const hist = await Historic.findOne({ 'placeId': places[i]._id })
-    
-            if (hist.endDate) {
-                var dateInfo = { 'startDate': dayjs(hist.startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': dayjs(hist.endDate).format("DD-MM-YYYY h:mm").toString() }
-            }
-            else {
-                var dateInfo = { 'startDate': dayjs(hist.startDate).format("DD-MM-YYYY h:mm").toString(), 'endDate': "" }
-
-            }
-            userInfo.push(infoUser)
-            renterInfo.push(infoRenter)
-            histInfo.push(dateInfo)
-        }
-        */
-
         return res.render("user/rentHistoric", { 'place': place, 'hist': histInfo })
 
     } catch (error) {
