@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 //DDBB
 const User = require('../models/users')
-const connectDB = require('../config/db');
+const connectDB = require('./db');
 connectDB()
 
 //Send email
