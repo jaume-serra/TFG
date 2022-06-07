@@ -193,7 +193,7 @@ const postStopRentPlace = async (req, res) => {
             subject: 'Cancel·lació del lloger per part del propietari',
             html:
                 `<h2>Cancel·lació del lloger</h2>
-            <p>Benvolgut, el propietari ha acabat amb el lloger de l'espai: ${place.title}.<br/>Qualsevol cosa, posa't amb contacte amb el propietari :<br/> ${email} <br/> Moltes gràcies, equip Releaser </p>
+            <p>Benvolgut, el propietari ha acabat amb el lloger de l'espai: ${place.title}.<br/>Qualsevol cosa, posa't amb contacte amb el propietari :<br/> ${email} <br/> Moltes gràcies, equip Keepers </p>
             `
         }
         await transporter.sendMail(mailData)

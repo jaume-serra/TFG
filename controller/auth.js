@@ -52,6 +52,8 @@ const checkNotAuthenticated = (req, res, next) => {
             res.redirect("/")
         })
         .catch((err) => {
+            if (req.cookies["session-token"]) res.clearCookie("session-token")
+            if (req.cookies["session-token-default"]) res.clearCookie("session-token-default")
             console.log('err :>> ', err);
             res.redirect("/")
         });
@@ -228,7 +230,7 @@ const postLogin = async (req, res, next) => {
 }
 
 const getRegister = (req, res) => {
-    res.render("main/register") //FIXME: {user:req.user}
+    res.render("main/register")
 }
 
 
@@ -307,7 +309,7 @@ const postForgotPassword = async (req, res) => {
             <b>${newPassword}</b>
 
             Qualsevol cosa, posa't amb contacte amb nosaltres.
-            <br/>Moltes gràcies, equip Releaser.</p>
+            <br/>Moltes gràcies, equip Keepers.</p>
             `
         }
         await transporter.sendMail(mailData)

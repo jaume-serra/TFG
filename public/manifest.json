@@ -1,6 +1,6 @@
 {
-    "name": "Kipeer",
-    "short_name": "Kipper",
+    "name": "Keepers",
+    "short_name": "Keepers",
     "start_url": "./view/main/index.ejs",
     "display": "standalone",
     "background_color": "#FFE9D2",

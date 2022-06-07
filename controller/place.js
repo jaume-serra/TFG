@@ -187,7 +187,7 @@ const getRentPlace = async (req, res) => {
             subject: `Val·lidació del lloger del ${place.type == "storage" ? "Traster" : "Pàrking"} `,
             html:
                 `<h3>Has llogat el ${place.type == "storage" ? "traster" : "pàrking"} correctament!</h3>
-            <p>Benvolgut, s'ha realitzat el lloger de l'espai "${place.title}" correctament.</p><p>Qualsevol cosa, contacte amb el propietari:</p><p>Correu: ${place.email}</p><br><p>Moltes gràcies per confiar amb nosaltres, equip Releaser </p>
+            <p>Benvolgut, s'ha realitzat el lloger de l'espai "${place.title}" correctament.</p><p>Qualsevol cosa, contacte amb el propietari:</p><p>Correu: ${place.email}</p><br><p>Moltes gràcies per confiar amb nosaltres, equip Keepers </p>
             `
         }
         await transporter.sendMail(mailData)
