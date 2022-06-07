@@ -10,7 +10,7 @@ const connectDB = require('../config/db');
 connectDB()
 
 //Send email
-const { transporter } = require('./sendEmail')
+const { sendEmail } = require('./sendEmail')
 
 
 
@@ -312,7 +312,7 @@ const postForgotPassword = async (req, res) => {
             <br/>Moltes gràcies, equip Keepers.</p>
             `
         }
-        await transporter.sendMail(mailData)
+        await sendEmail(mailData)
         return res.render('main/forgotPassword', { 'hide': false, 'msg': `S'ha enviat el correu electrònic correctament`, 'error': false })
 
 

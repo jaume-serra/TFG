@@ -21,7 +21,7 @@ const unlinkFile = util.promisify(fs.unlink)
 
 
 //Send email
-const { transporter } = require('./sendEmail')
+const { sendEmail } = require('./sendEmail')
 
 //QR
 const qrcode = require('qrcode');
@@ -196,7 +196,7 @@ const postStopRentPlace = async (req, res) => {
             <p>Benvolgut, el propietari ha acabat amb el lloger de l'espai: ${place.title}.<br/>Qualsevol cosa, posa't amb contacte amb el propietari :<br/> ${email} <br/> Moltes gràcies, equip Keepers </p>
             `
         }
-        await transporter.sendMail(mailData)
+        await sendEmail(mailData)
 
         //Actualitzem històric
         //TODO: comprovar q funcioni

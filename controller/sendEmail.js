@@ -1,18 +1,45 @@
 const nodemailer = require('nodemailer');
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+
+const createTransporter = async () => {
+    const oauth2Client = new OAuth2(
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        "https://developers.google.com/oauthplayground"
+    );
+
+    oauth2Client.setCredentials({
+        refresh_token: process.env.REFRESH_TOKEN
+    });
+
+    const accessToken = await new Promise((resolve, reject) => {
+        oauth2Client.getAccessToken((err, token) => {
+            if (err) {
+                reject();
+            }
+            resolve(token);
+        });
+    });
+
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            type: "OAuth2",
+            user: process.env.EMAIL,
+            accessToken,
+            clientId: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
+            refreshToken: process.env.REFRESH_TOKEN
+        }
+    });
+
+    return transporter;
+};
 
 
-const transporter = nodemailer.createTransport({
-    port: 465,               // true for 465, false for other ports
-    host: "smtp.gmail.com",
-    auth: {
-        type: 'OAuth2',
-        user: process.env.USER_EMAIL, // your email
-        clientId: process.env.ID_EMAIL, // oauth cliend id 
-        clientSecret: process.env.SECRET_EMAIL, // secret 
-        refreshToken: "AYjcyMzY3ZDhiNmJkNTY", // refresh token 
-        accessToken: "RjY2NjM5NzA2OWJjuE7c" // access token
-    },
-    secure: true,
-});
-
-module.exports = { transporter }
+const sendEmail = async (emailOptions) => {
+    let emailTransporter = await createTransporter();
+    await emailTransporter.sendMail(emailOptions);
+};
+module.exports = { sendEmail }

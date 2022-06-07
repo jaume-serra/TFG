@@ -7,7 +7,7 @@ const Historic = require('../models/historic')
 
 
 //Send Email
-const { transporter } = require("./sendEmail")
+const { sendEmail } = require("./sendEmail")
 
 //Maps api
 const NodeGeocoder = require('node-geocoder');
@@ -190,7 +190,7 @@ const getRentPlace = async (req, res) => {
             <p>Benvolgut, s'ha realitzat el lloger de l'espai "${place.title}" correctament.</p><p>Qualsevol cosa, contacte amb el propietari:</p><p>Correu: ${place.email}</p><br><p>Moltes gràcies per confiar amb nosaltres, equip Keepers </p>
             `
         }
-        await transporter.sendMail(mailData)
+        await sendEmail(mailData)
 
         return res.render("place/rentSuccess", { 'place': place, 'email': emailRenter })
     } catch (error) {
