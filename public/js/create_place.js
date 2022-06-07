@@ -141,17 +141,17 @@ function initMaps() {
       return;
     }
     map.setCenter(new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()))
-    const panorama = new google.maps.StreetViewPanorama(
-      document.getElementById("panorama"),
-      {
-        position: new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()),
-        pov: {
-          heading: 34,
-          pitch: 10,
-        },
-      }
-    );
-    map.setStreetView(panorama);
+    // const panorama = new google.maps.StreetViewPanorama(
+    //   document.getElementById("panorama"),
+    //   {
+    //     position: new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()),
+    //     pov: {
+    //       heading: 34,
+    //       pitch: 10,
+    //     },
+    //   }
+    // );
+    // map.setStreetView(panorama);
   });
 
 
