@@ -8,10 +8,6 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-
-
-
-
 router.get("/", authControler.getUserToRequest, (req, res) => {
     res.render("main/index");
 });

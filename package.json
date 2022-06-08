@@ -21,7 +21,7 @@
         "node": ">=12.22.9",
         "npm": ">=8.5.1"
     },
-    "homepage": "https://github.com/jaume-serra/TFG#readme",
+    "homepage": "/",
     "dependencies": {
         "aws-sdk": "^2.1095.0",
         "bcrypt": "^5.0.1",

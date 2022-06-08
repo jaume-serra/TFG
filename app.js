@@ -21,6 +21,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+app.use((req, res, next) => {
+    res.append('Service-Worker-Allowed', '/');
+    next();
+});
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -46,7 +52,6 @@ const corsOptions = {
 
 // app.use(cors(corsOptions));
 app.use(cors());
-
 
 
 app.use("/", require("./routes/main"))

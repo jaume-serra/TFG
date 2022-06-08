@@ -1,22 +1,33 @@
 {
-    "name": "Keepers",
+    "name": "keepers",
     "short_name": "Keepers",
-    "start_url": "./view/main/index.ejs",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#FFE9D2",
-    "theme_color": "#FFE1C4",
+    "theme_color": "#FFFFFF",
     "orientation": "portrait-primary",
-    "icons":[
+    "icons": [
         {
-            "src":"/img/a1.png",
-            "type":"image/png",
-            "sizes": "72x72"
+            "src": "/img/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
         },
         {
-            "src":"/img/facebook.png",
-            "type":"image/png",
-            "sizes": "144x144"
+            "src": "/img/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+          "src": "/img/android-chrome-maskable-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "maskable"
+        },
+        {
+          "src": "/img/android-chrome-maskable-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
         }
-        
-    ]
+      ]
 }

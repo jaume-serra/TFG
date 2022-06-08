@@ -4,17 +4,28 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <!-- <link rel="apple-touch-icon" href="/public/img/icon.png"> -->
+
+
+    <!-- TEST -->
+    <link rel="icon" href="/public/img/icon.png" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/public/img/apple-touch-icon.png" />
+
     <title>Keepers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link type="text/css" href="/public/css/style.css" />
     <script type="text/javascript" src="/public/js/menu.js"></script>
-    <link rel="manifest" href="/public/manifest.json">
+
+    <script src="/public/js/register-sw.js"></script>
+    <link rel="manifest" type="application/json" href="/manifest.json">
     <!-- <script>
         // Check that service workers are supported
         if ('serviceWorker' in navigator) {
             // Use the window load event to keep the page load performant
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/public/js/sw.js');
+                navigator.serviceWorker.register('~sw.js');
             });
         }
     </script> -->
