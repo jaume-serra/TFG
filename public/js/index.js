@@ -52,7 +52,7 @@ function initAutocomplete() {
 }
 
 function changeTypeSpace(id_button) { //Pot ser
-  var buttons = document.getElementById("buttons").getElementsByClassName("btn");
+  const buttons = document.getElementById("buttons").getElementsByClassName("btn");
 
   for (let j = 0; j < buttons.length; j++) {
     if (buttons[j].classList.contains("active")) {
@@ -66,7 +66,7 @@ function changeTypeSpace(id_button) { //Pot ser
 
     }
   }
-  var type_text = document.getElementsByClassName("type-text");
+  const type_text = document.getElementsByClassName("type-text");
   for (let i = 0; i < type_text.length; i++) {
     if (type_text[i].classList.contains("active")) {
       if (type_text[i].id !== id_button) {

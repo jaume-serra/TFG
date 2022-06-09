@@ -321,6 +321,40 @@ const postForgotPassword = async (req, res) => {
     }
 }
 
+const postContact = async (req, res) => {
+    const { name, email, phone, message } = req.body
+    try {
+
+        const mailData = {
+            from: process.env.USER_EMAIL,
+            to: process.env.USER_EMAIL,
+            subject: `Missatge de l'usuari ${name}`,
+            html:
+                `<h3>Missatge </h3>
+            <p>L'usuari ${name} amb les dades següents: 
+            <br>
+            <br>
+            - Email: ${email}
+            <br>
+            - Phone: ${phone}
+            <br>
+            <br>
+            T'ha enviat el missatge següent:
+            <br>
+            ${message}
+            `
+        }
+        await sendEmail(mailData)
+        return res.render('main/contact', { 'hide': false, 'msg': `S'ha enviat el correu electrònic correctament`, 'error': false })
+
+    } catch (error) {
+        return res.render('main/contact', { 'hide': false, 'msg': error, 'error': true })
+    }
 
 
-module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest, getForgotPassword, postForgotPassword }
+
+
+}
+
+
+module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest, getForgotPassword, postForgotPassword, postContact }

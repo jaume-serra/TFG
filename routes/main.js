@@ -20,6 +20,11 @@ router.all("/mapa", authControler.getUserToRequest, (req, res) => {
 });
 
 
+router.get("/contact", authControler.getUserToRequest, (req, res) => {
+    res.render("main/contact");
+});
+
+router.post("/contact", authControler.getUserToRequest, authControler.postContact)
 
 router.get("/register", authControler.checkNotAuthenticated, authControler.getRegister)
 router.post("/register", authControler.checkNotAuthenticated, authControler.postRegister)

@@ -2,6 +2,7 @@
 
     <script type="text/javascript" src="/public/js/index.js"></script>
 
+    <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
 
 
     <body style="font-family: 'Source Sans Pro', sans-serif;">
@@ -182,7 +183,7 @@
                                         </g>
                                     </svg>
                                     <div class="font-black text-white mx-4 p-2 text-xl">
-                                        Keepers support
+                                        getKeepers support
                                         <hr>
                                         <div class="font-normal py-2 text-base text-white">Suport total de la plataforma
                                         </div>
@@ -210,9 +211,9 @@
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <div class="font-black text-white mx-4 p-2">
-                            Browse
-                            <div class="font-normal text-[#c8d8e4]"> Search for local storage and parking spaces
-                                near you.
+                            Busca
+                            <div class="font-normal text-[#c8d8e4]"> Trobeu un espai que tingui la mida adequada, al
+                                lloc correcte.
                             </div>
                         </div>
 
@@ -234,9 +235,9 @@
                             </g>
                         </svg>
                         <div class="font-black text-white mx-4 p-2">
-                            Connect
-                            <div class="font-normal text-[#c8d8e4]"> Chat to verified Hosts and find your ideal
-                                space.
+                            Connecta
+                            <div class="font-normal text-[#c8d8e4]"> Parla amb els propietaris i troba el teu ideal
+                                espai.
                             </div>
                         </div>
 
@@ -267,9 +268,11 @@
                             </g>
                         </svg>
                         <div class="font-black text-white mx-4 p-2">
-                            Book
-                            <div class="font-normal text-[#c8d8e4]"> Confirm your booking and start using the
-                                space. Simple!
+                            Reserva
+                            <div class="font-normal text-[#c8d8e4]"> Confirmeu la vostra reserva i comenceu a utilitzar
+                                l'espai. És simple!
+
+
                             </div>
                         </div>
                     </div>
@@ -281,196 +284,203 @@
         <!--Inici FAQS -->
         <section class="change-bg bg-gradient-to-r bg-[#2b6777] pt-10 pb-20 ">
             <div class="max-w-7xl m-auto">
-                <div class="mx-10 lg:mx-20 pt-10 text-white font-black text-2xl">
+                <div class="mx-10 lg:mx-20 pt-10 text-white font-black text-2xl ">
                     <h1>FAQs</h1>
                 </div>
                 <div class=" mx-10 lg:mx-20 ">
-                    <section class="bg-[#f2f2f2] row rounded-lg">
-                        <div class="tabs">
-                            <div class="border-b tab rounded-lg">
-                                <div class="border-l-2 border-transparent relative">
-                                    <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2"
-                                        type="checkbox" id="chck1">
-                                    <header
-                                        class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none"
-                                        for="chck1">
-                                        <span class="text-grey-darkest  text-xl font-semibold">
-                                            Pregunta:1 Massa vitae tortor condimentum lacinia quis vel eros
-                                            donec
-                                        </span>
-                                        <div
-                                            class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
-                                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24"
-                                                stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" viewbox="0 0 24 24" width="24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <polyline points="6 9 12 15 18 9">
-                                                </polyline>
+                    <main class="bg-light-blue">
+                        <div class="flex items-start my-2">
+                            <div class="w-full my-1">
+                                <ul class="flex flex-col">
+                                    <li class="bg-white my-2 shadow-lg" x-data="accordion(1)">
+                                        <h2 @click="handleClick()"
+                                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+                                            <span>Com em converteixo en un llogater?</span>
+                                            <svg :class="handleRotate()"
+                                                class="fill-current text-gray-600 h-6 w-6 transform transition-transform duration-500"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                                </path>
                                             </svg>
+                                        </h2>
+                                        <div x-ref="tab" :style="handleToggle()"
+                                            class="border-l-4 border-gray-600 overflow-hidden max-h-0 duration-500 transition-all">
+                                            <p class="p-3 text-gray-900">
+                                                Busques un traster on guardar la teva bicicleta que sigui barat i
+                                                estigui a peu de carrer? O un pàrquing per a la teva moto que no et
+                                                costi un ronyó? getKeepers t'ajuda!
+                                                Utilitza el cercador de getKeepers per cercar i filtrar a prop de la
+                                                teva zona (pots accedir des de la pàgina principal). Si trobes el que et
+                                                convé, podràs parlar amb l'amfitrió directament des del dia que et
+                                                convingui.
+                                            </p>
                                         </div>
-                                    </header>
-                                    <div class="tab-content overflow-y-auto">
-                                        <div class=" pb-5 text-grey-darkest">
-                                            <ul class="pl-4  pr-4 md:pr-10 mx-4">
-                                                <li class="pb-2 text-justify overflow-y-auto">
-                                                    ¿Buscas un trastero donde guardar tu bicicleta que sea
-                                                    barato y esté a pie de calle? ¿O un parking para tu moto que
-                                                    no te cueste un riñón? ¡Speizy te ayuda! Utiliza el buscador
-                                                    de Speizy para buscar y filtrar cerca de tu zona (puedes
-                                                    acceder desde la
-                                                    página principal). Si encuentras el que te conviene, podrás
-                                                    hablar con el anfitrión mediante el sistema de chat de
-                                                    Speizy, o reservarlo directamente desde el día que te
-                                                    convenga. Desde el momento en el que
-                                                    reserves, el anfitrión tendrá un plazo de 48 horas para
-                                                    decidir si la acepta o la rechaza.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-b tab rounded-lg">
-                                <div class="border-l-2 border-transparent relative">
-                                    <input class="w-full absolute z-10 cursor-pointer h-20  opacity-0 border-2"
-                                        type="checkbox" id="chck1">
-
-                                    <header
-                                        class="flex justify-between items-center  mt-5 mb-5 px-5 pr-8 cursor-pointer select-none"
-                                        for="chck1">
-                                        <span class="text-grey-darkest  text-xl font-semibold">
-                                            Pregunta:1 Massa vitae tortor condimentum lacinia quis vel eros
-                                            donec
-                                        </span>
-                                        <div
-                                            class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test m-2">
-                                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24"
-                                                stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" viewbox="0 0 24 24" width="24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <polyline points="6 9 12 15 18 9">
-                                                </polyline>
+                                    </li>
+                                    <li class="bg-white my-2 shadow-lg" x-data="accordion(2)">
+                                        <h2 @click="handleClick()"
+                                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+                                            <span>Puc parlar amb el propietari abans de fer una reserva?</span>
+                                            <svg :class="handleRotate()"
+                                                class="fill-current text-gray-600 h-6 w-6 transform transition-transform duration-500"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                                </path>
                                             </svg>
+                                        </h2>
+                                        <div class="border-l-4 border-gray-600 overflow-hidden max-h-0 duration-500 transition-all"
+                                            x-ref="tab" :style="handleToggle()">
+                                            <p class="p-3 text-gray-900">
+                                                És clar! Podeu enviar un missatge a l'amfitrió amb qualsevol pregunta
+                                                que tingueu per esbrinar si el vostre espai és adequat. De tota manera,
+                                                en cas que trigui a respondre't, tingues paciència. És possible que
+                                                algun dels amfitrions trigui a respondre't per estar ocupats durant en
+                                                horari laboral o per qualsevol altre motiu, però segur que ho acaben
+                                                fent.
+                                            </p>
                                         </div>
-                                    </header>
+                                    </li>
+                                    <li class="bg-white my-2 shadow-lg" x-data="accordion(3)">
+                                        <h2 @click="handleClick()"
+                                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+                                            <span>Com estaré protegit legalment durant el lloguer? Hi haurà
+                                                contracte?</span>
+                                            <svg :class="handleRotate()"
+                                                class="fill-current text-gray-600 h-6 w-6 transform transition-transform duration-500"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                                </path>
+                                            </svg>
+                                        </h2>
+                                        <div class="border-l-4 border-gray-600 overflow-hidden max-h-0 duration-500 transition-all"
+                                            x-ref="tab" :style="handleToggle()">
+                                            <p class="p-3 text-gray-900">
+                                                A getKeepers, tant els llogaters com els amfitrions estan protegits pels
+                                                nostres termes i condicions, que estableixen les responsabilitats de
+                                                cada part i les penalitzacions aplicables pel seu incompliment. Però a
+                                                més, i per a més tranquil·litat de tots, en els lloguers a llarg termini
+                                                el propietari us enviarà un contracte mitjançant una plataforma de
+                                                signatura electrònica, perquè signeu online abans del començament del
+                                                lloguer.
+                                                Aquest contracte té completa validesa legal, perquè les dues parts
+                                                estigueu tranquil·les.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bg-white my-2 shadow-lg" x-data="accordion(4)">
+                                        <h2 @click="handleClick()"
+                                            class="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
+                                            <span>Què passa si vull cancel·lar el contracte? </span>
+                                            <svg :class="handleRotate()"
+                                                class="fill-current text-gray-600 h-6 w-6 transform transition-transform duration-500"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10">
+                                                </path>
+                                            </svg>
+                                        </h2>
+                                        <div class="border-l-4 border-gray-600 overflow-hidden max-h-0 duration-500 transition-all"
+                                            x-ref="tab" :style="handleToggle()">
+                                            <p class="p-3 text-gray-900">
+                                                Si el llogater vol cancel·lar el contracte, és molt fàcil de fer a
+                                                l'apartat dels meus espais. Un cop fet, s'haurà de rescindir el
+                                                contracte real amb el propietari. </p>
+                                        </div>
+                                    </li>
 
-                                    <div class="tab-content overflow-y-auto">
-                                        <div class=" pb-5 text-grey-darkest">
-                                            <ul class="pl-4  pr-4 md:pr-10 mx-4">
-                                                <li class="pb-2 text-justify ">
-                                                    ¿Buscas un trastero donde guardar tu bicicleta que sea
-                                                    barato y esté a pie de calle? ¿O un parking para tu moto que
-                                                    no te cueste un riñón? ¡Speizy te ayuda! Utiliza el buscador
-                                                    de Speizy para buscar y filtrar cerca de tu zona (puedes
-                                                    acceder desde la
-                                                    página principal). Si encuentras el que te conviene, podrás
-                                                    hablar con el anfitrión mediante el sistema de chat de
-                                                    Speizy, o reservarlo directamente desde el día que te
-                                                    convenga. Desde el momento en el que
-                                                    reserves, el anfitrión tendrá un plazo de 48 horas para
-                                                    decidir si la acepta o la rechaza.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                </ul>
                             </div>
                         </div>
-                    </section>
                 </div>
+            </div>
             </div>
         </section>
 
 
         <!--Inici tipus espais -->
-        <section class="change-bg bg-white py-20">
+        <section class="change-bg bg-[#f2f2f2] py-20">
             <div class="max-w-7xl mx-auto">
-                <div class="mx-10 lg:mx-20  font-black text-2xl bg-[#f2f2f2]text-[#2b6777]">
+                <div class="mx-10 lg:mx-20  font-black text-2xl  text-[#2b6777]">
                     <h1>Tipus espais</h1>
                 </div>
                 <div class="mx-10 lg:mx-20 mt-5 mb-10">
-                    <div class="grid grid-cols-1 md:grid-cols-5 md:gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-5 md:gap-y-4">
                         <div class="col-span-1">
                             <div class="flex md:grid md:grid-cols-1 overflow-x-auto" id="buttons">
                                 <hr>
                                 <button
-                                    class="btn bg-[#2b6777] text-white font-black px-2 py-2 mb-2 mx-2 my-2 md:mx-0 md:py-4 rounded-2xl active focus:outline-none"
-                                    id="garage" onclick="changeTypeSpace('garage')">Garages</button>
+                                    class="btn bg-[#2b6777] text-white font-black rounded-t-lg p-2 md:mx-0 md:py-4 md:rounded-t-none md:rounded-l-lg active focus:outline-none"
+                                    id="parking" onclick="changeTypeSpace('parking')">Pàrquings</button>
                                 <hr>
-                                <button class="btn py-2 px-2 my-2 mx-2 md:mx-0 md:py-4 rounded-xl focus:outline-none"
-                                    id="parking" onclick="changeTypeSpace('parking')">Parking Spaces</button>
-                                <hr>
-
                                 <button
-                                    class="btn py-2 px-2 mt-2 mx-2 mb-2 md:mx-0 md:py-4 rounded-xl focus:outline-none"
-                                    id="hola1" onclick="changeTypeSpace('hola1')">Hola1</button>
+                                    class="btn rounded-t-lg p-2 md:mx-0 md:py-4 md:rounded-t-none md:rounded-l-lg focus:outline-none"
+                                    id="traster" onclick="changeTypeSpace('traster')">Trasters</button>
                                 <hr>
 
+
+
+
                             </div>
 
                         </div>
-                        <div class="type-text bg-[#2b6777] col-span-4 rounded-xl active " id="garage">
+
+                        <div class="type-text bg-[#2b6777] col-span-4 rounded-sm active " id="parking">
                             <div class="m-5 p-5">
-                                <h1 class="font-black text-white text-xl">Garages</h1>
-                                <div class="text-[#c8d8e4]">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio
-                                        nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat
-                                        quibusdam?</p>
+                                <h1 class="font-black text-white text-xl">Pàrquings</h1>
+                                <div class="text-[#c8d8e4] mt-5">
+                                    <p>Lloguer de pàrquing per a cotxes i altres vehicles similars. Guarda el teu cotxe
+                                        amb tota seguretat i al menor cost.</p>
                                     <div class="ml-10 mt-5">
-                                        <h1>caracteristica 1</h1>
-                                        <h1>caracteristica 1</h1>
-                                        <h1>caracteristica 1</h1>
+                                        <h3>- Garatge privat</h3>
+                                        <h3>- Plaça privada amb pàrquing públic</h3>
+                                        <h3>- Garatge privat en edifici privat</h3>
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 md:grid-cols-3 mt-5">
-                                    <img class="px-2 my-2 rounded-xl"
+                                <div class="grid grid-cols-1 md:grid-cols-2 mt-5">
+                                    <img class="px-2 my-2 rounded-xl h-full"
                                         src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg"
                                         alt="" srcset="">
-                                    <img class="px-2 my-2 rounded-xl"
+                                    <img class="px-2 my-2 rounded-xl h-full"
                                         src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt=""
                                         srcset="">
-                                    <img class="px-2 my-2 rounded-xl"
-                                        src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg"
-                                        alt="" srcset="">
 
                                 </div>
 
                             </div>
                         </div>
-                        <div class="type-text bg-[#2b6777] col-span-4 rounded-xl hidden" id="parking">
+                        <div class="type-text bg-[#2b6777] col-span-4 rounded-sm hidden" id="traster">
                             <div class="m-5 p-5">
-                                <h1 class="font-black text-white text-xl">Parking Spaces</h1>
-                                <div class="text-[#c8d8e4]">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio
-                                        nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat
-                                        quibusdam?</p>
+                                <h1 class="font-black text-white text-xl">Trasters</h1>
+                                <div class="text-[#c8d8e4] mt-5">
+                                    <p>Lloguer d'espais entre particulars amb tota mena de característiques segons les
+                                        necessitats del llogater: mida, seguretat, prestatgeries, ascensor, etc.</p>
                                     <div class="ml-10 mt-5">
-                                        <h1>caracteristica 1</h1>
-                                        <h1>caracteristica 1</h1>
-                                        <h1>caracteristica 1</h1>
+                                        <h3>- Proximitat</h3>
+                                        <h3>- Tranquil·litat</h3>
+                                        <h3>- Preus reduïts </h3>
                                     </div>
                                 </div>
 
-                                <div class="grid  grid-cols-1 md:grid-cols-3 mt-5">
-                                    <img class="px-2 my-2 rounded-xl"
-                                        src="https://thumbs.dreamstime.com/b/empty-garage-interior-new-house-97573995.jpg"
+                                <div class="grid  grid-cols-1 md:grid-cols-2 mt-5">
+                                    <img class="px-2 my-2 rounded-xl  h-full"
+                                        src="https://img.freepik.com/foto-gratis/vista-superior-habitacion-desordenada-llena-cajas-mudanza_329181-18268.jpg?w=1380&t=st=1654804598~exp=1654805198~hmac=aef21809e594e10cef72e84b6e310c7524cd888ce030e6e6fad256e2be01c3c1"
                                         alt="" srcset="">
-                                    <img class="px-2 my-2 rounded-xl"
-                                        src="https://thumbs.dreamstime.com/b/empty-garage-22823237.jpg" alt=""
-                                        srcset="">
-                                    <img class="px-2 my-2 rounded-xl"
-                                        src="https://thumbs.dreamstime.com/b/empty-parking-garage-warehouse-interior-large-white-gates-gray-tile-floor-light-98102493.jpg"
+                                    <img class="px-2 my-2 rounded-xl  h-full"
+                                        src="https://img.freepik.com/foto-gratis/nadie-sala-estar-vacia-embalaje-carton-nuevo-hogar-muebles-cajas-carton-no-hay-personas-propiedad-hogar-carga-paquete-mudarse-bienes-raices_482257-43689.jpg?t=st=1654804656~exp=1654805256~hmac=3b5157fa52d1f572b15129dc0b261183c959b2b795e6bdeddbdd0daee9c60f7d&w=1380"
                                         alt="" srcset="">
+                                    <img class="px-2 my-2 rounded-xl" alt="" srcset="">
 
                                 </div>
 
                             </div>
                         </div>
-                        <div class="type-text bg-[#2b6777] col-span-4 rounded-xl hidden" id="hola1">
+                        <!--      <div class="type-text bg-[#2b6777] col-span-4 rounded-sm hidden" id="hola1">
                             <div class="m-5 p-5">
                                 <h1 class="font-black text-white text-xl">Parking Spaces</h1>
-                                <div class="text-[#c8e8d4]">
+                                <div class="text-[#c8e8d4] mt-5">
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio
                                         nesciunt suscipit sequi recusandae dolore dolorem dolor nisi fugiat
                                         quibusdam?</p>
@@ -493,7 +503,7 @@
                                         alt="" srcset="">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -507,29 +517,31 @@
                     <h1>Blog</h1>
                 </div>
                 <div class="grid grid-cols-1 gap-4 md:flex overflow-x-auto mx-10 lg:mx-20 mt-10 mb-10">
-                    <a class="bg-white text-[#2b6777] p-6 rounded-lg " href="/blog/article-x">
-                        <img src="/public/img/a1.jpg" class="rounded-xl">
-                        <h1 class="font-bold text-xl ">titol</h1>
-                        <p class="text-justify ">Lorem ipsum, dolor sit ...</p>
-                        <button class="underline  focus:outline-none " href="/blog/article-x">Mostrar
+                    <a class="bg-white text-[#2b6777] p-6 rounded-lg " href="/blog/article-1">
+                        <img src="https://img.freepik.com/foto-gratis/automatizacion-fabrica-vehiculos-guiados-automatizados-brazo-robotico-transporte-aumentar-transporte-mas-seguridad_41470-4712.jpg"
+                            class="rounded-xl h-64  md:h-96">
+                        <h2 class="font-bold text-xl mt-5">Com gestionar l'inventari del magatzem
+                        </h2>
+                        <p class="text-justify ">Amb el vostre negoci a l'alça, necessitareu més espai. Però quan
+                            tinguis...
+
+                        </p>
+                        <button class="underline  focus:outline-none " href="/blog/article-1">Mostrar
                             més</button>
                     </a>
-                    <a class="bg-white text-[#2b6777] p-6 rounded-lg" href="/blog/article-x">
-                        <img src="/public/img/a1.jpg" class="rounded-xl">
-                        <h1 class="font-bold text-xl ">titol</h1>
-                        <p class="text-justify ">Lorem ipsum, dolor sit ...</p>
-                        <button class="underline  focus:outline-none " href="/blog/article-x">Mostrar
+                    <a class="bg-white text-[#2b6777] p-6 rounded-lg" href="/blog/article-2">
+                        <img src="https://img.freepik.com/vector-gratis/ilustracion-concepto-esquizofrenia_114360-3567.jpg?t=st=1654805728~exp=1654806328~hmac=d99daf007f35f067eeb2cfa13fb7b69077cc51aa05f6c27cae52efbe0ed7f4d9&w=826"
+                            class="rounded-xl  h-64 md:h-96">
+                        <h2 class="font-bold text-xl mt-5">4 maneres d'optimitzar la vostra llar per millorar la vostra
+                            salut mental
+                        </h2>
+                        <p class="text-justify ">Sabíeu que el vostre espai vital pot tenir un efecte a la salut
+                            mental? Segueix els nostres quatre... </p>
+                        <button class="underline  focus:outline-none " href="/blog/article-2">Mostrar
                             més</button>
 
                     </a>
-                    <a class="bg-white text-[#2b6777] p-6 rounded-lg" href="/blog/article-x">
-                        <img src="/public/img/a1.jpg" class="rounded-xl">
-                        <h1 class="font-bold text-xl ">titol</h1>
-                        <p class="text-justify">Lorem ipsum, dolor sit ...</p>
-                        <button class="underline  focus:outline-none " href="/blog/article-x">Mostrar
-                            més</button>
 
-                    </a>
 
                 </div>
             </div>
@@ -540,6 +552,29 @@
         <%- include('../partials/footer') %>
 
             </div>
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    Alpine.store('accordion', {
+                        tab: 0
+                    });
+
+                    Alpine.data('accordion', (idx) => ({
+                        init() {
+                            this.idx = idx;
+                        },
+                        idx: -1,
+                        handleClick() {
+                            this.$store.accordion.tab = this.$store.accordion.tab === this.idx ? 0 : this.idx;
+                        },
+                        handleRotate() {
+                            return this.$store.accordion.tab === this.idx ? 'rotate-180' : '';
+                        },
+                        handleToggle() {
+                            return this.$store.accordion.tab === this.idx ? `max-height: ${this.$refs.tab.scrollHeight}px` : '';
+                        }
+                    }));
+                })
+            </script>
             <script type="text/javascript"
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6jD6iWnEJkmx1_ah_o3ftmI8w9ozYBcM&callback=initAutocomplete&v=weekly&libraries=places"
                 async>

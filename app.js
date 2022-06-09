@@ -58,6 +58,8 @@ app.use("/", require("./routes/main"))
 app.use("/api", require("./routes/api"));
 app.use("/place", require("./routes/place"));
 app.use("/user", require("./routes/user"));
+app.use("/blog", require("./routes/blog"));
+
 app.use((req, res, next) => {
     res.status(404).render("main/error404")
 })

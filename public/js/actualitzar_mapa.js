@@ -87,21 +87,22 @@ function actualitzar_llistat(place) {
     console.log(place)
     html_llistat =
       `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2  items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + id + `" >
-           <div class="col-span-1 px-2 max-w-screen-md"> <!--imatges-->
-             <img class = " image h-max  w-full rounded-lg object-cover" src= "${place.images[0]}">
+           <div class="col-span-1 px-2 max-w-screen-md "> <!--imatges-->
+             <img class = " image h-max w-full   rounded-lg object-cover" src= "${place.images[0]}">
            </div>
-           <div class="col-span-1 px-4  py-2 w-full text-left "> <!--informacio local-->
+           <div class="col-span-1 px-4  py-2 w-[27rem] text-left "> <!--informacio local-->
              <div>
              <h1 class="font-black text-2xl text-[#2b6777]">${place.title} </h1>
              <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
-             <p class = "text-lg">${place.description}Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ipsam.</p>
-             <div>
-               <p class = "text-lg">Espai: ${place.measures}</p>  
-             </div>
-             <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €/m2</p>
+             <h3 class="font-black text-lg text-[#2b6777]" >Descripció</h3>
+             <p class = "text-lg">${place.description}</p>
+             <h3 class="font-black text-lg text-[#2b6777]" >Mides</h3>
+             <p class = "text-lg">${place.measures} m<sup>2</sup></p>
+              
+             <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €</p>
              <a href="place/${place.id}?lat=${place.lat}&lng=${place.lng}">
-              <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
-              Veure més info
+              <button class="mt-4 rounded-full  px-4 py-2 text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
+              Més info
               </button>
              </a> 
              </div>
@@ -120,18 +121,18 @@ function actualitzar_llistat(place) {
              <img class = "image   w-full rounded-lg object-cover" id="slider_`+ id + `" src= "${place.images[0]}" value = "` + place.images + `">
              <div class = "text-right arrow arrow-right" onclick="next('`+ id + `')"></div>
          </div>
-         <div class="col-span-1 px-4 py-2  w-full text-left "> <!--informacio local-->
+         <div class="col-span-1 px-4 py-2  w-[27rem] text-left "> <!--informacio local-->
            <div>
              <h1 class="font-black text-2xl text-[#2b6777]">${place.title} </h1>
              <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
-             <p class = "text-lg">${place.description}Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ipsam.</p>
-             <div>
-               <p class = "text-lg">Espai: ${place.measures}</p>  
-             </div>
-             <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €/m2</p>
+             <h3 class="font-black text-lg text-[#2b6777]" >Descripció</h3>
+             <p class = "text-lg">${place.description}</p>
+             <h3 class="font-black text-lg text-[#2b6777]" >Mides</h3>
+             <p class = "text-lg">${place.measures} m<sup>2</sup></p>
+             <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €</p>
              <a href="place/${place.id}?lat=${place.lat}&lng=${place.lng}">
-               <button class="mt-8 rounded-full p-2 bg-white text-center border-2 text-[#2b6777] hover:bg-[#e9fffa] font-black text-lg focus:outline-none transition duration-300">
-               Veure més info
+               <button class="mt-4 rounded-full px-4 py-2  text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
+               Més info
                </button>
              </a> 
             </div>

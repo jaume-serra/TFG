@@ -1,9 +1,9 @@
 {
-    "name": "keepers",
-    "short_name": "Keepers",
+    "name": "getkeepers",
+    "short_name": "getKeepers",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#FFE9D2",
+    "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
     "orientation": "portrait-primary",
     "icons": [

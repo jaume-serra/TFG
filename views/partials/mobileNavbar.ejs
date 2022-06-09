@@ -25,20 +25,18 @@
                     href="/place/create">Publica un espai</a></li>
             <li class="p-2 rounded-xl bg-white text-[#2b6777] hover:bg-[#2b6777] hover:text-white"><a
                     href="/user/myspaces">Els teus espais</a></li>
+       
             <li class="p-2 rounded-xl bg-white text-[#2b6777] hover:bg-[#2b6777] hover:text-white"><a
-                    href="/blog">Blog</a>
-            </li>
-            <li class="p-2 rounded-xl bg-white text-[#2b6777] hover:bg-[#2b6777] hover:text-white"><a
-                    href="/contact">About</a>
+                    href="/contact">Contacte</a>
             </li>
             <% if(locals.user){ %>
-                <li><a href="profile">
+                <li><a href="/user/profile">
                         <button class="bg-[#2b6777] text-white w-full mt-6 py-2 rounded-xl hover:bg-[#c8d8e4] ">Profile
                         </button>
                     </a>
                 </li>
                 <li>
-                    <a href="logout">
+                    <a href="/logout">
                         <button class="bg-red-500 text-white w-full py-2  rounded-xl hover:bg-red-600">
                             Log out
                         </button>
@@ -47,12 +45,12 @@
                 </li>
 
                 <% }else{ %>
-                    <li><a href="login">
+                    <li><a href="/login">
                             <button class="bg-green-500 text-white w-full mt-6 py-2 rounded-xl hover:bg-green-600">Login
                             </button>
                         </a>
                     </li>
-                    <li><a href="register">
+                    <li><a href="/register">
                             <button class="bg-blue-400 text-white w-full py-2 rounded-xl hover:bg-blue-600">Register
                             </button>
                         </a>
