@@ -11,6 +11,9 @@ dotenv.config({ path: "./config/config.env" });
 router.get("/", authControler.getUserToRequest, (req, res) => {
     res.render("main/index");
 });
+router.all("/manifest.json", (req, res) => {
+    res.sendFile("/manifest.json")
+})
 
 router.all("/mapa", authControler.getUserToRequest, (req, res) => {
     res.render("main/mapa");
