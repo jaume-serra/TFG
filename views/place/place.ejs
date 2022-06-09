@@ -2,13 +2,24 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2346109445308925"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="/public/css/place.css">
 
     <body>
         <!-- Menu navegacio -->
         <%- include('../partials/navbar') %>
+
             <div id="change-bg" class="change-bg">
-                <div class="container mx-auto bg-gray-50 shadow-2xl rounded-md">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 m-10  gap-20">
+                <div class="container mx-auto bg-gray-50 shadow-2xl rounded-md ">
+                    <!-- Test -->
+                    <div id="video-container" class="hidden my-10">
+                        <video id="video-element">
+                            <source src="https://storage.googleapis.com/interactive-media-ads/media/android.mp4">
+                            <source src="https://storage.googleapis.com/interactive-media-ads/media/android.webm">
+                        </video>
+                        <div id="ad-container"></div>
+
+                    </div>
+                    <div id="noad" class="grid grid-cols-1 lg:grid-cols-2 m-10  gap-20">
                         <% if(place.images.length> 1){ %>
                             <div id="animation-carousel" class="relative mt-10" data-carousel="static">
                                 <div class="overflow-hidden relative h-48 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
@@ -77,14 +88,17 @@
                                                     Total <%= place.price %> €
                                                 </p>
                                             </div>
-                                            <button id='showMobile'
+
+                                            <button id='play-button'
                                                 class="mt-5 w-full h-10 rounded-md bg-blue-500 text-white hover:text-blue-500 hover:bg-white">Reserva
                                                 <%- place.type=="storage" ? "el traster" : "el parking" %>
                                             </button>
                                             <div id="mobileNum"
                                                 class="hidden mt-5 w-full h-10 rounded-md bg-blue-500 text-white text-xl font-black align-middle text-center ">
-                                                <%= owner.contact %>
+                                                Contacte: <%= owner.contact %>
                                             </div>
+
+
                                         </div>
                                     </div>
                                     <hr class="col-span-1 lg:col-span-2 border-1 border-gray-500 ">
@@ -195,6 +209,9 @@
 
                 <%- include('../partials/footer') %>
             </div>
+            <!-- Test -->
+            <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+            <script type="text/javascript" src="/public/js/ads.js"></script>
 
             <script type="text/javascript" src=/public/js/styled_map.js></script>
             <script src="/public/js/viewPlace.js" async></script>

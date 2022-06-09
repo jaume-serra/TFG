@@ -1,16 +1,23 @@
-const showMobile = document.getElementById('showMobile');
+const showInfo = document.getElementById('play-button');
 
 
 
 
-showMobile.addEventListener('click', () => {
+showInfo.addEventListener('click', () => {
     //Ensenyar anunci
     //Ensenyar mobil
-    const mobileNum = document.getElementById('mobileNum')
-    const showMobile = document.getElementById('showMobile');
+    const ad = document.getElementById('video-container')
+    const noad = document.getElementById('noad')
 
-    showMobile.classList.add('hidden')
-    mobileNum.classList.remove('hidden')
+    ad.classList.remove('hidden')
+    noad.classList.add('hidden')
+    setTimeout(() => {
+        ad.classList.add('hidden')
+        noad.classList.remove('hidden')
+    }, "10000")
+
+    document.getElementById('mobileNum').classList.remove("hidden")
+    document.getElementById('play-button').classList.add("hidden")
 
 })
 
