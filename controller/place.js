@@ -18,7 +18,7 @@ const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
 const crypto = require('crypto');
-const place = require('../models/place');
+// const place = require('../models/place');
 
 // Options for geocoder
 const options = {
@@ -81,7 +81,7 @@ const postCreatePlace = async (req, res) => {
             renter: "",
             rentKey: ""
         })
-        res.redirect(`${folderId}`)
+        res.redirect(`${folderId}?lat=${latitude}&lng=${longitude}`)
 
     } catch (err) {
         res.send(err)
@@ -201,4 +201,12 @@ const getRentPlace = async (req, res) => {
 
 }
 
-module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace, getRentPlace }
+
+
+const postDeleteRating = async (req, res) => {
+    const { id } = req.body
+    await Rating.findByIdAndDelete({ '_id': id })
+
+}
+
+module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace, getRentPlace, postDeleteRating }

@@ -1,0 +1,213 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <body>
+
+            <div class="w-11/12 min-h-[28rem] mx-auto relative shadow-2xl mb-24 rounded my-10  overflow-hidden">
+                <div class="grid grid-cols-12 bg-white ">
+
+                    <div class="col-span-12  h-full pb-12">
+                        <div class="px-4 pt-4">
+                            <div class="overflow-x-auto shadow-md sm:rounded-lg">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden ">
+                                        <div class="my-5">
+                                            <h3 class=" text-2xl font-semibold">Espais no actius</h3>
+                                            <hr>
+                                        </div>
+                                        <% if(places.length==0) { %>
+                                            <p class=" p-2 text-xl h-screen text-center">Actualment no hi ha cap espai
+                                                no actiu
+                                                <% } else {%>
+                                                    <table class="min-w-full divide-gray-200 table-fixed ">
+                                                        <thead class="bg-gray-100 ">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Propietari
+                                                                </th>
+
+
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                                                    Tipus
+                                                                </th>
+
+
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                                    Informació addicional
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                                    Activar espai
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                                    Eliminar espai
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="bg-white divide-y divide-gray-200 ">
+                                                            <% for(let i=0; i < places.length ; i++) { %>
+
+                                                                <tr class="hover:bg-gray-100">
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">
+
+                                                                        <%= places[i].email %>
+                                                                    </td>
+
+
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">
+                                                                        <%- places[i].type=="storage" ? "Traster"
+                                                                            : "Parking" %>
+                                                                    </td>
+
+
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-blue-700 underline hover:text-blue-500 whitespace-nowrap text-center ">
+                                                                        <a
+                                                                            href="/place/<%= places[i].id %>?<%= places[i].lat %>&<%= places[i].lng %>">
+                                                                            Més info
+                                                                        </a>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
+                                                                        <form action="/admin/activate" method="POST">
+                                                                            <button type="submit">
+                                                                                <svg class="h-6 w-6"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="img"
+                                                                                    width="1em" height="1em"
+                                                                                    preserveAspectRatio="xMidYMid meet"
+                                                                                    viewBox="0 0 15 15">
+                                                                                    <path fill="#008000"
+                                                                                        fill-rule="evenodd"
+                                                                                        d="M0 7.5a7.5 7.5 0 1 1 15 0a7.5 7.5 0 0 1-15 0Zm7.072 3.21l4.318-5.398l-.78-.624l-3.682 4.601L4.32 7.116l-.64.768l3.392 2.827Z"
+                                                                                        clip-rule="evenodd" />
+                                                                                </svg>
+                                                                                <input type="text"
+                                                                                    value="<%- places[i]._id %>"
+                                                                                    name="id" class="hidden">
+                                                                                <input type="text"
+                                                                                    value="<%- places[i].email %>"
+                                                                                    name="email" class="hidden">
+
+
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td
+                                                                        class="py-4 px-6 text-sm font-medium text-center  whitespace-nowrap">
+                                                                        <form action="/admin/eliminate" method="POST">
+                                                                            <button type="submit">
+                                                                                <svg class="h-6 w-6"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    aria-hidden="true" role="img"
+                                                                                    width="1em" height="1em"
+                                                                                    preserveAspectRatio="xMidYMid meet"
+                                                                                    viewBox="0 0 24 24">
+                                                                                    <path fill="#ff0000"
+                                                                                        d="M19.1 4.9C15.2 1 8.8 1 4.9 4.9S1 15.2 4.9 19.1s10.2 3.9 14.1 0s4-10.3.1-14.2zm-4.3 11.3L12 13.4l-2.8 2.8l-1.4-1.4l2.8-2.8l-2.8-2.8l1.4-1.4l2.8 2.8l2.8-2.8l1.4 1.4l-2.8 2.8l2.8 2.8l-1.4 1.4z" />
+                                                                                </svg>
+                                                                                <input type="text"
+                                                                                    value="<%- places[i]._id %>"
+                                                                                    name="id" class="hidden">
+                                                                                <input type="text"
+                                                                                    value="<%- places[i].email %>"
+                                                                                    name="email" class="hidden">
+
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                                <% } %>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <% } %>
+                                                        <!-- Tot correcte -->
+                                                        <% if(locals.activated){%>
+                                                            <div class=" w-full" id="alertbox">
+                                                                <div class=" w-full bg-green-500 flex items-center text-white text-sm font-bold px-4 py-3 relative"
+                                                                    role="alert">
+                                                                    <svg class="fill-current w-4 h-4 mr-2"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 20 20">
+                                                                        <path
+                                                                            d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                                                                    </svg>
+                                                                    <p>
+                                                                        <%= msg %>
+                                                                    </p>
+
+                                                                    <span
+                                                                        class="absolute top-0 bottom-0 right-0 px-4 py-3 closealertbutton">
+                                                                        <svg class="fill-current h-6 w-6 text-white"
+                                                                            role="button"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 20 20">
+                                                                            <title>Close</title>
+                                                                            <path
+                                                                                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                                                        </svg>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <% }else if(locals.error){%>
+                                                                <!-- Error -->
+                                                                <div class="container" id="alertbox">
+                                                                    <div class="container bg-red-500 flex items-center text-white text-sm font-bold px-4 py-3 relative"
+                                                                        role="alert">
+                                                                        <svg class="fill-current w-4 h-4 mr-2"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 20 20">
+                                                                            <path
+                                                                                d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                                                                        </svg>
+                                                                        <p>
+                                                                            <%= error %>
+                                                                        </p>
+
+                                                                        <span
+                                                                            class="absolute top-0 bottom-0 right-0 px-4 py-3 closealertbutton">
+                                                                            <svg class="fill-current h-6 w-6 text-white"
+                                                                                role="button"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 20 20">
+                                                                                <title>Close</title>
+                                                                                <path
+                                                                                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                                    <!-- Evitar redirect form -->
+                                                                    <iframe name="hiddenFrame" width="0" height="0"
+                                                                        border="0" style="display: none;"></iframe>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </body>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
+            </script>
+
+        <script src="/public/js/closeAlert.js"></script>
+        <%- include("../partials/footer") %>
+
+            </html>

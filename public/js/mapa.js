@@ -203,18 +203,15 @@ function getHtml(place) {
         <img src="${place.images[0]}" class="img-fluid rounded-xl" heigth = "200px" width="300px" > 
       </div>
      
-      <div>
-        <p>Espai:${place.measures}</p>  
-      </div>
-      <div>
-        <p> PREU:
-          <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
-          ${place.price}€
-          </div>
-        </p>
-      </div>
-      <a href="place/${place.id}">
-        <button class="mt-8 rounded-full p-2  text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
+      <h3 class="font-black text-lg text-[#2b6777]" >Descripció</h3>
+      <p class = "text-lg">${place.description}</p>
+      <h3 class="font-black text-lg text-[#2b6777]" >Mides</h3>
+      <p class = "text-lg">${place.measures} m<sup>2</sup></p>
+      <h3 class="font-black text-lg text-[#2b6777]" >Preu</h3>
+       
+      <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €</p>
+      <a href="place/${place.id}?lat=${place.lat}&lng=${place.lng}">
+        <button class="mt-4 rounded-full p-2  text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
         Més info
         </button>
       </a> 
@@ -233,24 +230,15 @@ function getHtml(place) {
         <div class = "text-right-infowindow arrow arrow-right" onclick="next_infowindow('`+ place.id + `')"></div>
       </div>
       <div>
-      <h3>
-      Descripció
-      </h3>
-      <br>
-      <p>${place.description}</p>
-      </div>
-      <div>
-        <p>Espai:${place.measures}</p>  
-      </div>
-      <div>
-        <p> PREU:
-          <div class="text-xl text-[#2b6777] font-bold font-sans shadow-s w-16">
-          ${place.price}€
-          </div>
-        </p>
-      </div>
-      <a href="place/${place.id}">
-        <button class="mt-8 rounded-full p-2  text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
+      <h3 class="font-black text-lg text-[#2b6777]" >Descripció</h3>
+      <p class = "text-lg">${place.description}</p>
+      <h3 class="font-black text-lg text-[#2b6777]" >Mides</h3>
+      <p class = "text-lg">${place.measures} m<sup>2</sup></p>
+      <h3 class="font-black text-lg text-[#2b6777]" >Preu</h3>
+       
+      <p class="text-left text-[#2b6777] text-3xl font-black ">${place.price} €</p>
+      <a href="place/${place.id}?lat=${place.lat}&lng=${place.lng}">
+        <button class="mt-4 rounded-full p-2  text-center border-2 bg-[#2b6777] border-white text-white hover:bg-white hover:border-[#2b6777] hover:text-[#2b6777] font-black text-lg focus:outline-none transition duration-300">
         Més info
         </button>
       </a> 

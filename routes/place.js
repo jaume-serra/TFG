@@ -23,6 +23,8 @@ router.post("/create", [authControler.checkAuthenticated, upload.array('files', 
 
 router.get("/:id/:rentKey", authControler.checkAuthenticated, placeControler.getRentPlace);
 
+router.post("/deleteRating", authControler.checkAuthenticated, placeControler.postDeleteRating);
+
 
 //Ha de ser la última ruta
 router.get("/:id", authControler.getUserToRequest, placeControler.getPlace);

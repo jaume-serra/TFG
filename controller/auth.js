@@ -33,6 +33,26 @@ const checkAuthenticated = async (req, res, next) => {
     }
 };
 
+
+/* Comprova si l'usuari està loggejat com admin  */
+const checkAuthenticatedAdmin = async (req, res, next) => {
+    let token = {
+        "defaultToken": req.cookies["session-token-default"],
+        "googleToken": req.cookies["session-token"]
+    };
+
+    try {
+        const user = await verifyToken(token)
+        if (user.role == "admin") {
+            res.locals.user = user;
+            req.user = user;
+            return next()
+        }
+        throw ("Usuari no vàlid")
+    } catch {
+        res.redirect(`/login?next=${req.originalUrl}`)
+    }
+};
 /* Comprova si l'usuari no està loggejat */
 
 const checkNotAuthenticated = (req, res, next) => {
@@ -140,25 +160,23 @@ const loginUser = async (email, password) => {
     if (!(email && password)) return false
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
-
         const token = jwt.sign(
             {
                 user_id: user._id,
                 email,
                 displayName: user.displayName,
                 firstName: user.firstName,
-                image: user.image
+                image: user.image,
+                role: user.role == "admin" ? "admin" : "user"
             },
             process.env.TOKEN_KEY,
             {
                 expiresIn: "2h",
             }
         );
-
         // save user token
         user.token = token;
         return user
-
     }
     else {
         return false
@@ -292,7 +310,6 @@ const getForgotPassword = async (req, res) => {
 const postForgotPassword = async (req, res) => {
     const { email, repEmail } = req.body
     try {
-        console.log(email, repEmail)
         if (email != repEmail) throw ("Els correus no coincideixen")
         const newPassword = Math.random().toString(36).slice(-8)
         encryptedPassword = await bcrypt.hash(newPassword, 10)
@@ -357,4 +374,4 @@ const postContact = async (req, res) => {
 }
 
 
-module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkNotAuthenticated, getUserToRequest, getForgotPassword, postForgotPassword, postContact }
+module.exports = { getLogin, postLogin, getRegister, postRegister, checkAuthenticated, checkAuthenticatedAdmin, checkNotAuthenticated, getUserToRequest, getForgotPassword, postForgotPassword, postContact }

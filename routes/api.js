@@ -15,7 +15,7 @@ router.get('/get_places', async (req, res) => {
     }
 
     //Call Database
-    const places = await Place.find({ available: true }) //FIXME: afegir active
+    const places = await Place.find({ 'active': true })
 
     var response = [];
     places.forEach(element => {
@@ -26,12 +26,5 @@ router.get('/get_places', async (req, res) => {
     res.json({ 'msg': response });
 
 });
-
-
-
-//Todo: Tokensigin function
-
-
-
 
 module.exports = router;

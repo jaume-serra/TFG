@@ -14,7 +14,7 @@ const url = require('url')
 const bcrypt = require('bcrypt');
 
 //Images to S3
-const { uploadFile } = require('./s3files')
+const { uploadFile, emptyS3Directory } = require('./s3files')
 const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink)
@@ -240,11 +240,15 @@ const postDeleteSpace = async (req, res) => {
         if (place.renter) {
             throw ("Primer has d'anul·lar el lloger abans d'eliminar-lo")
         }
+        //Eliminem espai i les imatges de S3
 
-        await Place.findByIdAndRemove({ '_id': id })
+        const placeRemoved = await Place.findByIdAndRemove({ '_id': id })
+        const dir = `spaceImages/${placeRemoved.id}/`
+        await emptyS3Directory(process.env.AWS_BUCKET_NAME, dir);
+
+        //Tornem a carregar tota la info
         const places = await Place.find({ 'email': email })
         renterInfo = await generateRenterInfo(places)
-
         const msg = "Espai eliminat correctament"
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': msg, 'error': false })
 
@@ -305,8 +309,6 @@ const postGenerateQR = async (req, res) => {
 
 const getHistoric = async (req, res) => {
     const { email } = req.user
-    /*     let renterInfo = []
-        let userInfo = [] */
     let histInfo = []
 
     //Llistar tots els espais on l'usuari ha estat propietari o llogater
