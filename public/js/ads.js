@@ -27,7 +27,6 @@ window.addEventListener('resize', function (event) {
         var height = videoElement.clientHeight;
         adsManager.resize(width, height, google.ima.ViewMode.NORMAL);
     }
-
 });
 
 function initializeIMA() {
@@ -77,7 +76,6 @@ function loadAds(event) {
     // Prevent triggering immediate playback when ads are loading
     event.preventDefault();
 
-    console.log("loading ads");
     // Initialize the container. Must be done via a user action on mobile devices.
     videoElement.load();
     adDisplayContainer.initialize();
@@ -85,12 +83,14 @@ function loadAds(event) {
     var width = videoElement.clientWidth;
     var height = videoElement.clientHeight;
     try {
+
         adsManager.init(width, height, google.ima.ViewMode.NORMAL);
         adsManager.start();
+
     } catch (adError) {
         // Play the video without ads, if an error occurs
-        console.log("AdsManager could not be started");
         videoElement.play();
+
     }
 
 }
@@ -98,7 +98,6 @@ function loadAds(event) {
 
 
 function initializeIMA() {
-    console.log("initializing IMA");
     adContainer = document.getElementById('ad-container');
     adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoElement);
     adsLoader = new google.ima.AdsLoader(adDisplayContainer);
@@ -150,7 +149,12 @@ function onAdsManagerLoaded(adsManagerLoadedEvent) {
     adsManager.addEventListener(
         google.ima.AdEvent.Type.LOADED,
         onAdLoaded);
-
+    adsManager.addEventListener(
+        google.ima.AdEvent.Type.STARTED,
+        onAdEvent);
+    adsManager.addEventListener(
+        google.ima.AdEvent.Type.ALL_ADS_COMPLETED,
+        onAdEvent);
 }
 
 function onAdLoaded(adEvent) {
@@ -188,4 +192,37 @@ function onAdError(adErrorEvent) {
     if (adsManager) {
         adsManager.destroy();
     }
+}
+function onAdEvent(adEvent) {
+
+
+    var ad = adEvent.getAd();
+    switch (adEvent.type) {
+        case google.ima.AdEvent.Type.STARTED:
+            // This event indicates the ad has started - the video player
+            // can adjust the UI, for example display a pause button and
+            // remaining time.
+            if (ad.isLinear()) {
+                // For a linear ad, a timer can be started to poll for
+                // the remaining time.
+
+                intervalTimer = setInterval(
+
+                    function () {
+                        var remainingTime = adsManager.getRemainingTime();
+                        console.log(remainingTime)
+                    },
+                    300); // every 300ms
+            }
+            break;
+        case google.ima.AdEvent.Type.COMPLETE:
+            // This event indicates the ad has finished - the video player
+            // can perform appropriate UI actions, such as removing the timer for
+            // remaining time detection.
+            if (ad.isLinear()) {
+                clearInterval(intervalTimer);
+            }
+            break;
+    }
+
 }

@@ -41,7 +41,8 @@ const getCreatePlace = (req, res) => {
 //@POST create
 const postCreatePlace = async (req, res) => {
     //Guardem espai i després fotos de l'espai
-    const { title, description, measures, price, address } = req.body;
+   
+    const { title, description, measures, price, address, type } = req.body;
     const user = req.user.email
     const images = []
 
@@ -66,6 +67,7 @@ const postCreatePlace = async (req, res) => {
         await Place.create({
             id: folderId,
             email: user,
+            type: type,
             title,
             description,
             measures,

@@ -80,7 +80,6 @@ const checkNotAuthenticated = (req, res, next) => {
 };
 
 /* Afegir usuari a la request */
-
 const getUserToRequest = (req, res, next) => {
     let token = {
         "defaultToken": req.cookies["session-token-default"],
@@ -256,8 +255,8 @@ const getRegister = (req, res) => {
 const postRegister = async (req, res) => {
 
     try {
-        const { firstName, secondName, email, password, passwordRepeat } = req.body
-        if (!(secondName && firstName && email && password && passwordRepeat)) res.status(400).send("All input are required")
+        const { firstName, secondName, email, password, passwordRepeat, phone } = req.body
+        if (!(secondName && firstName && email && password && passwordRepeat && phone)) res.status(400).send("All input are required")
 
         const oldUser = await User.findOne({ email })
         if (oldUser) {
@@ -272,6 +271,7 @@ const postRegister = async (req, res) => {
             lastName: secondName,
             email: email.toLowerCase(),
             password: encryptedPassword,
+            phone: phone
         })
 
         // Create token
@@ -296,7 +296,6 @@ const postRegister = async (req, res) => {
 
     } catch (err) {
         /* TODO: acabar aixo */
-
         console.log('err :>> ', err);
     }
 

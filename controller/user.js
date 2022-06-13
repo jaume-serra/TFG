@@ -122,7 +122,6 @@ const postStopRent = async (req, res) => {
         }
 
         //Actualitzem històric
-        //TODO: comprovar q funcioni
         await Historic.findOneAndUpdate({ 'email': place.email, 'renter': req.user.email, 'placeId': id }, { 'endDate': Date.now() })
 
         //Eliminem el llogater
@@ -199,7 +198,6 @@ const postStopRentPlace = async (req, res) => {
         await sendEmail(mailData)
 
         //Actualitzem històric
-        //TODO: comprovar q funcioni
         await Historic.findOneAndUpdate({ 'email': place.email, 'renter': place.renter, 'placeId': id }, { 'endDate': Date.now() })
 
         //Eliminem el llogater
