@@ -25,6 +25,7 @@
     "dependencies": {
         "aws-sdk": "^2.1095.0",
         "bcrypt": "^5.0.1",
+        "check-password-strength": "^2.0.5",
         "connect-mongo": "^4.6.0",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",

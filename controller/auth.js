@@ -12,6 +12,8 @@ connectDB()
 //Send email
 const { sendEmail } = require('./sendEmail')
 
+//Check password
+const { passwordStrength } = require('check-password-strength')
 
 
 
@@ -263,6 +265,11 @@ const postRegister = async (req, res) => {
             res.status(409)
             return res.redirect("main/login", { 'hide': true })
         }
+
+        if (passwordStrength(password).id < 2) {
+            return res.render("main/register", { 'passwordWeak': true })
+        }
+        console.log(passwordStrength(password))
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
         const user = await User.create({
