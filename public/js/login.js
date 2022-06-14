@@ -1,11 +1,11 @@
 function onSignIn(googleUser) {
-
     // The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/login')
+    xhr.open('POST', 'https://www.getkeepers.net/login')
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onload = function () {
+        console.log(xhr.response)
         if (xhr.response === 'success') {
             signOut();
             let nextURL = new URLSearchParams(location.search).get("next")
