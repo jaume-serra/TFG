@@ -2,6 +2,7 @@ function onSignIn(googleUser) {
     // The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     var xhr = new XMLHttpRequest();
+    console.log("hoa")
     xhr.open('POST', 'https://www.getkeepers.net/login')
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onload = function () {
