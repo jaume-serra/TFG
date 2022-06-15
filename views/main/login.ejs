@@ -1,8 +1,5 @@
 <%- include('../partials/head') %>
 
-    <meta name="google-signin-client_id"
-        content="939993245053-2fql8kutib3dt4vq1v6ip4knq4p637tg.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <link type="text/css" href="/public/css/login.css" />
 
@@ -10,7 +7,10 @@
     <body>
 
         <%- include('../partials/navbar') %>
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+            <meta name="google-signin-client_id"
+                content="939993245053-2fql8kutib3dt4vq1v6ip4knq4p637tg.apps.googleusercontent.com">
             <div id="change-bg" class="change-bg">
 
                 <!--Inici Login-->
@@ -125,46 +125,46 @@
                 </div>
 
                 <%- include("../partials/footer") %>
+                    <script>
+                        function onSignIn(googleUser) {
+                            // The ID token you need to pass to your backend:
+                            var id_token = googleUser.getAuthResponse().id_token;
+                            var xhr = new XMLHttpRequest();
+                            console.log("hoa")
+                            xhr.open('POST', 'https://www.getkeepers.net/login')
+                            xhr.setRequestHeader('Content-Type', 'application/json')
+                            xhr.onload = function () {
+                                console.log(xhr.response)
+                                if (xhr.response === 'success') {
+                                    signOut();
+                                    let nextURL = new URLSearchParams(location.search).get("next")
+                                    if (nextURL) {
+                                        location.assign(nextURL)
+                                    } else {
+                                        location.assign("/user/profile")
+                                    }
+                                }
+                            }
+                            xhr.send(JSON.stringify({ token: id_token }))
+                        }
 
+
+                        function signOut() {
+                            var auth2 = gapi.auth2.getAuthInstance();
+                            auth2.signOut().then(function () {
+                                console.log('User signed out');
+                            });
+
+                        }
+
+
+                    </script>
             </div>
 
 
 
     </body>
-    <script>
-        function onSignIn(googleUser) {
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-            var xhr = new XMLHttpRequest();
-            console.log("hoa")
-            xhr.open('POST', 'https://www.getkeepers.net/login')
-            xhr.setRequestHeader('Content-Type', 'application/json')
-            xhr.onload = function () {
-                console.log(xhr.response)
-                if (xhr.response === 'success') {
-                    signOut();
-                    let nextURL = new URLSearchParams(location.search).get("next")
-                    if (nextURL) {
-                        location.assign(nextURL)
-                    } else {
-                        location.assign("/user/profile")
-                    }
-                }
-            }
-            xhr.send(JSON.stringify({ token: id_token }))
-        }
 
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out');
-            });
-
-        }
-
-
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
         integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
         </script>
