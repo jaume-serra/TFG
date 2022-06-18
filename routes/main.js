@@ -6,7 +6,17 @@ const authControler = require('../controller/auth');
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
 
+const passport = require('passport');
 
+
+//Google callback route
+
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+    console.log("hola tokjen", req.user)
+    res.cookie('authToken', req.user.token);
+    res.redirect('/');
+});
 
 router.get("/", authControler.getUserToRequest, (req, res) => {
     res.render("main/index");
