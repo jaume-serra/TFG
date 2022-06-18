@@ -114,7 +114,7 @@ const verifyToken = async (token) => {
         try {
             const ticket = await client.verifyIdToken({
                 idToken: token["googleToken"],
-                audience: process.env.ID_EMAIL,
+                audience: process.env.CLIENT_ID,
             });
 
             const payload = ticket.getPayload();
@@ -209,7 +209,6 @@ const postLogin = async (req, res, next) => {
         /* Login with Google */
         if (token) {
             /* Pot rebre token i tenir sessio? En teoria no*/
-
             loginGoogle({ "googleToken": token })
                 .then(() => {
                     if (!req.cookies["session-token"]) {
@@ -270,7 +269,6 @@ const postRegister = async (req, res) => {
             return res.render("main/register", { 'passwordWeak': true })
         }
         //TODO: enviar correu administrador
-        console.log(passwordStrength(password))
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
         const user = await User.create({

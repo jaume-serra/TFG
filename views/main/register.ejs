@@ -1,17 +1,15 @@
 <%- include('../partials/head') %>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link type="text/css" href="/public/css/login.css" />
 
     <script type="text/javascript" src="/public/js/register.js"></script>
-    <script  type="text/javascript" src="/public/js/login.js"></script>
+    <script type="text/javascript" src="/public/js/login.js"></script>
 
     <body>
         <!-- Menu navegacio -->
         <%- include('../partials/navbar') %>
 
-            <script src="https://apis.google.com/js/platform.js" async defer></script>
-            <meta name="google-signin-client_id"
-                content="870274444376-73so85qmub77gbsku1223965n2ij0mit.apps.googleusercontent.com">
-
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
             <div id="change-bg" class="change-bg">
 
                 <!--Inici Register-->
@@ -138,13 +136,16 @@
                                 <p class="text-blue-600 text-sm">or</p>
                             </div>
 
-
+                            <div id="g_id_onload"
+                                data-client_id="870274444376-73so85qmub77gbsku1223965n2ij0mit.apps.googleusercontent.com"
+                                data-callback="onSignIn">
+                            </div>
                             <!--Google or facebook buttons-->
                             <div class="grid grid-cols-1 gap-x-4 place-items-center pt-5 pb-3">
                                 <!--<a href="/auth/google" class="btn red darken-1">
                         <i class="fab fa-google left"></i> Login with google
                         </a> -->
-                                <div class="g-signin2 min-w-fit" data-onsuccess="onSignIn" style="width:auto"></div>
+                                <div class="g_id_signin min-w-fit" data-type="standard" style="width:auto"></div>
                             </div>
                         </div>
                     </div>

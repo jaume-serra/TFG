@@ -8,11 +8,6 @@ dotenv.config({ path: "./config/config.env" });
 
 
 
-//Google callback route
-
-
-
-
 router.get("/", authControler.getUserToRequest, (req, res) => {
     res.render("main/index");
 });

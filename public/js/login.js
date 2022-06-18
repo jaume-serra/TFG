@@ -1,15 +1,13 @@
 function onSignIn(googleUser) {
     // The ID token you need to pass to your backend:
-    console.log(googleUser)
-    var id_token = googleUser.getAuthResponse().id_token;
+    var id_token = googleUser.credential;
     var xhr = new XMLHttpRequest();
-    console.log("hoa")
+    //xhr.open('POST', 'https://localhost:8081/login')
     xhr.open('POST', 'https://www.getkeepers.net/login')
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onload = function () {
         console.log(xhr.response)
         if (xhr.response === 'success') {
-            signOut();
             let nextURL = new URLSearchParams(location.search).get("next")
             if (nextURL) {
                 location.assign(nextURL)
@@ -22,10 +20,10 @@ function onSignIn(googleUser) {
 }
 
 
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out');
-    });
+// function signOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function () {
+//         console.log('User signed out');
+//     });
 
-}
+// }
