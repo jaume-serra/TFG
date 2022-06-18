@@ -11,7 +11,6 @@ const morgan = require("morgan"); //Per printar resultat pantalla
 const { connect } = require("http2");
 
 //Google sign in 
-const passport = require('./controller/passport');
 
 //Config file 
 dotenv.config({ path: './config/config.env' });
@@ -22,7 +21,6 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(passport.initialize());
 
 
 app.use((req, res, next) => {

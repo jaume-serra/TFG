@@ -1,5 +1,6 @@
 function onSignIn(googleUser) {
     // The ID token you need to pass to your backend:
+    console.log(googleUser)
     var id_token = googleUser.getAuthResponse().id_token;
     var xhr = new XMLHttpRequest();
     console.log("hoa")
