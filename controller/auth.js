@@ -1,6 +1,6 @@
 const { OAuth2Client } = require('google-auth-library');
 const { Error } = require('mongoose');
-const client = new OAuth2Client(process.env.CLIENT_ID);
+const client = new OAuth2Client(process.env.ID_EMAIL);
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
@@ -114,7 +114,7 @@ const verifyToken = async (token) => {
         try {
             const ticket = await client.verifyIdToken({
                 idToken: token["googleToken"],
-                audience: process.env.CLIENT_ID,
+                audience: process.env.ID_EMAIL,
             });
 
             const payload = ticket.getPayload();
@@ -269,6 +269,7 @@ const postRegister = async (req, res) => {
         if (passwordStrength(password).id < 2) {
             return res.render("main/register", { 'passwordWeak': true })
         }
+        //TODO: enviar correu administrador
         console.log(passwordStrength(password))
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
@@ -340,6 +341,7 @@ const postForgotPassword = async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
         return res.render('main/forgotPassword', { 'hide': false, 'msg': error, 'error': true })
     }
 }
