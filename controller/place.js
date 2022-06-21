@@ -113,7 +113,6 @@ const getPlace = async (req, res) => {
 //@POST /:id
 
 const postPlace = async (req, res) => {
-    console.log(req.body)
     const { message, email, star, placeId } = req.body;
     if (!message || !email || !star || !placeId) {
         //TODO: Ensenyar error
@@ -208,7 +207,6 @@ const getRentPlace = async (req, res) => {
 const postDeleteRating = async (req, res) => {
     const { id } = req.body
     await Rating.findByIdAndDelete({ '_id': id })
-
 }
 
 module.exports = { getCreatePlace, postCreatePlace, getPlace, postPlace, getRentPlace, postDeleteRating }

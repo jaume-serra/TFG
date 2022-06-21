@@ -158,6 +158,7 @@ const getLogin = (req, res) => {
 //POST Login
 
 const loginUser = async (email, password) => {
+    // Comprovem que existeixi i que les dades siguin vàlides i creem token
     if (!(email && password)) return false
     const user = await User.findOne({ email })
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -186,10 +187,10 @@ const loginUser = async (email, password) => {
 
 //Funcio cridada quan l'usuari vol iniciar amb token
 const loginGoogle = async (token) => {
-    verifyToken(token)
+    verifyToken(token) //Verifiquem el token
         .then(async (newUser) => {
             try {
-
+                //Comprovem si existeix l'usuari i sinó en creem un
                 let user = await User.findOne({ email: newUser.email })
                 if (user == null) {
                     user = await User.create(newUser)
@@ -208,9 +209,10 @@ const postLogin = async (req, res, next) => {
         const { email, password, token } = req.body
         /* Login with Google */
         if (token) {
-            /* Pot rebre token i tenir sessio? En teoria no*/
+            //Cridem a la funció loginGoogle per verificar el token i l'usuari
             loginGoogle({ "googleToken": token })
                 .then(() => {
+                    // Creem la cookie de sessió per guardar el token i retornem succes al frontend
                     if (!req.cookies["session-token"]) {
                         res.cookie("session-token", token);
                     }
@@ -225,13 +227,13 @@ const postLogin = async (req, res, next) => {
         }
 
         /* Login normal */
-
         const user = await loginUser(email, password)
         if (!user) {
             let error = "L'usuari o la contrasenya no són vàlids"
             return res.render("main/login", { 'error': error, 'msg': true, 'hide': false })
         }
         else {
+            // Guardem el token com a cookie de sessió i redirigim al profile
             res.cookie("session-token-default", user.token)
             if (req.query.next) {
                 if (req.query.lng) {
@@ -259,16 +261,18 @@ const postRegister = async (req, res) => {
         const { firstName, secondName, email, password, passwordRepeat, phone } = req.body
         if (!(secondName && firstName && email && password && passwordRepeat && phone)) res.status(400).send("All input are required")
 
+        // omprovem que no existeixi l'usuari
         const oldUser = await User.findOne({ email })
         if (oldUser) {
             res.status(409)
             return res.redirect("main/login", { 'hide': true })
         }
-
+        // Comprovem si la password és forta
         if (passwordStrength(password).id < 2) {
             return res.render("main/register", { 'passwordWeak': true })
         }
-        //TODO: enviar correu administrador
+
+        // Encriptem la contrasenya i creem l'usuari
         encryptedPassword = await bcrypt.hash(password, 10)
         const displayName = `${firstName} ${secondName}`
         const user = await User.create({
@@ -280,7 +284,7 @@ const postRegister = async (req, res) => {
             phone: phone
         })
 
-        // Create token
+        // Creem el token de l'usuari
         const token = jwt.sign(
             {
                 user_id: user._id,
@@ -294,11 +298,26 @@ const postRegister = async (req, res) => {
                 expiresIn: "2h",
             });
 
-        // save user token
+        // Guardem el user token
         user.token = token;
         res.cookie("session-token-default", user.token)
-        res.status(201).redirect('user/profile')
 
+        // Enviem correu a l'administrador
+        const mailData = {
+            from: process.env.USER_EMAIL,
+            to: process.env.USER_EMAIL,
+            subject: 'Usuari nou a la plataforma',
+            html:
+                `<h3>Usuari nou </h3>
+            <p>L'usuari ${displayName} acaba de registrar-se a la plataforma.
+            <br/>El seu Email: ${email} </br>
+        
+            <br/>Moltes gràcies, equip getKeepers.</p>
+            `
+        }
+        await sendEmail(mailData)
+
+        res.status(201).redirect('user/profile')
 
     } catch (err) {
         /* TODO: acabar aixo */
@@ -331,7 +350,7 @@ const postForgotPassword = async (req, res) => {
             <b>${newPassword}</b>
 
             Qualsevol cosa, posa't amb contacte amb nosaltres.
-            <br/>Moltes gràcies, equip Keepers.</p>
+            <br/>Moltes gràcies, equip getKeepers.</p>
             `
         }
         await sendEmail(mailData)
@@ -354,7 +373,7 @@ const postContact = async (req, res) => {
             subject: `Missatge de l'usuari ${name}`,
             html:
                 `<h3>Missatge </h3>
-            <p>L'usuari ${name} amb les dades següents: 
+            <p>L'usuari ${name} amb les següents dades: 
             <br>
             <br>
             - Email: ${email}

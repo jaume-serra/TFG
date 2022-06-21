@@ -41,124 +41,129 @@
         </div>
 
     </div>
-    <% if(locals.user.role=="admin" ) {%>
-        <div class="w-full text-right pr-10">
-            <form action="/place/deleteRating" target="hiddenFrame" method="POST"  onsubmit="setTimeout(function(){window.location.reload();},10);">
-                <button type="submit">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
-                        height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
-                        <path fill="#FF0000"
-                            d="M352 192V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64H96a32 32 0 0 1 0-64h256zm64 0h192v-64H416v64zM192 960a32 32 0 0 1-32-32V256h704v672a32 32 0 0 1-32 32H192zm224-192a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32zm192 0a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32z" />
-                    </svg>
-                    <input type="text" value="<%- rating._id %>" name="id" class="hidden">
+    <% if(locals.user ) {%>
+        <% if(locals.user.role=="admin" ) {%>
+            <div class="w-full text-right pr-10">
+                <form action="/place/deleteRating" target="hiddenFrame" method="POST"
+                    onsubmit="setTimeout(function(){window.location.reload();},10);">
+                    <button type="submit">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                            width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                            <path fill="#FF0000"
+                                d="M352 192V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64H96a32 32 0 0 1 0-64h256zm64 0h192v-64H416v64zM192 960a32 32 0 0 1-32-32V256h704v672a32 32 0 0 1-32 32H192zm224-192a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32zm192 0a32 32 0 0 0 32-32V416a32 32 0 0 0-64 0v320a32 32 0 0 0 32 32z" />
+                        </svg>
+                        <input type="text" value="<%- rating._id %>" name="id" class="hidden">
 
-                </button>
-            </form>
+                    </button>
+                </form>
 
-        </div>
-        <!-- Evitar redirect form -->
-        <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+            </div>
+            <!-- Evitar redirect form -->
+            <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+            <% } %>
+                <% } %>
+                    <% }) %>
+                        <!-- Comentari nou -->
 
-        <% } %>
-            <% }) %>
-                <!-- Comentari nou -->
+                        <% if (locals.user) {%>
+                            <form method="POST">
 
-                <% if (locals.user) {%>
-                    <form method="POST">
+                                <div class="flex items-start mt-5">
+                                    <div class="flex-shrink-0">
+                                        <div class="inline-block relative">
+                                            <div class="relative w-16 h-16 rounded-full overflow-hidden">
+                                                <img class="absolute top-0 left-0 w-full h-full bg-cover object-fit object-cover"
+                                                    src="<%= locals.user.image %>" alt="Profile picture">
+                                                <div
+                                                    class="absolute top-0 left-0 w-full h-full rounded-full shadow-inner">
+                                                </div>
+                                            </div>
 
-                        <div class="flex items-start mt-5">
-                            <div class="flex-shrink-0">
-                                <div class="inline-block relative">
-                                    <div class="relative w-16 h-16 rounded-full overflow-hidden">
-                                        <img class="absolute top-0 left-0 w-full h-full bg-cover object-fit object-cover"
-                                            src="<%= locals.user.image %>" alt="Profile picture">
-                                        <div class="absolute top-0 left-0 w-full h-full rounded-full shadow-inner">
                                         </div>
                                     </div>
+                                    <div class="ml-6">
+                                        <p class="flex items-baseline">
+                                        <h4 class="text-gray-600 font-bold">
+                                            <%- locals.user.displayName ? locals.user.displayName :
+                                                locals.user.firstName %>
+                                        </h4>
+                                        </p>
+                                        <div class="flex items-center mt-1">
+                                            <div id="input-1">
+                                                <input type="text" class="hidden input" name="star">
+                                                <svg name="star-1" id="star-1"
+                                                    class="duration-200 w-4 h-4 fill-current text-yellow-600"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                </svg>
+                                            </div>
+                                            <div id="input-2">
+                                                <input type="text" class="hidden input" name="star">
+                                                <svg name="star-2" id="star-2"
+                                                    class="duration-200 w-4 h-4 fill-current text-yellow-600"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                </svg>
+                                            </div>
+                                            <div id="input-3">
+                                                <input type="text" class="hidden input" name="star">
+                                                <svg name="star-3" id="star-3"
+                                                    class="duration-200 w-4 h-4 fill-current text-yellow-600"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                </svg>
 
-                                </div>
-                            </div>
-                            <div class="ml-6">
-                                <p class="flex items-baseline">
-                                <h4 class="text-gray-600 font-bold">
-                                    <%- locals.user.displayName ? locals.user.displayName : locals.user.firstName %>
-                                </h4>
-                                </p>
-                                <div class="flex items-center mt-1">
-                                    <div id="input-1">
-                                        <input type="text" class="hidden input" name="star">
-                                        <svg name="star-1" id="star-1"
-                                            class="duration-200 w-4 h-4 fill-current text-yellow-600"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                        </svg>
+                                            </div>
+                                            <div id="input-4">
+                                                <input type="text" class="hidden input" name="star" value="4">
+                                                <svg name="star-4" id="star-4"
+                                                    class="duration-200 w-4 h-4 fill-current text-yellow-600"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                </svg>
+
+                                            </div>
+                                            <div id="input-5">
+                                                <input type="text" class="hidden input" name="star">
+                                                <svg name="star-5" id="star-5"
+                                                    class="duration-200 w-4 h-4 fill-current text-gray-400"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-3 w-full">
+                                            <textarea name="message" id="message" cols="150"
+                                                class="block p-2.5 w-full rounded-lg border border-gray-300"
+                                                placeholder="Deixa un comentari..." required></textarea>
+                                        </div>
+                                        <div class="hidden">
+                                            <input type="text" name="email" value="<%- locals.user.email %>">
+                                            <input type="text" name="placeId" value="<%- place.id %>">
+
+                                        </div>
+                                        <div class="flex flex-row-reverse">
+                                            <button type="submit"
+                                                class="mt-3 uppercase bg-blue-500 rounded-md text-white font-black py-2 px-4 ">Comentar</button>
+                                        </div>
+
                                     </div>
-                                    <div id="input-2">
-                                        <input type="text" class="hidden input" name="star">
-                                        <svg name="star-2" id="star-2"
-                                            class="duration-200 w-4 h-4 fill-current text-yellow-600"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                        </svg>
-                                    </div>
-                                    <div id="input-3">
-                                        <input type="text" class="hidden input" name="star">
-                                        <svg name="star-3" id="star-3"
-                                            class="duration-200 w-4 h-4 fill-current text-yellow-600"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                        </svg>
+                                </div>
+                            </form>
 
-                                    </div>
-                                    <div id="input-4">
-                                        <input type="text" class="hidden input" name="star" value="4">
-                                        <svg name="star-4" id="star-4"
-                                            class="duration-200 w-4 h-4 fill-current text-yellow-600"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                        </svg>
-
-                                    </div>
-                                    <div id="input-5">
-                                        <input type="text" class="hidden input" name="star">
-                                        <svg name="star-5" id="star-5"
-                                            class="duration-200 w-4 h-4 fill-current text-gray-400"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path
-                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                        </svg>
-                                    </div>
+                            <% }else { %>
+                                <div class="mt-5 ml-24 text-lg">
+                                    <h3 class="font-black">Vols deixar un comentari ?</h3>
+                                    <p>Has <button onclick="loginToComment()"
+                                            class="underline hover:text-blue-500">d'iniciar
+                                            sessió</button> per comentar
+                                    </p>
                                 </div>
 
-                                <div class="mt-3 w-full">
-                                    <textarea name="message" id="message" cols="150"
-                                        class="block p-2.5 w-full rounded-lg border border-gray-300"
-                                        placeholder="Deixa un comentari..." required></textarea>
-                                </div>
-                                <div class="hidden">
-                                    <input type="text" name="email" value="<%- locals.user.email %>">
-                                    <input type="text" name="placeId" value="<%- place.id %>">
-
-                                </div>
-                                <div class="flex flex-row-reverse">
-                                    <button type="submit"
-                                        class="mt-3 uppercase bg-blue-500 rounded-md text-white font-black py-2 px-4 ">Comentar</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </form>
-
-                    <% }else { %>
-                        <div class="mt-5 ml-24 text-lg">
-                            <h3 class="font-black">Vols deixar un comentari ?</h3>
-                            <p>Has <button onclick="loginToComment()" class="underline hover:text-blue-500">d'iniciar
-                                    sessió</button> per comentar
-                            </p>
-                        </div>
-
-                        <% } %>
+                                <% } %>
