@@ -26,7 +26,7 @@ router.get("/:id/:rentKey", authControler.checkAuthenticated, placeControler.get
 router.post("/deleteRating", authControler.checkAuthenticated, placeControler.postDeleteRating);
 
 
-//Ha de ser la última ruta
+//Ha de ser última ruta
 router.get("/:id", authControler.getUserToRequest, placeControler.getPlace);
 router.post("/:id", authControler.getUserToRequest, placeControler.postPlace);
 

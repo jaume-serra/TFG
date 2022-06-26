@@ -1,4 +1,4 @@
-const showInfo = document.getElementById('play-button');
+const showInfo = document.getElementById('showNumber');
 
 
 
@@ -6,18 +6,11 @@ const showInfo = document.getElementById('play-button');
 showInfo.addEventListener('click', () => {
     //Ensenyar anunci
     //Ensenyar mobil
-    const ad = document.getElementById('video-container')
-    const noad = document.getElementById('noad')
-
-    ad.classList.remove('hidden')
-    noad.classList.add('hidden')
-    setTimeout(() => {
-        ad.classList.add('hidden')
-        noad.classList.remove('hidden')
-    }, "10000")
+    
+    setTimeout(() => {}, "2000")
 
     document.getElementById('mobileNum').classList.remove("hidden")
-    document.getElementById('play-button').classList.add("hidden")
+    document.getElementById('showNumber').classList.add("hidden")
 
 })
 
