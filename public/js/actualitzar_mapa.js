@@ -84,7 +84,6 @@ function actualitzar_llistat(place) {
     console.log('err :>> ', err);
   }
   if (place.images.length == 1) {
-    console.log(place)
     html_llistat =
       `<div class="grid max-w-max md:grid-cols-2  sm:grid-cols-1 border-b-2 m-2 p-2  items-center  hover:shadow-md md:hover:shadow-none md:transform hover:scale-105 motion-reduce:transform-none" id="id_mouse` + id + `" >
            <div class="col-span-1 px-2 max-w-screen-md "> <!--imatges-->

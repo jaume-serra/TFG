@@ -1,19 +1,10 @@
 const showInfo = document.getElementById('showNumber');
 
-
-
-
 showInfo.addEventListener('click', () => {
-    //Ensenyar anunci
-    //Ensenyar mobil
-    
     setTimeout(() => {}, "2000")
-
     document.getElementById('mobileNum').classList.remove("hidden")
     document.getElementById('showNumber').classList.add("hidden")
-
 })
-
 
 function initMaps() {
     let map = new google.maps.Map(document.getElementById("mapa"), {

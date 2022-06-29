@@ -152,22 +152,8 @@ function initMaps() {
     });
     marker.setMap(map);
     document.getElementById("map").classList.remove("hidden")
-    // const panorama = new google.maps.StreetViewPanorama(
-    //   document.getElementById("panorama"),
-    //   {
-    //     position: new google.maps.LatLng(new_place.geometry.location.lat(), new_place.geometry.location.lng()),
-    //     pov: {
-    //       heading: 34,
-    //       pitch: 10,
-    //     },
-    //   }
-    // );
-    // map.setStreetView(panorama);
   });
-
-
   //Centrar steet view
-
 }
 
 
@@ -190,17 +176,14 @@ window.onload = function () {
   //Check File API support
   if (window.File && window.FileList && window.FileReader) {
     var filesInput = document.getElementById("files");
-
     filesInput.addEventListener("change", function (event) {
 
       var files = event.target.files; //FileList object
       var output = document.getElementById("result");
       //Clear output
       output.innerHTML = ""
-
       for (var i = 0; i < files.length; i++) {
         var file = files[i];
-
         //Only pics
         if (!file.type.match('image'))
           continue;

@@ -2,10 +2,7 @@
 
 let map;
 
-/*
-Coses a revisar:
--Actualitzo el llistat de lesquerra des del mapa :(
-*/
+
 
 function initMap() {
   let lastInfowindow;
@@ -73,7 +70,7 @@ function initMap() {
       if (map_bounds != map.getBounds()) {
         check_bounds()
       }
-    }, 200) //TODO: 200 ms canviar a 0
+    }, 200)
   });
   google.maps.event.addListenerOnce(map, 'idle', () => {
     var map_bounds = map.getBounds()
@@ -82,7 +79,7 @@ function initMap() {
         getType()
         check_bounds()
       }
-    }, 200) //TODO: 200 ms canviar a 0
+    }, 200)
   });
 
   map.addListener('dragend', () => { /* Envia info quan el mapa es mou amb el ratoli */
@@ -91,7 +88,7 @@ function initMap() {
       if (map_bounds != map.getBounds()) {
         check_bounds()
       }
-    }, 200) //TODO: 200 ms canviar a 0
+    }, 200)
   });
 
 
@@ -101,7 +98,6 @@ function initMap() {
     //checkeja si hi ha elements a dins del bound actual i afegeix els markers corresponents.
     var bound = map.getBounds();
     var places = get_places();   //cridar api per agafar llocs
-    console.log(places)
     var no_result = true; //variable per controlar si no hi ha resultats de busqueda
     var llistat_esquerra = []; //llista per guardar els html i passaro despres
 
@@ -118,7 +114,6 @@ function initMap() {
           position: pos,
           map: map,
           visible: true,
-          // animation: google.maps.Animation.BOUNCE
         });
 
         markers[places[i].id] = marker;
@@ -133,7 +128,6 @@ function initMap() {
       } else {
         if (markers.hasOwnProperty(places[i].id)) {
           // si existeix el marker el fa invisible
-          //TODO: eliminar marker?
           marker_clusterer.removeMarker(places[i].id);
           markers[places[i].id].setVisible(false);
         }
@@ -194,7 +188,6 @@ function actualitzar_llistat_notfound() {
 
 function getHtml(place) {
   var html_generate;
-  console.log(place)
   if (place.images.length == 1) {
     html_generate = `
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
@@ -218,7 +211,6 @@ function getHtml(place) {
      
   </div>`
   } else {
-    console.log("hola", place)
 
     html_generate = `
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
@@ -251,7 +243,6 @@ function getHtml(place) {
 
 function get_places() {
   var next_url = new URL(document.baseURI);
-  console.log("/api/get_places" + next_url.search);
   var url = "/api/get_places" + next_url.search;
   var msg = [];
 
@@ -261,7 +252,7 @@ function get_places() {
       msg = JSON.parse(request.responseText)["msg"];
     }
   }
-  request.open("GET", url, false); //TODO: mirar fer async
+  request.open("GET", url, false);
   request.send();
   if (msg != []) {
     return msg;
@@ -271,14 +262,12 @@ function get_places() {
 
 
 function changeButtonMap() {
-  //TODO: canviar per toggle
   document.getElementById('div_taula').classList.add('invisible');
   document.getElementById('div_taula').style.display = 'none';
   document.getElementById('div_mapa').classList.remove('invisible', 'h-0');
   document.getElementById('div_mapa').classList.add('h-screen');
 }
 function changeButtonList() {
-  //TODO: canviar per toggle
   document.getElementById('div_taula').classList.remove('invisible');
   document.getElementById('div_taula').style.display = 'inline';
   document.getElementById('div_mapa').classList.add('invisible', 'h-0');
@@ -305,7 +294,6 @@ function changeParking() {
 
   } else {
     if (url.searchParams.get("type") == "storage") {
-      console.log("type", url.searchParams.get("type"));
       url.searchParams.set("type", "parking");
       window.history.pushState("string", "Title", url);
     } else if (url.searchParams.get("type") != "parking") {
@@ -321,7 +309,6 @@ function changeParking() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-white', 'border-white');
   parking_button.classList.add('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
-  //TODO:falta crida funcio per filtrar
   //check_bounds(map.getBounds(),"changeParking");
   map.setZoom(map.getZoom());
 
@@ -335,7 +322,6 @@ function changeStorage() {
 
   } else {
     if (url.searchParams.get("type") == "parking") {
-      console.log("type", url.searchParams.get("type"));
       url.searchParams.set("type", "storage");
       window.history.pushState("string", "Title", url);
     } else if (url.searchParams.get("type") != "storage") {
@@ -352,7 +338,7 @@ function changeStorage() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
   parking_button.classList.add('text-white', 'border-white');
-  //TODO: check_bounds(map.getBounds(),"changeStorage");
+  // check_bounds(map.getBounds(),"changeStorage");
   //falta crida funcio per filtrar
   map.setZoom(map.getZoom());
 }

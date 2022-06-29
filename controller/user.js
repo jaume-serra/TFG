@@ -295,7 +295,6 @@ const postGenerateQR = async (req, res) => {
 
         const places = await Place.find({ 'email': email })
         renterInfo = await generateRenterInfo(places)
-        console.log(urlFor)
         return res.render("user/mySpaces", { "places": places, 'renterInfo': renterInfo, 'hide': false, 'msg': false, 'error': false, 'code': qr })
 
     } catch (error) {

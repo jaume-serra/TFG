@@ -317,7 +317,7 @@ const postRegister = async (req, res) => {
         }
         await sendEmail(mailData)
 
-        res.status(201).redirect('user/profile')
+        res.redirect('user/profile')
 
     } catch (err) {
         /* TODO: acabar aixo */
