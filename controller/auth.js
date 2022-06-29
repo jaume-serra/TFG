@@ -316,7 +316,7 @@ const postRegister = async (req, res) => {
             `
         }
         await sendEmail(mailData)
-
+       
         res.redirect('user/profile')
 
     } catch (err) {
