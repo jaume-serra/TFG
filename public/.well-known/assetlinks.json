@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "net.getkeepers.www.twa",
+                 "sha256_cert_fingerprints": ["CF:D7:60:CF:46:29:D9:63:D9:55:65:8B:13:DB:FA:06:BB:CB:9D:9A:0D:51:01:BE:C9:0D:5D:75:50:FF:02:7C"] }
+  }]

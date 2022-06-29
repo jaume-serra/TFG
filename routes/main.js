@@ -14,7 +14,9 @@ router.get("/", authControler.getUserToRequest, (req, res) => {
 router.all("/manifest.json", (req, res) => {
     res.sendFile("/manifest.json")
 })
-
+router.all("/assetlinks.json", (req, res) => {
+    res.sendFile("/.well-known/assetlinks.json")
+})
 router.all("/mapa", authControler.getUserToRequest, (req, res) => {
     res.render("main/mapa");
 });

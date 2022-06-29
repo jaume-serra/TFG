@@ -33,7 +33,6 @@ const createTransporter = async () => {
             refreshToken: process.env.REFRESH_EMAIL
         }
     });
-
     return transporter;
 };
 
