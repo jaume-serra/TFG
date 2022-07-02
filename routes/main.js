@@ -21,6 +21,9 @@ router.all("/mapa", authControler.getUserToRequest, (req, res) => {
     res.render("main/mapa");
 });
 
+router.all("/privacitat", authControler.getUserToRequest, (req, res) => {
+    res.render("main/privacyPolicy")
+})
 
 router.get("/contact", authControler.getUserToRequest, (req, res) => {
     res.render("main/contact");
