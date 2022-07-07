@@ -89,7 +89,7 @@ function actualitzar_llistat(place) {
            <div class="col-span-1 px-2 max-w-screen-md "> <!--imatges-->
              <img class = " image h-max w-full   rounded-lg object-cover" src= "${place.images[0]}">
            </div>
-           <div class="col-span-1 px-4  py-2  w-[24rem] md:w-[27rem] text-left overflow-hidden "> <!--informacio local-->
+           <div class="col-span-1 px-4  py-2  w-full md:w-[27rem] text-left overflow-hidden "> <!--informacio local-->
              <div>
              <h1 class="font-black text-2xl text-[#2b6777]">${place.title} </h1>
              <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
@@ -120,7 +120,7 @@ function actualitzar_llistat(place) {
              <img class = "image   w-full rounded-lg object-cover" id="slider_`+ id + `" src= "${place.images[0]}" value = "` + place.images + `">
              <div class = "text-right arrow arrow-right" onclick="next('`+ id + `')"></div>
          </div>
-         <div class="col-span-1 px-4 py-2  w-[27rem] text-left "> <!--informacio local-->
+         <div class="col-span-1 px-4 py-2  w-full md:w-[27rem] text-left "> <!--informacio local-->
            <div>
              <h1 class="font-black text-2xl text-[#2b6777]">${place.title} </h1>
              <hr class="border-b-2 w-3/5 border-[#2b6777] my-2">
