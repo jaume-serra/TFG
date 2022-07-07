@@ -177,6 +177,7 @@ function afegir_infowindow_marker(map, marker, html, lastInfowindow, infowindow)
 }
 
 function actualitzar_llistat_notfound() {
+  
   var html_llistat_notfound =
     `<div class=" border-b-2 m-2 p-3 overflow-y-visible">
     <h1 class="font-black text-2xl">Cap resultat a la cerca</h1>
@@ -193,7 +194,7 @@ function getHtml(place) {
   <div id = "mydiv" class="rounded overflow-y-hidden overflow-x-hidden">
     <h1 class="title font-black text-3xl center-text p-1 m-1">${place.title}</h1>
       <div class="containter-md m-1 p-1 text-center">
-        <img src="${place.images[0]}" class="img-fluid rounded-xl" heigth = "200px" width="300px" > 
+        <img src="${place.images[0]}" class="img-fluid rounded-xl w-full" > 
       </div>
      
       <h3 class="font-black text-lg text-[#2b6777]" >Descripció</h3>
@@ -218,7 +219,7 @@ function getHtml(place) {
       <div class="containter-md m-1 p-1 text-center">
         <input id="infowindow_input_`+ place.id + `" type="hidden" value="0">
         <div class = "text-left-infowindow arrow arrow-left" onclick="previous_infowindow('`+ place.id + `')"></div>
-        <img class = "image  rounded-lg" id="infowindow_slider_`+ place.id + `" src= "${place.images[0]}" value = "` + place.images + `" width="300px" height="200px">
+        <img class = "image  rounded-lg w-full" id="infowindow_slider_`+ place.id + `" src= "${place.images[0]}" value = "` + place.images + `" >
         <div class = "text-right-infowindow arrow arrow-right" onclick="next_infowindow('`+ place.id + `')"></div>
       </div>
       <div>
@@ -262,13 +263,13 @@ function get_places() {
 
 
 function changeButtonMap() {
-  document.getElementById('div_taula').classList.add('invisible');
+  document.getElementById('div_taula').classList.add('invisible','h-0');
   document.getElementById('div_taula').style.display = 'none';
   document.getElementById('div_mapa').classList.remove('invisible', 'h-0');
   document.getElementById('div_mapa').classList.add('h-screen');
 }
 function changeButtonList() {
-  document.getElementById('div_taula').classList.remove('invisible');
+  document.getElementById('div_taula').classList.remove('invisible','h-0');
   document.getElementById('div_taula').style.display = 'inline';
   document.getElementById('div_mapa').classList.add('invisible', 'h-0');
   document.getElementById('div_mapa').classList.remove('h-screen');
@@ -309,7 +310,6 @@ function changeParking() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-white', 'border-white');
   parking_button.classList.add('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
-  //check_bounds(map.getBounds(),"changeParking");
   map.setZoom(map.getZoom());
 
 }
@@ -338,8 +338,6 @@ function changeStorage() {
   var parking_button = document.getElementById('parking_button');
   parking_button.classList.remove('text-[#52ab98]', 'font-black', 'border-[#52ab98]');
   parking_button.classList.add('text-white', 'border-white');
-  // check_bounds(map.getBounds(),"changeStorage");
-  //falta crida funcio per filtrar
   map.setZoom(map.getZoom());
 }
 

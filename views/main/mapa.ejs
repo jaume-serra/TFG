@@ -43,13 +43,13 @@
         </nav>
         <!-- Llistat esquerra-->
         <div class="grid md:grid-cols-2  h-screen max-h-screen resize-none">
-          <div class="md:col-span-1 md:overflow-y-auto md:visible sm:visible bg-white" id='div_taula'>
+          <div class="md:col-span-1 md:overflow-y-auto  bg-white" id='div_taula'>
             <div id="taula_disponible" class="overflow-hidden">
             </div>
             <div class="relative z-40">
               <div class="flex items-center justify-center">
                 <button
-                  class="flex md:invisible visible w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+                  class="flex md:invisible  w-38 h-10 border-2 fixed bottom-0 my-16  border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
                   href='div_mapa' id="button_map" onclick="changeButtonMap()">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -64,11 +64,12 @@
             </div>
           </div>
           <!-- Mapa -->
-          <div class="md:col-span-1  max-h-screen overflow-y-hidden md:h-screen md:visible invisible h-0" id='div_mapa'>
+          <div class="md:col-span-1  max-h-screen overflow-y-hidden md:visible invisible"
+            id='div_mapa'>
             <div id="map" style="width:100%; height:100%" class="fluid-container focus:outline-none"></div>
             <div class="flex items-center justify-center">
               <button
-                class="flex md:invisible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
+                class="flex md:invisible visible w-38 h-10  border-2  fixed bottom-0 my-16 border-gray-900 rounded-3xl  bg-gray-700 text-center  transform hover:scale-110 motion-reduce:transform-none"
                 href='div_taula' id="button_list" onclick="changeButtonList()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3 mt-2 text-gray-100" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
